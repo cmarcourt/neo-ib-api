@@ -1,0 +1,45 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ch.aonyx</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.1.1.GA</version>
+	</parent>
+	<groupId>ch.aonyx.broker.ib</groupId>
+	<artifactId>neo-api</artifactId>
+	<version>1.0.0</version>
+
+	<properties>
+		<commons-io.commons-io.version>2.3</commons-io.commons-io.version>
+		<joda-time.joda-time.version>2.0</joda-time.joda-time.version>
+		<com.googlecode.disruptor.disruptor.version>2.10</com.googlecode.disruptor.disruptor.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.commons-io.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>${joda-time.joda-time.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.googlecode.disruptor</groupId>
+			<artifactId>disruptor</artifactId>
+			<version>${com.googlecode.disruptor.disruptor.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
