@@ -19,7 +19,7 @@ package ch.aonyx.broker.ib.api;
  * @author Christophe Marcourt
  * @version 1.0.0
  */
-public class RequestException extends NeoApiClientException {
+public class RequestException extends NeoIbApiClientException {
 
 	private static final long serialVersionUID = -1744532346747011511L;
 	private final Request request;
