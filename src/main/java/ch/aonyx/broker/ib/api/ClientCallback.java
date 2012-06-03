@@ -23,5 +23,5 @@ public interface ClientCallback {
 
 	void onSuccess(CallbackObject object);
 
-	void onFailure(NeoApiClientException exception);
+	void onFailure(NeoIbApiClientException exception);
 }

@@ -16,13 +16,13 @@
 package ch.aonyx.broker.ib.api.net;
 
 import ch.aonyx.broker.ib.api.ClientMessageCode;
-import ch.aonyx.broker.ib.api.NeoApiClientException;
+import ch.aonyx.broker.ib.api.NeoIbApiClientException;
 
 /**
  * @author Christophe Marcourt
  * @version 1.0.0
  */
-public class ConnectionException extends NeoApiClientException {
+public class ConnectionException extends NeoIbApiClientException {
 
 	private static final long serialVersionUID = -6690414065094261327L;
 

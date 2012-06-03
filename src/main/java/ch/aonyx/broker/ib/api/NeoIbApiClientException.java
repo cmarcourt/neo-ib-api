@@ -19,17 +19,17 @@ package ch.aonyx.broker.ib.api;
  * @author Christophe Marcourt
  * @version 1.0.0
  */
-public class NeoApiClientException extends RuntimeException {
+public class NeoIbApiClientException extends RuntimeException {
 
 	private static final long serialVersionUID = 8064925803528503973L;
 	protected final String detailedMessage;
 	protected final ClientMessageCode clientMessageCode;
 
-	public NeoApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
+	public NeoIbApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
 		this(clientMessageCode, detailedMessage, null);
 	}
 
-	public NeoApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+	public NeoIbApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage,
 			final Throwable cause) {
 		super(clientMessageCode.getMessage() + " " + detailedMessage, cause);
 		this.detailedMessage = detailedMessage;

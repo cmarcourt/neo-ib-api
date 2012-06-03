@@ -28,7 +28,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.apache.commons.lang3.time.DateUtils;
 
-import ch.aonyx.broker.ib.api.NeoApiClientException;
+import ch.aonyx.broker.ib.api.NeoIbApiClientException;
 import ch.aonyx.broker.ib.api.order.ComboLeg;
 
 import com.google.common.collect.Lists;
@@ -107,7 +107,7 @@ public final class Contract {
 			try {
 				return DateUtils.parseDate(expiry, "YYYYMM");
 			} catch (final ParseException e) {
-				throw new NeoApiClientException(null, e.getMessage(), e);
+				throw new NeoIbApiClientException(null, e.getMessage(), e);
 			}
 		}
 		return null;

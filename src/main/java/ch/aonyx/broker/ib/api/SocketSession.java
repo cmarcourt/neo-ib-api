@@ -181,7 +181,7 @@ final class SocketSession implements Session, OrderIdInternalIdListener {
 			if (serverCurrentVersion < serverMinimumRequiredVersion) {
 				final String detailedMessage = "Minimum server version required '" + serverMinimumRequiredVersion
 						+ "', current server version '" + serverCurrentVersion + "'";
-				callbackNonBlockingCaller.onFailure(clientCallback, new NeoApiClientException(UPDATE_TWS,
+				callbackNonBlockingCaller.onFailure(clientCallback, new NeoIbApiClientException(UPDATE_TWS,
 						detailedMessage));
 				LOGGER.error(detailedMessage);
 				closeSession();
@@ -232,7 +232,7 @@ final class SocketSession implements Session, OrderIdInternalIdListener {
 			final long endingTimeNano = System.nanoTime();
 			final CallbackObject callbackObject = new CallbackObject(request, beginningTimeNano, endingTimeNano);
 			callbackNonBlockingCaller.onSuccess(clientCallback, callbackObject);
-		} catch (final NeoApiClientException exception) {
+		} catch (final NeoIbApiClientException exception) {
 			callbackNonBlockingCaller.onFailure(clientCallback, exception);
 		}
 	}

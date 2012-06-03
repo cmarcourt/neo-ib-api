@@ -39,7 +39,7 @@ final class ClientCallbackNonBlockingCaller {
 		});
 	}
 
-	void onFailure(final ClientCallback clientCallback, final NeoApiClientException exception) {
+	void onFailure(final ClientCallback clientCallback, final NeoIbApiClientException exception) {
 		executor.execute(new Runnable() {
 			@Override
 			public void run() {

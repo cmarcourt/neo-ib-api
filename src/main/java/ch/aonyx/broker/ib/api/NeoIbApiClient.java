@@ -32,13 +32,13 @@ import ch.aonyx.broker.ib.api.net.ConnectionParameters;
  * @author Christophe Marcourt
  * @version 1.0.0
  */
-public final class NeoApiClient {
+public final class NeoIbApiClient {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(NeoApiClient.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(NeoIbApiClient.class);
 	private final ClientCallback clientCallback;
 	private Socket socket;
 
-	public NeoApiClient(final ClientCallback clientCallback) {
+	public NeoIbApiClient(final ClientCallback clientCallback) {
 		Validate.notNull(clientCallback);
 		this.clientCallback = clientCallback;
 	}
