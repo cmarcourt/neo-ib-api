@@ -1,0 +1,5 @@
+= IB API =
+Here is how today existing IB API works (approximatively):
+http://aonyx.ch/neo-ib-api/uml/ib/current_sequence.gif
+
+One can see that problems can occur during callback methods (red colored): tickPrice(), tickSize()... as it is the same thread (EReader) reading from InputStream and executing code within these callback methods. You must avoid long operations or performances will decrease dramatically.
