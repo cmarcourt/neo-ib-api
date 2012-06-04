@@ -21,7 +21,7 @@ http://aonyx.ch/neo-ib-api/uml/neo-ib-api/consumer_sequence.gif
 
 A completely different design.
 
-The EventInputStreamConsumerThread read from the InputStream. As soon as the stream is consumed an event is created and published to [http://code.google.com/p/disruptor/ disruptor]. Disruptor uses its own thead to handle event.
+The EventInputStreamConsumerThread read from the InputStream. As soon as the stream is consumed an event is created and published to [http://code.google.com/p/disruptor/ Disruptor]. Disruptor uses its own thead to handle event.
 
 Each events to publish are delegated to EventPublisher thread pooled (Thread Pool1). EventNotifier notifies each events to listeners within a separate thread (Thread Pool2).
 
