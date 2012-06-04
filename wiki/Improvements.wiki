@@ -25,7 +25,7 @@ One thread to send requests and place orders (must be synchronized). One consume
 
 =={{{StrBuilder}}} has replaced {{{StringBuffer}}}==
 ===IB API===
-In EReader object, method readStr() uses a {{{StringBuffer}}} and instantiate a new one every time. One has to know this method is called thousand times a minute.
+In EReader object, method readStr() uses a {{{StringBuffer}}} and instantiates a new one every time. One has to know this method is called thousand times a minute.
 {{{
 protected String readStr() throws IOException {
   StringBuffer buf = new StringBuffer();
