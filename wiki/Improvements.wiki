@@ -6,7 +6,7 @@ Several things have been improved from IB API to ease development and to improve
 Almost no enum exists. Input and output parameters are native type (int, long...). Not so readable and not too easy to maintain code.
 
 ===Neo IB API===
-Every native input and output parameters have been typed. So now when you're placing a buy order, no more "BUY" String coding. Use OrderAction.BUY enum.
+Every native input and output parameters have been typed. So now when you're placing a buy order, no more {{{"BUY"}}} String coding. Use {{{OrderAction.BUY}}} enum.
 
 =Efficiency=
 ==Implementation of multi-threading==
