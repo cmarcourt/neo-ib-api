@@ -25,4 +25,4 @@ The EventInputStreamConsumerThread read from the InputStream. As soon as the str
 
 Each events to publish are delegated to EventPublisher thread pooled (Thread Pool1). EventNotifier notifies each events to listeners within a separate thread (Thread Pool2).
 
-Long operations are no more a problem.
+Now long operations are welcomed !
