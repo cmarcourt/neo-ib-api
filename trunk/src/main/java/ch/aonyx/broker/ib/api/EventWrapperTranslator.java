@@ -19,7 +19,7 @@ import com.lmax.disruptor.EventTranslator;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 final class EventWrapperTranslator implements EventTranslator<EventWrapper> {
 

@@ -20,7 +20,7 @@ import ch.aonyx.broker.ib.api.EventListener;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 @AssignableListenerType
 public interface AccountUpdateValueEventListener extends EventListener<AccountUpdateValueEvent> {

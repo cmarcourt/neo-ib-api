@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 final class ConcurrentlyEventNotifier extends AbstractEventNotifier {
 

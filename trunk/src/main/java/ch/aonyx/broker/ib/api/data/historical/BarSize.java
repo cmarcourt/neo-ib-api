@@ -24,7 +24,7 @@ import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.SECONDS;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @version 1.0.1
  */
 public enum BarSize {
 

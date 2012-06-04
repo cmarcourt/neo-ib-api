@@ -24,7 +24,7 @@ import com.google.common.collect.HashBiMap;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 final class OrderIdInternalIdBinding {
 

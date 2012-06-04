@@ -24,7 +24,7 @@ import ch.aonyx.broker.ib.api.contract.Contract;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 public final class ExecutionReportEvent extends AbstractEventSupport {
 
