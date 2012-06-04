@@ -23,6 +23,13 @@ When placing an order, one has to provide an {{{int}}} for the order id (not rea
 ===Neo IB API===
 All ids are human readable as they are {{{String}}} typed. When subscribing or sending a request, one can provide a {{{String}}} id or let the API generates automatically a human readable id using object's fields concatenation.
 
+==Increment nextValidOrderId==
+===IB API===
+One has to retrieve the next valid order id and maintains incrementation. Be careful though when placing orders, even orderIds are different they must be in ascending order when sending request!
+
+===Neo IB API===
+It just does the trick for you. Don't bother with incrementation. Just give a {{{String}}} id or let the API generates it for you.
+
 =Efficiency=
 ==Implementation of multi-threading==
 ===IB API===
