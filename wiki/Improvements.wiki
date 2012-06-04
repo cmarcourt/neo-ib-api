@@ -18,14 +18,14 @@ Just subscribe to {{{MarketDataSubscriptionRequest}}} then listen to {{{Composit
 =Efficiency=
 ==Implementation of multi-threading==
 ===IB API===
-One thread to send requests and place orders (must be synchronized). Only one thread to read from InputStream and dispatch to EWrapper callback methods.
+One thread to send requests and place orders (must be synchronized). Only one thread to read from {{{InputStream}}} and dispatch to EWrapper callback methods.
 
 ===Neo IB API===
-One thread to send requests and place orders (must be synchronized). One consumer thread reading from InputStream. One thread pool publishing events. One thread pool notifying events to listeners.
+One thread to send requests and place orders (must be synchronized). One consumer thread reading from {{{InputStream}}}. One thread pool publishing events. One thread pool notifying events to listeners.
 
-==StrBuilder has replaced StringBuffer==
+=={{{StrBuilder}}} has replaced {{{StringBuffer}}}==
 ===IB API===
-In EReader object, method readStr() uses a StringBuffer and instantiate a new one every time. One has to know this method is called thousand times a minute.
+In EReader object, method readStr() uses a {{{StringBuffer}}} and instantiate a new one every time. One has to know this method is called thousand times a minute.
 {{{
 protected String readStr() throws IOException {
   StringBuffer buf = new StringBuffer();
@@ -43,7 +43,7 @@ protected String readStr() throws IOException {
 }}}
 
 ===Neo IB API===
-StringBuffer has been replaced with StrBuilder (I chose StrBuilder from commons-lang as there are shortcut methods) as there is only one consumer, no need to synchronized. Only one instance exists of StrBuilder (singleton), no new instantiation each read.
+{{{StringBuffer}}} has been replaced with {{{StrBuilder}}} (I chose {{{StrBuilder}}} from commons-lang as there are shortcut methods) as there is only one consumer, no need to synchronized. Only one instance exists of {{{StrBuilder}}} (singleton), no new instantiation each read.
 {{{
 public static final String readString(final InputStream inputStream) {
   BUILDER.clear();
