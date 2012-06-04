@@ -19,7 +19,7 @@ package ch.aonyx.broker.ib.api;
  * Only used to sub type an {@link Id}.
  * 
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 public interface RequestId extends Id {
 

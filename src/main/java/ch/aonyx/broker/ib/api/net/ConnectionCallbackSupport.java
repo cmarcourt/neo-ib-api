@@ -22,7 +22,7 @@ import ch.aonyx.broker.ib.api.Session;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 public class ConnectionCallbackSupport implements ConnectionCallback {
 

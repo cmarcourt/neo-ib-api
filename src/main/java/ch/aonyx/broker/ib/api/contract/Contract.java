@@ -35,7 +35,7 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 public final class Contract {
 

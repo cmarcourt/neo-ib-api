@@ -54,7 +54,7 @@ import com.lmax.disruptor.dsl.Disruptor;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 final class SocketSession implements Session, OrderIdInternalIdListener {
 

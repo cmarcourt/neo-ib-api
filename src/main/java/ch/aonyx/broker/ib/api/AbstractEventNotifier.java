@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 abstract class AbstractEventNotifier implements EventNotifier {
 

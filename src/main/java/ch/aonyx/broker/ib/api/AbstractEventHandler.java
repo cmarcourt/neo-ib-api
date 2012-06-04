@@ -19,7 +19,7 @@ import com.lmax.disruptor.EventHandler;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 abstract class AbstractEventHandler implements EventHandler<EventWrapper> {
 

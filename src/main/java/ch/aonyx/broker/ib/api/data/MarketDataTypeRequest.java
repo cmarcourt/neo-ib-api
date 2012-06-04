@@ -32,7 +32,7 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 public final class MarketDataTypeRequest extends AbstractRequestSupport implements SimpleRequest {
 

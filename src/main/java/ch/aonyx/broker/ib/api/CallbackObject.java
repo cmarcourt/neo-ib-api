@@ -20,7 +20,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @author Christophe Marcourt
- * @version 1.0.0
+ * @since 1.0.0
  */
 public class CallbackObject {
 
