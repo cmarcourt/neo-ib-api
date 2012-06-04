@@ -8,6 +8,13 @@ Almost no enum exists. Input and output parameters are native type (int, long...
 ===Neo IB API===
 Every native input and output parameters have been typed. So now when you're placing a buy order, no more {{{"BUY"}}} String coding. Use {{{OrderAction.BUY}}} enum.
 
+==Handle tick price events==
+===IB API===
+When requesting market data, EReader firstly read tick price event then call tickPrice() callback method, secondly call tickSize() callback method. Not so easy to bind price and size if you've implemented multi-threading on your own.
+
+===Neo IB API===
+Just subscribe to {{{MarketDataSubscriptionRequest}}} then listen to {{{CompositeTickEventListener}}} to be notified of a {{{TickPriceEvent}}} binded to a {{{TickSizeEvent}}}.
+
 =Efficiency=
 ==Implementation of multi-threading==
 ===IB API===
