@@ -1,0 +1,19 @@
+Several things have been improved from IB API to ease development and to improve efficiency.
+
+=Efficiency=
+==IB API==
+{{{
+protected String readStr() throws IOException {
+  StringBuffer buf = new StringBuffer();
+  while (true) {
+    byte c = m_dis.readByte();
+    if (c == 0) {
+      break;
+    }
+    buf.append((char) c);
+  }
+
+  String str = buf.toString();
+  return str.length() == 0 ? null : str;
+}
+}}}
