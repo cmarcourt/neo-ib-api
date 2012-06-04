@@ -1,0 +1,3 @@
+Neo IB API is completely *event driven design*.
+
+Once connected to TWS using {{{NeoIbApiClient.connect()}}} method, you will be provided a {{{Session}}} object.
