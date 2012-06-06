@@ -23,6 +23,6 @@ A completely different design.
 
 The {{{EventInputStreamConsumerThread}}} read from the {{{InputStream}}}. As soon as the stream is consumed an event is created and published to [http://code.google.com/p/disruptor/ Disruptor]. {{{Disruptor}}} uses its own thead to handle event.
 
-Each events to publish are delegated to {{{EventPublisher}}} thread pooled (Thread Pool1). {{{EventNotifier}}} notifies each events to listeners within a separate thread (Thread Pool2).
+Each events to publish are delegated to {{{EventPublisher}}} thread pooled (Thread Pool1). {{{EventNotifier}}} notifies each events to listeners within a separated thread (Thread Pool2).
 
 Now long operations are welcomed !
