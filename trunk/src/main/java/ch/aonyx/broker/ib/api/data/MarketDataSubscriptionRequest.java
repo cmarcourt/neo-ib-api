@@ -24,13 +24,13 @@ import ch.aonyx.broker.ib.api.contract.Contract;
  */
 public final class MarketDataSubscriptionRequest extends AbstractMarketDataRequest implements SubscriptionRequest {
 
-	public MarketDataSubscriptionRequest(final Contract contract,
-			final ReturnedTickTypeFilter... returnedTickTypeFilters) {
-		super(contract, false, returnedTickTypeFilters);
-	}
+    public MarketDataSubscriptionRequest(final Contract contract,
+            final ReturnedTickTypeFilter... returnedTickTypeFilters) {
+        super(contract, false, returnedTickTypeFilters);
+    }
 
-	public MarketDataSubscriptionRequest(final String requestId, final Contract contract,
-			final ReturnedTickTypeFilter... returnedTickTypeFilters) {
-		super(requestId, contract, false, returnedTickTypeFilters);
-	}
+    public MarketDataSubscriptionRequest(final String requestId, final Contract contract,
+            final ReturnedTickTypeFilter... returnedTickTypeFilters) {
+        super(requestId, contract, false, returnedTickTypeFilters);
+    }
 }

@@ -21,16 +21,16 @@ package ch.aonyx.broker.ib.api;
  */
 final class SequentiallyEventPublisher extends AbstractEventPublisher {
 
-	SequentiallyEventPublisher(final EventNotifier eventNotifier) {
-		super(eventNotifier);
-	}
+    SequentiallyEventPublisher(final EventNotifier eventNotifier) {
+        super(eventNotifier);
+    }
 
-	@Override
-	public void publishEvent(final Event event) {
-		if (event != null) {
-			event.setSequence(getSequence().getAndIncrement());
-			getEventNotifier().notify(event);
-		}
-	}
+    @Override
+    public void publishEvent(final Event event) {
+        if (event != null) {
+            event.setSequence(getSequence().getAndIncrement());
+            getEventNotifier().notify(event);
+        }
+    }
 
 }

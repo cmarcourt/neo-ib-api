@@ -21,7 +21,7 @@ package ch.aonyx.broker.ib.api;
  */
 public interface ClientCallback {
 
-	void onSuccess(CallbackObject object);
+    void onSuccess(CallbackObject object);
 
-	void onFailure(NeoIbApiClientException exception);
+    void onFailure(NeoIbApiClientException exception);
 }

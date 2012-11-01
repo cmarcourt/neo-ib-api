@@ -23,11 +23,11 @@ import ch.aonyx.broker.ib.api.io.EventCreatingConsumer;
  */
 public abstract class AbstractEventCreatingConsumerSupport<E extends Event> implements EventCreatingConsumer<E> {
 
-	protected final RequestId toRequestId(final int id) {
-		return (RequestId) RequestIdInternalIdBinding.getInstance().getRequestId(id);
-	}
+    protected final RequestId toRequestId(final int id) {
+        return (RequestId) RequestIdInternalIdBinding.getInstance().getRequestId(id);
+    }
 
-	protected final OrderId toOrderId(final int id) {
-		return (OrderId) OrderIdInternalIdBinding.getInstance().getOrderId(id);
-	}
+    protected final OrderId toOrderId(final int id) {
+        return (OrderId) OrderIdInternalIdBinding.getInstance().getOrderId(id);
+    }
 }

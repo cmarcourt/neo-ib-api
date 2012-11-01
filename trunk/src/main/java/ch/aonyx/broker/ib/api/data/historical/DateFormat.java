@@ -25,30 +25,30 @@ import com.google.common.collect.Maps;
  */
 public enum DateFormat {
 
-	UNKNOWN(0), SECONDS_TIMESTAMP(2), YYYYMMDD__HH_MM_SS(1);
+    UNKNOWN(0), SECONDS_TIMESTAMP(2), YYYYMMDD__HH_MM_SS(1);
 
-	private final int value;
-	private static final Map<Integer, DateFormat> MAP;
+    private final int value;
+    private static final Map<Integer, DateFormat> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final DateFormat dateFormat : values()) {
-			MAP.put(dateFormat.getValue(), dateFormat);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final DateFormat dateFormat : values()) {
+            MAP.put(dateFormat.getValue(), dateFormat);
+        }
+    }
 
-	private DateFormat(final int value) {
-		this.value = value;
-	}
+    private DateFormat(final int value) {
+        this.value = value;
+    }
 
-	public final int getValue() {
-		return value;
-	}
+    public final int getValue() {
+        return value;
+    }
 
-	public static final DateFormat fromValue(final int value) {
-		if (MAP.containsKey(value)) {
-			return MAP.get(value);
-		}
-		return UNKNOWN;
-	}
+    public static final DateFormat fromValue(final int value) {
+        if (MAP.containsKey(value)) {
+            return MAP.get(value);
+        }
+        return UNKNOWN;
+    }
 }

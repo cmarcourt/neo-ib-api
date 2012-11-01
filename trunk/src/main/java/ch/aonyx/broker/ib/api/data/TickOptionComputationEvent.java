@@ -26,68 +26,68 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class TickOptionComputationEvent extends AbstractTickEvent {
 
-	private final double impliedVolatility;
-	private final double delta;
-	private final double price;
-	private final double presentValueDividend;
-	private final double gamma;
-	private final double vega;
-	private final double theta;
-	private final double underlyingPrice;
+    private final double impliedVolatility;
+    private final double delta;
+    private final double price;
+    private final double presentValueDividend;
+    private final double gamma;
+    private final double vega;
+    private final double theta;
+    private final double underlyingPrice;
 
-	public TickOptionComputationEvent(final Id requestId, final TickType type, final double impliedVolatility,
-			final double delta, final double price, final double presentValueDividend, final double gamma,
-			final double vega, final double theta, final double underlyingPrice) {
-		super(requestId, type);
-		this.impliedVolatility = impliedVolatility;
-		this.delta = delta;
-		this.price = price;
-		this.presentValueDividend = presentValueDividend;
-		this.gamma = gamma;
-		this.vega = vega;
-		this.theta = theta;
-		this.underlyingPrice = underlyingPrice;
-	}
+    public TickOptionComputationEvent(final Id requestId, final TickType type, final double impliedVolatility,
+            final double delta, final double price, final double presentValueDividend, final double gamma,
+            final double vega, final double theta, final double underlyingPrice) {
+        super(requestId, type);
+        this.impliedVolatility = impliedVolatility;
+        this.delta = delta;
+        this.price = price;
+        this.presentValueDividend = presentValueDividend;
+        this.gamma = gamma;
+        this.vega = vega;
+        this.theta = theta;
+        this.underlyingPrice = underlyingPrice;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return TickOptionComputationEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return TickOptionComputationEventListener.class;
+    }
 
-	public final double getImpliedVolatility() {
-		return impliedVolatility;
-	}
+    public double getImpliedVolatility() {
+        return impliedVolatility;
+    }
 
-	public final double getDelta() {
-		return delta;
-	}
+    public double getDelta() {
+        return delta;
+    }
 
-	public final double getPrice() {
-		return price;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public final double getPresentValueDividend() {
-		return presentValueDividend;
-	}
+    public double getPresentValueDividend() {
+        return presentValueDividend;
+    }
 
-	public final double getGamma() {
-		return gamma;
-	}
+    public double getGamma() {
+        return gamma;
+    }
 
-	public final double getVega() {
-		return vega;
-	}
+    public double getVega() {
+        return vega;
+    }
 
-	public final double getTheta() {
-		return theta;
-	}
+    public double getTheta() {
+        return theta;
+    }
 
-	public final double getUnderlyingPrice() {
-		return underlyingPrice;
-	}
+    public double getUnderlyingPrice() {
+        return underlyingPrice;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

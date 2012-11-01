@@ -22,10 +22,10 @@ import ch.aonyx.broker.ib.api.UnsubscriptionRequest;
  * @since 1.0.0
  */
 public final class AccountUpdateUnsubscriptionRequest extends AbstractAccountUpdateRequest implements
-		UnsubscriptionRequest {
+        UnsubscriptionRequest {
 
-	public AccountUpdateUnsubscriptionRequest(final String accountCode) {
-		super(accountCode, false);
-	}
+    public AccountUpdateUnsubscriptionRequest(final String accountCode) {
+        super(accountCode, false);
+    }
 
 }

@@ -27,35 +27,35 @@ import com.google.common.collect.Maps;
  */
 public enum TimeInForce {
 
-	UNKNOWN("UNKNOWN"), EMPTY(""), DAY("DAY"), GOOD_TILL_CANCEL("GTC"), IMMEDIATE_OR_CANCEL("IOC"), GOOD_TILL_DATE(
-			"GTD");
+    UNKNOWN("UNKNOWN"), EMPTY(""), DAY("DAY"), GOOD_TILL_CANCEL("GTC"), IMMEDIATE_OR_CANCEL("IOC"), GOOD_TILL_DATE(
+            "GTD");
 
-	private final String abbreviation;
-	private static final Map<String, TimeInForce> MAP;
+    private final String abbreviation;
+    private static final Map<String, TimeInForce> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final TimeInForce timeInForce : values()) {
-			MAP.put(timeInForce.getAbbreviation(), timeInForce);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final TimeInForce timeInForce : values()) {
+            MAP.put(timeInForce.getAbbreviation(), timeInForce);
+        }
+    }
 
-	private TimeInForce(final String abbreviation) {
-		this.abbreviation = abbreviation;
-	}
+    private TimeInForce(final String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
-	public final String getAbbreviation() {
-		return abbreviation;
-	}
+    public final String getAbbreviation() {
+        return abbreviation;
+    }
 
-	public static final TimeInForce fromAbbreviation(final String abbreviation) {
-		if (StringUtils.isBlank(abbreviation)) {
-			return EMPTY;
-		}
-		final String abbreviationUpperCase = abbreviation.toUpperCase();
-		if (MAP.containsKey(abbreviationUpperCase)) {
-			return MAP.get(abbreviationUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final TimeInForce fromAbbreviation(final String abbreviation) {
+        if (StringUtils.isBlank(abbreviation)) {
+            return EMPTY;
+        }
+        final String abbreviationUpperCase = abbreviation.toUpperCase();
+        if (MAP.containsKey(abbreviationUpperCase)) {
+            return MAP.get(abbreviationUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

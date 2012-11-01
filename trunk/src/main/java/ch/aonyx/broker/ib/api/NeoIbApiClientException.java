@@ -21,27 +21,27 @@ package ch.aonyx.broker.ib.api;
  */
 public class NeoIbApiClientException extends RuntimeException {
 
-	private static final long serialVersionUID = 8064925803528503973L;
-	protected final String detailedMessage;
-	protected final ClientMessageCode clientMessageCode;
+    private static final long serialVersionUID = 8064925803528503973L;
+    private final String detailedMessage;
+    private final ClientMessageCode clientMessageCode;
 
-	public NeoIbApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
-		this(clientMessageCode, detailedMessage, null);
-	}
+    public NeoIbApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
+        this(clientMessageCode, detailedMessage, null);
+    }
 
-	public NeoIbApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Throwable cause) {
-		super(clientMessageCode.getMessage() + " " + detailedMessage, cause);
-		this.detailedMessage = detailedMessage;
-		this.clientMessageCode = clientMessageCode;
-	}
+    public NeoIbApiClientException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Throwable cause) {
+        super(clientMessageCode.getMessage() + " " + detailedMessage, cause);
+        this.detailedMessage = detailedMessage;
+        this.clientMessageCode = clientMessageCode;
+    }
 
-	public final String getDetailedMessage() {
-		return detailedMessage;
-	}
+    public final String getDetailedMessage() {
+        return detailedMessage;
+    }
 
-	public final ClientMessageCode getClientMessageCode() {
-		return clientMessageCode;
-	}
+    public final ClientMessageCode getClientMessageCode() {
+        return clientMessageCode;
+    }
 
 }

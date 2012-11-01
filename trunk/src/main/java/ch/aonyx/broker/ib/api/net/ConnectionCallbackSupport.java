@@ -26,15 +26,15 @@ import ch.aonyx.broker.ib.api.Session;
  */
 public class ConnectionCallbackSupport implements ConnectionCallback {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionCallbackSupport.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConnectionCallbackSupport.class);
 
-	@Override
-	public void onSuccess(final Session session) {
-	}
+    @Override
+    public void onSuccess(final Session session) {
+    }
 
-	@Override
-	public void onFailure(final ConnectionException exception) {
-		LOGGER.error("failure due to exception: ", exception);
-	}
+    @Override
+    public void onFailure(final ConnectionException exception) {
+        LOGGER.error("failure due to exception: ", exception);
+    }
 
 }

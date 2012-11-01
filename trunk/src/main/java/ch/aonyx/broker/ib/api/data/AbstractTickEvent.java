@@ -24,15 +24,15 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public abstract class AbstractTickEvent extends AbstractEventSupport {
 
-	protected final TickType type;
+    private final TickType type;
 
-	protected AbstractTickEvent(final Id requestId, final TickType type) {
-		super(requestId);
-		this.type = type;
-	}
+    protected AbstractTickEvent(final Id requestId, final TickType type) {
+        super(requestId);
+        this.type = type;
+    }
 
-	public final TickType getType() {
-		return type;
-	}
+    public final TickType getType() {
+        return type;
+    }
 
 }

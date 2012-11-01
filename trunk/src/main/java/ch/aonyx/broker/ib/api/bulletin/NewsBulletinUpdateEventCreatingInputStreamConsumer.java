@@ -27,26 +27,26 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class NewsBulletinUpdateEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<NewsBulletinUpdateEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<NewsBulletinUpdateEvent> {
 
-	public NewsBulletinUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public NewsBulletinUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected NewsBulletinUpdateEvent consumeVersionLess(final InputStream inputStream) {
-		final int newsBulletinId = readInt(inputStream);
-		final int newsBulletinTypeValue = readInt(inputStream);
-		final String message = readString(inputStream);
-		final String exchange = readString(inputStream);
-		return createEvent(newsBulletinId, newsBulletinTypeValue, message, exchange);
-	}
+    @Override
+    protected NewsBulletinUpdateEvent consumeVersionLess(final InputStream inputStream) {
+        final int newsBulletinId = readInt(inputStream);
+        final int newsBulletinTypeValue = readInt(inputStream);
+        final String message = readString(inputStream);
+        final String exchange = readString(inputStream);
+        return createEvent(newsBulletinId, newsBulletinTypeValue, message, exchange);
+    }
 
-	private NewsBulletinUpdateEvent createEvent(final int newsBulletinId, final int newBulletinTypeValue,
-			final String message, final String exchange) {
-		return new NewsBulletinUpdateEvent(newsBulletinId, NewsBulletinType.fromValue(newBulletinTypeValue), message,
-				exchange);
-	}
+    private NewsBulletinUpdateEvent createEvent(final int newsBulletinId, final int newBulletinTypeValue,
+            final String message, final String exchange) {
+        return new NewsBulletinUpdateEvent(newsBulletinId, NewsBulletinType.fromValue(newBulletinTypeValue), message,
+                exchange);
+    }
 
 }

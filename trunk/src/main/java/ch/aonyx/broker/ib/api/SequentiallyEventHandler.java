@@ -21,7 +21,7 @@ package ch.aonyx.broker.ib.api;
  */
 final class SequentiallyEventHandler extends AbstractEventHandler {
 
-	SequentiallyEventHandler(final EventNotifier eventNotifier) {
-		super(new SequentiallyEventPublisher(eventNotifier));
-	}
+    SequentiallyEventHandler(final EventNotifier eventNotifier) {
+        super(new SequentiallyEventPublisher(eventNotifier));
+    }
 }

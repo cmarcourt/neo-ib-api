@@ -27,28 +27,28 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class ServerCurrentTimeEvent extends AbstractEventSupport {
 
-	private final long timestamp;
+    private final long timestamp;
 
-	public ServerCurrentTimeEvent(final long timestamp) {
-		super();
-		this.timestamp = timestamp;
-	}
+    public ServerCurrentTimeEvent(final long timestamp) {
+        super();
+        this.timestamp = timestamp;
+    }
 
-	public final long getTimestamp() {
-		return timestamp;
-	}
+    public long getTimestamp() {
+        return timestamp;
+    }
 
-	public final DateTime getDateTime() {
-		return new DateTime(timestamp * 1000);
-	}
+    public DateTime getDateTime() {
+        return new DateTime(timestamp * 1000);
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return ServerCurrentTimeEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return ServerCurrentTimeEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

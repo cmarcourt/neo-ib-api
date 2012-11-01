@@ -27,74 +27,74 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class HistoricalDataEvent extends AbstractEventSupport {
 
-	private final String dateTime;
-	private final double open;
-	private final double high;
-	private final double low;
-	private final double close;
-	private final int volume;
-	private final int tradeNumber;
-	private final double weightedAveragePrice;
-	private final boolean hasGap;
+    private final String dateTime;
+    private final double open;
+    private final double high;
+    private final double low;
+    private final double close;
+    private final int volume;
+    private final int tradeNumber;
+    private final double weightedAveragePrice;
+    private final boolean hasGap;
 
-	public HistoricalDataEvent(final Id requestId, final String dateTime, final double open, final double high,
-			final double low, final double close, final int volume, final int tradeNumber,
-			final double weightedAveragePrice, final boolean hasGap) {
-		super(requestId);
-		this.dateTime = dateTime;
-		this.open = open;
-		this.high = high;
-		this.low = low;
-		this.close = close;
-		this.volume = volume;
-		this.tradeNumber = tradeNumber;
-		this.weightedAveragePrice = weightedAveragePrice;
-		this.hasGap = hasGap;
-	}
+    public HistoricalDataEvent(final Id requestId, final String dateTime, final double open, final double high,
+            final double low, final double close, final int volume, final int tradeNumber,
+            final double weightedAveragePrice, final boolean hasGap) {
+        super(requestId);
+        this.dateTime = dateTime;
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
+        this.tradeNumber = tradeNumber;
+        this.weightedAveragePrice = weightedAveragePrice;
+        this.hasGap = hasGap;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return HistoricalDataEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return HistoricalDataEventListener.class;
+    }
 
-	public final String getDateTime() {
-		return dateTime;
-	}
+    public String getDateTime() {
+        return dateTime;
+    }
 
-	public final double getOpen() {
-		return open;
-	}
+    public double getOpen() {
+        return open;
+    }
 
-	public final double getHigh() {
-		return high;
-	}
+    public double getHigh() {
+        return high;
+    }
 
-	public final double getLow() {
-		return low;
-	}
+    public double getLow() {
+        return low;
+    }
 
-	public final double getClose() {
-		return close;
-	}
+    public double getClose() {
+        return close;
+    }
 
-	public final int getVolume() {
-		return volume;
-	}
+    public int getVolume() {
+        return volume;
+    }
 
-	public final int getTradeNumber() {
-		return tradeNumber;
-	}
+    public int getTradeNumber() {
+        return tradeNumber;
+    }
 
-	public final double getWeightedAveragePrice() {
-		return weightedAveragePrice;
-	}
+    public double getWeightedAveragePrice() {
+        return weightedAveragePrice;
+    }
 
-	public final boolean isHasGap() {
-		return hasGap;
-	}
+    public boolean isHasGap() {
+        return hasGap;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

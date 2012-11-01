@@ -23,7 +23,7 @@ import ch.aonyx.broker.ib.api.Session;
  */
 public interface ConnectionCallback {
 
-	void onSuccess(Session session);
+    void onSuccess(Session session);
 
-	void onFailure(ConnectionException exception);
+    void onFailure(ConnectionException exception);
 }

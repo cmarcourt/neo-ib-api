@@ -25,20 +25,20 @@ import ch.aonyx.broker.ib.api.util.InputStreamUtils;
  * @since 1.0.0
  */
 public final class NextValidOrderIdEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<NextValidOrderIdEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<NextValidOrderIdEvent> {
 
-	public NextValidOrderIdEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public NextValidOrderIdEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected NextValidOrderIdEvent consumeVersionLess(final InputStream inputStream) {
-		final int nextValidOrderId = InputStreamUtils.readInt(inputStream);
-		return createEvent(nextValidOrderId);
-	}
+    @Override
+    protected NextValidOrderIdEvent consumeVersionLess(final InputStream inputStream) {
+        final int nextValidOrderId = InputStreamUtils.readInt(inputStream);
+        return createEvent(nextValidOrderId);
+    }
 
-	private NextValidOrderIdEvent createEvent(final int nextValidOrderId) {
-		return new NextValidOrderIdEvent(nextValidOrderId);
-	}
+    private NextValidOrderIdEvent createEvent(final int nextValidOrderId) {
+        return new NextValidOrderIdEvent(nextValidOrderId);
+    }
 }

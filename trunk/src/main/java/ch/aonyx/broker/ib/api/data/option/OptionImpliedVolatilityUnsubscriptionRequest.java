@@ -35,61 +35,61 @@ import ch.aonyx.broker.ib.api.util.RequestBuilder;
  * @since 1.0.0
  */
 public final class OptionImpliedVolatilityUnsubscriptionRequest extends AbstractRequestSupport implements
-		UnsubscriptionRequest {
+        UnsubscriptionRequest {
 
-	private static final int VERSION = 1;
+    private static final int VERSION = 1;
 
-	public OptionImpliedVolatilityUnsubscriptionRequest(final String id) {
-		super(id);
-	}
+    public OptionImpliedVolatilityUnsubscriptionRequest(final String id) {
+        super(id);
+    }
 
-	public OptionImpliedVolatilityUnsubscriptionRequest(final RequestId id) {
-		super(id);
-	}
+    public OptionImpliedVolatilityUnsubscriptionRequest(final RequestId id) {
+        super(id);
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		checkCancelCalculateImpliedVolatility();
-		builder.append(OutgoingMessageId.OPTION_IMPLIED_VOLATILITY_UNSUBSCRIPTION_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(toInternalId(getId()));
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        checkCancelCalculateImpliedVolatility();
+        builder.append(OutgoingMessageId.OPTION_IMPLIED_VOLATILITY_UNSUBSCRIPTION_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(toInternalId(getId()));
+        return builder;
+    }
 
-	private void checkCancelCalculateImpliedVolatility() {
-		if (!Feature.CANCEL_CALCULATE_IMPLIED_VOLATILITY.isSupportedByVersion(getServerCurrentVersion())) {
-			throw new RequestException(ClientMessageCode.UPDATE_TWS,
-					"It does not support calculate implied volatility cancellation.", this);
-		}
-	}
+    private void checkCancelCalculateImpliedVolatility() {
+        if (!Feature.CANCEL_CALCULATE_IMPLIED_VOLATILITY.isSupportedByVersion(getServerCurrentVersion())) {
+            throw new RequestException(ClientMessageCode.UPDATE_TWS,
+                    "It does not support calculate implied volatility cancellation.", this);
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		return new EqualsBuilder().isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        return new EqualsBuilder().isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

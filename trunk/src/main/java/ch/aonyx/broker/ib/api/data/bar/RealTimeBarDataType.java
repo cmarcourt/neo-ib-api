@@ -27,34 +27,34 @@ import com.google.common.collect.Maps;
  */
 public enum RealTimeBarDataType {
 
-	UNKNOWN("UNKNOWN"), EMPTY(""), TRADES("TRADES"), BID("BID"), ASK("ASK"), MID_POINT("MIDPOINT");
+    UNKNOWN("UNKNOWN"), EMPTY(""), TRADES("TRADES"), BID("BID"), ASK("ASK"), MID_POINT("MIDPOINT");
 
-	private final String label;
-	private static final Map<String, RealTimeBarDataType> MAP;
+    private final String label;
+    private static final Map<String, RealTimeBarDataType> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final RealTimeBarDataType barDataType : values()) {
-			MAP.put(barDataType.getLabel(), barDataType);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final RealTimeBarDataType barDataType : values()) {
+            MAP.put(barDataType.getLabel(), barDataType);
+        }
+    }
 
-	private RealTimeBarDataType(final String label) {
-		this.label = label;
-	}
+    private RealTimeBarDataType(final String label) {
+        this.label = label;
+    }
 
-	public final String getLabel() {
-		return label;
-	}
+    public final String getLabel() {
+        return label;
+    }
 
-	public static final RealTimeBarDataType fromLabel(final String label) {
-		if (StringUtils.isBlank(label)) {
-			return EMPTY;
-		}
-		final String labelUpperCase = label.toUpperCase();
-		if (MAP.containsKey(labelUpperCase)) {
-			return MAP.get(labelUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final RealTimeBarDataType fromLabel(final String label) {
+        if (StringUtils.isBlank(label)) {
+            return EMPTY;
+        }
+        final String labelUpperCase = label.toUpperCase();
+        if (MAP.containsKey(labelUpperCase)) {
+            return MAP.get(labelUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

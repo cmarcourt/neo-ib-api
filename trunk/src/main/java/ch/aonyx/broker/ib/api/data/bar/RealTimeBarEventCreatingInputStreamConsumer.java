@@ -28,31 +28,31 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class RealTimeBarEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<RealTimeBarEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<RealTimeBarEvent> {
 
-	public RealTimeBarEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public RealTimeBarEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected RealTimeBarEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final long timestamp = readLong(inputStream);
-		final double open = readDouble(inputStream);
-		final double high = readDouble(inputStream);
-		final double low = readDouble(inputStream);
-		final double close = readDouble(inputStream);
-		final long volume = readLong(inputStream);
-		final double weightedAveragePrice = readDouble(inputStream);
-		final int tradeNumber = readInt(inputStream);
-		return createEvent(requestId, timestamp, open, high, low, close, volume, weightedAveragePrice, tradeNumber);
-	}
+    @Override
+    protected RealTimeBarEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final long timestamp = readLong(inputStream);
+        final double open = readDouble(inputStream);
+        final double high = readDouble(inputStream);
+        final double low = readDouble(inputStream);
+        final double close = readDouble(inputStream);
+        final long volume = readLong(inputStream);
+        final double weightedAveragePrice = readDouble(inputStream);
+        final int tradeNumber = readInt(inputStream);
+        return createEvent(requestId, timestamp, open, high, low, close, volume, weightedAveragePrice, tradeNumber);
+    }
 
-	private RealTimeBarEvent createEvent(final int requestId, final long timestamp, final double open,
-			final double high, final double low, final double close, final long volume,
-			final double weightedAveragePrice, final int tradeNumber) {
-		return new RealTimeBarEvent(toRequestId(requestId), timestamp, open, high, low, close, volume,
-				weightedAveragePrice, tradeNumber);
-	}
+    private RealTimeBarEvent createEvent(final int requestId, final long timestamp, final double open,
+            final double high, final double low, final double close, final long volume,
+            final double weightedAveragePrice, final int tradeNumber) {
+        return new RealTimeBarEvent(toRequestId(requestId), timestamp, open, high, low, close, volume,
+                weightedAveragePrice, tradeNumber);
+    }
 
 }

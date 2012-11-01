@@ -24,34 +24,34 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 class StringId implements Id {
 
-	private final String id;
+    private final String id;
 
-	StringId(final String id) {
-		this.id = id;
-	}
+    StringId(final String id) {
+        this.id = id;
+    }
 
-	@Override
-	public String toString() {
-		return id;
-	}
+    @Override
+    public String toString() {
+        return id;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(id).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(id).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final StringId rhs = (StringId) obj;
-		return new EqualsBuilder().append(id, rhs.id).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final StringId rhs = (StringId) obj;
+        return new EqualsBuilder().append(id, rhs.id).isEquals();
+    }
 }

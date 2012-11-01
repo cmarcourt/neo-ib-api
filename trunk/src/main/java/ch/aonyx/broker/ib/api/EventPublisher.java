@@ -21,5 +21,5 @@ package ch.aonyx.broker.ib.api;
  */
 interface EventPublisher {
 
-	void publishEvent(Event event);
+    void publishEvent(Event event);
 }

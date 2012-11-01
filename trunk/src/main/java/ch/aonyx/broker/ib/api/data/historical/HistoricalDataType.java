@@ -27,35 +27,35 @@ import com.google.common.collect.Maps;
  */
 public enum HistoricalDataType {
 
-	UNKNOWN("UNKNOWN"), EMPTY(""), TRADES("TRADES"), MID_POINT("MIDPOINT"), BID("BID"), ASK("ASK"), BID_ASK("BID_ASK"), HISTORICAL_VOLATILITY(
-			"HISTORICAL_VOLATILITY"), OPTION_IMPLIED_VOLATILITY("OPTION_IMPLIED_VOLATILITY");
+    UNKNOWN("UNKNOWN"), EMPTY(""), TRADES("TRADES"), MID_POINT("MIDPOINT"), BID("BID"), ASK("ASK"), BID_ASK("BID_ASK"),
+    HISTORICAL_VOLATILITY("HISTORICAL_VOLATILITY"), OPTION_IMPLIED_VOLATILITY("OPTION_IMPLIED_VOLATILITY");
 
-	private final String label;
-	private static final Map<String, HistoricalDataType> MAP;
+    private final String label;
+    private static final Map<String, HistoricalDataType> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final HistoricalDataType dataType : values()) {
-			MAP.put(dataType.getLabel(), dataType);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final HistoricalDataType dataType : values()) {
+            MAP.put(dataType.getLabel(), dataType);
+        }
+    }
 
-	private HistoricalDataType(final String label) {
-		this.label = label;
-	}
+    private HistoricalDataType(final String label) {
+        this.label = label;
+    }
 
-	public final String getLabel() {
-		return label;
-	}
+    public final String getLabel() {
+        return label;
+    }
 
-	public static final HistoricalDataType fromLabel(final String label) {
-		if (StringUtils.isBlank(label)) {
-			return EMPTY;
-		}
-		final String labelUpperCase = label.toUpperCase();
-		if (MAP.containsKey(labelUpperCase)) {
-			return MAP.get(labelUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final HistoricalDataType fromLabel(final String label) {
+        if (StringUtils.isBlank(label)) {
+            return EMPTY;
+        }
+        final String labelUpperCase = label.toUpperCase();
+        if (MAP.containsKey(labelUpperCase)) {
+            return MAP.get(labelUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

@@ -26,27 +26,27 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class AccountUpdateValueEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<AccountUpdateValueEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<AccountUpdateValueEvent> {
 
-	public AccountUpdateValueEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public AccountUpdateValueEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected AccountUpdateValueEvent consumeVersionLess(final InputStream inputStream) {
-		final String key = readString(inputStream);
-		final String value = readString(inputStream);
-		final String currency = readString(inputStream);
-		String accountName = null;
-		if (getVersion() >= 2) {
-			accountName = readString(inputStream);
-		}
-		return createEvent(key, value, currency, accountName);
-	}
+    @Override
+    protected AccountUpdateValueEvent consumeVersionLess(final InputStream inputStream) {
+        final String key = readString(inputStream);
+        final String value = readString(inputStream);
+        final String currency = readString(inputStream);
+        String accountName = null;
+        if (getVersion() >= 2) {
+            accountName = readString(inputStream);
+        }
+        return createEvent(key, value, currency, accountName);
+    }
 
-	private AccountUpdateValueEvent createEvent(final String key, final String value, final String currency,
-			final String accountName) {
-		return new AccountUpdateValueEvent(key, value, currency, accountName);
-	}
+    private AccountUpdateValueEvent createEvent(final String key, final String value, final String currency,
+            final String accountName) {
+        return new AccountUpdateValueEvent(key, value, currency, accountName);
+    }
 }

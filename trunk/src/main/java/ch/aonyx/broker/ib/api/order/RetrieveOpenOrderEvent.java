@@ -28,37 +28,37 @@ import ch.aonyx.broker.ib.api.contract.Contract;
  */
 public final class RetrieveOpenOrderEvent extends AbstractEventSupport {
 
-	private final Contract contract;
-	private final Order order;
-	private final OrderExecution orderExecution;
+    private final Contract contract;
+    private final Order order;
+    private final OrderExecution orderExecution;
 
-	public RetrieveOpenOrderEvent(final Id orderId, final Contract contract, final Order order,
-			final OrderExecution orderExecution) {
-		super(orderId);
-		this.contract = contract;
-		this.order = order;
-		this.orderExecution = orderExecution;
-	}
+    public RetrieveOpenOrderEvent(final Id orderId, final Contract contract, final Order order,
+            final OrderExecution orderExecution) {
+        super(orderId);
+        this.contract = contract;
+        this.order = order;
+        this.orderExecution = orderExecution;
+    }
 
-	public final Contract getContract() {
-		return contract;
-	}
+    public Contract getContract() {
+        return contract;
+    }
 
-	public final Order getOrder() {
-		return order;
-	}
+    public Order getOrder() {
+        return order;
+    }
 
-	public final OrderExecution getOrderExecution() {
-		return orderExecution;
-	}
+    public OrderExecution getOrderExecution() {
+        return orderExecution;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return RetrieveOpenOrderEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return RetrieveOpenOrderEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

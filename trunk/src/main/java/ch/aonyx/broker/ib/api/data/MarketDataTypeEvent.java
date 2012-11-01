@@ -27,24 +27,24 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class MarketDataTypeEvent extends AbstractEventSupport {
 
-	private final MarketDataType marketDataType;
+    private final MarketDataType marketDataType;
 
-	public MarketDataTypeEvent(final Id requestId, final MarketDataType marketDataType) {
-		super(requestId);
-		this.marketDataType = marketDataType;
-	}
+    public MarketDataTypeEvent(final Id requestId, final MarketDataType marketDataType) {
+        super(requestId);
+        this.marketDataType = marketDataType;
+    }
 
-	public final MarketDataType getMarketDataType() {
-		return marketDataType;
-	}
+    public MarketDataType getMarketDataType() {
+        return marketDataType;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return MarketDataTypeEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return MarketDataTypeEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

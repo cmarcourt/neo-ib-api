@@ -27,22 +27,22 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class TickGenericEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<TickGenericEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<TickGenericEvent> {
 
-	public TickGenericEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public TickGenericEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected TickGenericEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final int tickType = readInt(inputStream);
-		final double value = readDouble(inputStream);
-		return createEvent(requestId, tickType, value);
-	}
+    @Override
+    protected TickGenericEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final int tickType = readInt(inputStream);
+        final double value = readDouble(inputStream);
+        return createEvent(requestId, tickType, value);
+    }
 
-	private TickGenericEvent createEvent(final int requestId, final int tickType, final double value) {
-		return new TickGenericEvent(toRequestId(requestId), TickType.fromValue(tickType), value);
-	}
+    private TickGenericEvent createEvent(final int requestId, final int tickType, final double value) {
+        return new TickGenericEvent(toRequestId(requestId), TickType.fromValue(tickType), value);
+    }
 
 }

@@ -22,11 +22,11 @@ package ch.aonyx.broker.ib.api;
 @AssignableListenerType
 public interface ServerMessageEventListener extends EventListener<ServerMessageEvent> {
 
-	void onInfo(ServerMessageEvent event);
+    void onInfo(ServerMessageEvent event);
 
-	void onWarn(ServerMessageEvent event);
+    void onWarn(ServerMessageEvent event);
 
-	void onError(ServerMessageEvent event);
+    void onError(ServerMessageEvent event);
 
-	void onUnknown(ServerMessageEvent event);
+    void onUnknown(ServerMessageEvent event);
 }

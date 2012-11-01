@@ -28,28 +28,28 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class AccountUpdateTimeEvent extends AbstractEventSupport {
 
-	private final String time;
+    private final String time;
 
-	public AccountUpdateTimeEvent(final String time) {
-		super();
-		this.time = time;
-	}
+    public AccountUpdateTimeEvent(final String time) {
+        super();
+        this.time = time;
+    }
 
-	public final String getTime() {
-		return time;
-	}
+    public String getTime() {
+        return time;
+    }
 
-	public DateTime getDateTime() {
-		return LocalTime.parse(time).toDateTimeToday();
-	}
+    public DateTime getDateTime() {
+        return LocalTime.parse(time).toDateTimeToday();
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return AccountUpdateTimeEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return AccountUpdateTimeEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

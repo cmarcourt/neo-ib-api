@@ -24,15 +24,15 @@ import ch.aonyx.broker.ib.api.NeoIbApiClientException;
  */
 public class IOStreamException extends NeoIbApiClientException {
 
-	private static final long serialVersionUID = 7449219711331360065L;
+    private static final long serialVersionUID = 7449219711331360065L;
 
-	public IOStreamException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Throwable cause) {
-		super(clientMessageCode, detailedMessage, cause);
-	}
+    public IOStreamException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Throwable cause) {
+        super(clientMessageCode, detailedMessage, cause);
+    }
 
-	public IOStreamException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
-		super(clientMessageCode, detailedMessage);
-	}
+    public IOStreamException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
+        super(clientMessageCode, detailedMessage);
+    }
 
 }

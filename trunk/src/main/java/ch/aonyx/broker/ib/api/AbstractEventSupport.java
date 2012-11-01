@@ -21,37 +21,37 @@ package ch.aonyx.broker.ib.api;
  */
 public abstract class AbstractEventSupport implements Event {
 
-	private final long creationTimestamp;
-	private long sequence;
-	private Id id;
+    private final long creationTimestamp;
+    private long sequence;
+    private Id id;
 
-	protected AbstractEventSupport(final Id id) {
-		this();
-		this.id = id;
-	}
+    protected AbstractEventSupport(final Id id) {
+        this();
+        this.id = id;
+    }
 
-	protected AbstractEventSupport() {
-		creationTimestamp = System.currentTimeMillis();
-	}
+    protected AbstractEventSupport() {
+        creationTimestamp = System.currentTimeMillis();
+    }
 
-	@Override
-	public final long getCreationTimestamp() {
-		return creationTimestamp;
-	}
+    @Override
+    public final long getCreationTimestamp() {
+        return creationTimestamp;
+    }
 
-	@Override
-	public final void setSequence(final long sequence) {
-		this.sequence = sequence;
-	}
+    @Override
+    public final void setSequence(final long sequence) {
+        this.sequence = sequence;
+    }
 
-	@Override
-	public final long getSequence() {
-		return sequence;
-	}
+    @Override
+    public final long getSequence() {
+        return sequence;
+    }
 
-	@Override
-	public final Id getId() {
-		return id;
-	}
+    @Override
+    public final Id getId() {
+        return id;
+    }
 
 }

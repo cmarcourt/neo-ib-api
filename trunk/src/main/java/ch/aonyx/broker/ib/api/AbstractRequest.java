@@ -21,25 +21,25 @@ package ch.aonyx.broker.ib.api;
  */
 public abstract class AbstractRequest implements Request {
 
-	private final Id id;
-	private int serverCurrentVersion;
+    private final Id id;
+    private int serverCurrentVersion;
 
-	protected AbstractRequest(final Id id) {
-		this.id = id;
-	}
+    protected AbstractRequest(final Id id) {
+        this.id = id;
+    }
 
-	@Override
-	public Id getId() {
-		return id;
-	}
+    @Override
+    public Id getId() {
+        return id;
+    }
 
-	@Override
-	public final void setServerCurrentVersion(final int serverCurrentVersion) {
-		this.serverCurrentVersion = serverCurrentVersion;
-	}
+    @Override
+    public final void setServerCurrentVersion(final int serverCurrentVersion) {
+        this.serverCurrentVersion = serverCurrentVersion;
+    }
 
-	protected final int getServerCurrentVersion() {
-		return serverCurrentVersion;
-	}
+    protected final int getServerCurrentVersion() {
+        return serverCurrentVersion;
+    }
 
 }

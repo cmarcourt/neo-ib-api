@@ -21,14 +21,14 @@ package ch.aonyx.broker.ib.api.util;
  */
 public interface RequestBuilder {
 
-	RequestBuilder append(final int i);
+    RequestBuilder append(final int i);
 
-	RequestBuilder append(final boolean b);
+    RequestBuilder append(final boolean b);
 
-	RequestBuilder append(final double d);
+    RequestBuilder append(final double d);
 
-	RequestBuilder append(final String s);
+    RequestBuilder append(final String s);
 
-	byte[] toBytes();
+    byte[] toBytes();
 
 }

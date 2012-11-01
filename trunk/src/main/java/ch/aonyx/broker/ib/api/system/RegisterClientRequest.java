@@ -32,51 +32,51 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class RegisterClientRequest extends AbstractRequestSupport implements SimpleRequest {
 
-	private final int clientId;
+    private final int clientId;
 
-	public RegisterClientRequest(final int clientId) {
-		super(StringIdUtils.uniqueRandomId());
-		this.clientId = clientId;
-	}
+    public RegisterClientRequest(final int clientId) {
+        super(StringIdUtils.uniqueRandomId());
+        this.clientId = clientId;
+    }
 
-	public final int getClientId() {
-		return clientId;
-	}
+    public int getClientId() {
+        return clientId;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(clientId);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(clientId);
+        return builder;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(clientId).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(clientId).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final RegisterClientRequest rhs = (RegisterClientRequest) obj;
-		return new EqualsBuilder().append(clientId, rhs.clientId).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final RegisterClientRequest rhs = (RegisterClientRequest) obj;
+        return new EqualsBuilder().append(clientId, rhs.clientId).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

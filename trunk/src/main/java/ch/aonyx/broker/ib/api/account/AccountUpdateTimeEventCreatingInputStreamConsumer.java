@@ -26,21 +26,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class AccountUpdateTimeEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<AccountUpdateTimeEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<AccountUpdateTimeEvent> {
 
-	public AccountUpdateTimeEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public AccountUpdateTimeEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected AccountUpdateTimeEvent consumeVersionLess(final InputStream inputStream) {
-		final String time = readString(inputStream);
-		return createEvent(time);
-	}
+    @Override
+    protected AccountUpdateTimeEvent consumeVersionLess(final InputStream inputStream) {
+        final String time = readString(inputStream);
+        return createEvent(time);
+    }
 
-	private AccountUpdateTimeEvent createEvent(final String time) {
-		return new AccountUpdateTimeEvent(time);
-	}
+    private AccountUpdateTimeEvent createEvent(final String time) {
+        return new AccountUpdateTimeEvent(time);
+    }
 
 }

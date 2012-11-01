@@ -24,23 +24,23 @@ import java.util.concurrent.Executors;
  */
 final class ConcurrentlyEventPublisher extends AbstractEventPublisher {
 
-	private Executor executor;
+    private Executor executor;
 
-	ConcurrentlyEventPublisher(final EventNotifier eventNotifier) {
-		super(eventNotifier);
-		createExecutor();
-	}
+    ConcurrentlyEventPublisher(final EventNotifier eventNotifier) {
+        super(eventNotifier);
+        createExecutor();
+    }
 
-	private void createExecutor() {
-		executor = Executors.newCachedThreadPool();
-	}
+    private void createExecutor() {
+        executor = Executors.newCachedThreadPool();
+    }
 
-	@Override
-	public void publishEvent(final Event event) {
-		if (event != null) {
-			event.setSequence(getSequence().getAndIncrement());
-			executor.execute(new EventNotifierWrapperTask(event, getEventNotifier()));
-		}
-	}
+    @Override
+    public void publishEvent(final Event event) {
+        if (event != null) {
+            event.setSequence(getSequence().getAndIncrement());
+            executor.execute(new EventNotifierWrapperTask(event, getEventNotifier()));
+        }
+    }
 
 }

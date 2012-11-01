@@ -34,71 +34,71 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class ExecutionReportRequest extends AbstractRequestSupport implements SimpleRequest {
 
-	private static final int VERSION = 3;
-	private final ExecutionReportFilter filter;
+    private static final int VERSION = 3;
+    private final ExecutionReportFilter filter;
 
-	public ExecutionReportRequest(final ExecutionReportFilter filter) {
-		this(StringIdUtils.uniqueIdFromExecutionReportFilter(filter), filter);
-	}
+    public ExecutionReportRequest(final ExecutionReportFilter filter) {
+        this(StringIdUtils.uniqueIdFromExecutionReportFilter(filter), filter);
+    }
 
-	public ExecutionReportRequest(final String id, final ExecutionReportFilter filter) {
-		super(id);
-		this.filter = filter;
-	}
+    public ExecutionReportRequest(final String id, final ExecutionReportFilter filter) {
+        super(id);
+        this.filter = filter;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.EXECUTION_REPORT_REQUEST.getId());
-		builder.append(VERSION);
-		if (Feature.EXECUTION_MARKER.isSupportedByVersion(getServerCurrentVersion())) {
-			builder.append(toInternalId(getId()));
-		}
-		appendFilter(builder);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.EXECUTION_REPORT_REQUEST.getId());
+        builder.append(VERSION);
+        if (Feature.EXECUTION_MARKER.isSupportedByVersion(getServerCurrentVersion())) {
+            builder.append(toInternalId(getId()));
+        }
+        appendFilter(builder);
+        return builder;
+    }
 
-	private void appendFilter(final RequestBuilder builder) {
-		builder.append(filter.getClientId());
-		builder.append(filter.getAccountNumber());
-		builder.append(filter.getTime());
-		builder.append(filter.getSymbol());
-		builder.append(filter.getSecurityType().getAbbreviation());
-		builder.append(filter.getExchange());
-		builder.append(filter.getOrderAction().getAbbreviation());
-	}
+    private void appendFilter(final RequestBuilder builder) {
+        builder.append(filter.getClientId());
+        builder.append(filter.getAccountNumber());
+        builder.append(filter.getTime());
+        builder.append(filter.getSymbol());
+        builder.append(filter.getSecurityType().getAbbreviation());
+        builder.append(filter.getExchange());
+        builder.append(filter.getOrderAction().getAbbreviation());
+    }
 
-	public final ExecutionReportFilter getFilter() {
-		return filter;
-	}
+    public ExecutionReportFilter getFilter() {
+        return filter;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(filter).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(filter).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final ExecutionReportRequest rhs = (ExecutionReportRequest) obj;
-		return new EqualsBuilder().append(filter, rhs.filter).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final ExecutionReportRequest rhs = (ExecutionReportRequest) obj;
+        return new EqualsBuilder().append(filter, rhs.filter).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -31,71 +31,71 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class ExecutionReportEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<ExecutionReportEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<ExecutionReportEvent> {
 
-	public ExecutionReportEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public ExecutionReportEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected ExecutionReportEvent consumeVersionLess(final InputStream inputStream) {
-		int requestId = -1;
-		if (getVersion() >= 7) {
-			requestId = readInt(inputStream);
-		}
-		final int orderId = readInt(inputStream);
-		final Contract contract = consumeContract(inputStream);
-		final ExecutionReport executionReport = consumeExecutionReport(inputStream, orderId);
-		return createEvent(requestId, contract, executionReport);
-	}
+    @Override
+    protected ExecutionReportEvent consumeVersionLess(final InputStream inputStream) {
+        int requestId = -1;
+        if (getVersion() >= 7) {
+            requestId = readInt(inputStream);
+        }
+        final int orderId = readInt(inputStream);
+        final Contract contract = consumeContract(inputStream);
+        final ExecutionReport executionReport = consumeExecutionReport(inputStream, orderId);
+        return createEvent(requestId, contract, executionReport);
+    }
 
-	private Contract consumeContract(final InputStream inputStream) {
-		final Contract contract = new Contract();
-		if (getVersion() >= 5) {
-			contract.setId(readInt(inputStream));
-		}
-		contract.setSymbol(readString(inputStream));
-		contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
-		contract.setExpiry(readString(inputStream));
-		contract.setStrike(readDouble(inputStream));
-		contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
-		contract.setExchange(readString(inputStream));
-		contract.setCurrencyCode(readString(inputStream));
-		contract.setLocalSymbol(readString(inputStream));
-		return contract;
-	}
+    private Contract consumeContract(final InputStream inputStream) {
+        final Contract contract = new Contract();
+        if (getVersion() >= 5) {
+            contract.setId(readInt(inputStream));
+        }
+        contract.setSymbol(readString(inputStream));
+        contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
+        contract.setExpiry(readString(inputStream));
+        contract.setStrike(readDouble(inputStream));
+        contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
+        contract.setExchange(readString(inputStream));
+        contract.setCurrencyCode(readString(inputStream));
+        contract.setLocalSymbol(readString(inputStream));
+        return contract;
+    }
 
-	private ExecutionReport consumeExecutionReport(final InputStream inputStream, final int orderId) {
-		final ExecutionReport executionReport = new ExecutionReport();
-		executionReport.setOrderId(orderId);
-		executionReport.setExecutionId(readString(inputStream));
-		executionReport.setTime(readString(inputStream));
-		executionReport.setAccountNumber(readString(inputStream));
-		executionReport.setExchange(readString(inputStream));
-		executionReport.setSide(Side.fromAcronym(readString(inputStream)));
-		executionReport.setFilledQuantity(readInt(inputStream));
-		executionReport.setFilledPrice(readDouble(inputStream));
-		if (getVersion() >= 2) {
-			executionReport.setPermanentId(readInt(inputStream));
-		}
-		if (getVersion() >= 3) {
-			executionReport.setClientId(readInt(inputStream));
-		}
-		if (getVersion() >= 4) {
-			executionReport.setLiquidation(readInt(inputStream));
-		}
-		if (getVersion() >= 6) {
-			executionReport.setCumulativeQuantity(readInt(inputStream));
-			executionReport.setAverageFilledPrice(readDouble(inputStream));
-		}
-		if (getVersion() >= 8) {
-			executionReport.setOrderRef(readString(inputStream));
-		}
-		return executionReport;
-	}
+    private ExecutionReport consumeExecutionReport(final InputStream inputStream, final int orderId) {
+        final ExecutionReport executionReport = new ExecutionReport();
+        executionReport.setOrderId(orderId);
+        executionReport.setExecutionId(readString(inputStream));
+        executionReport.setTime(readString(inputStream));
+        executionReport.setAccountNumber(readString(inputStream));
+        executionReport.setExchange(readString(inputStream));
+        executionReport.setSide(Side.fromAcronym(readString(inputStream)));
+        executionReport.setFilledQuantity(readInt(inputStream));
+        executionReport.setFilledPrice(readDouble(inputStream));
+        if (getVersion() >= 2) {
+            executionReport.setPermanentId(readInt(inputStream));
+        }
+        if (getVersion() >= 3) {
+            executionReport.setClientId(readInt(inputStream));
+        }
+        if (getVersion() >= 4) {
+            executionReport.setLiquidation(readInt(inputStream));
+        }
+        if (getVersion() >= 6) {
+            executionReport.setCumulativeQuantity(readInt(inputStream));
+            executionReport.setAverageFilledPrice(readDouble(inputStream));
+        }
+        if (getVersion() >= 8) {
+            executionReport.setOrderRef(readString(inputStream));
+        }
+        return executionReport;
+    }
 
-	private ExecutionReportEvent createEvent(final int requestId, final Contract contract,
-			final ExecutionReport executionReport) {
-		return new ExecutionReportEvent(toRequestId(requestId), contract, executionReport);
-	}
+    private ExecutionReportEvent createEvent(final int requestId, final Contract contract,
+            final ExecutionReport executionReport) {
+        return new ExecutionReportEvent(toRequestId(requestId), contract, executionReport);
+    }
 }

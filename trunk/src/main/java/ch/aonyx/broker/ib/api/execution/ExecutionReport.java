@@ -26,165 +26,165 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public final class ExecutionReport {
 
-	private static final String EMPTY = "";
-	private String accountNumber = EMPTY;
-	private double averageFilledPrice;
-	private int clientId;
-	private int cumulativeQuantity;
-	private String exchange = EMPTY;
-	private String executionId = EMPTY;
-	private int liquidation;
-	private int orderId;
-	private String orderRef = EMPTY;
-	private int permanentId;
-	private double filledPrice;
-	private int filledQuantity;
-	private Side side = Side.EMPTY;
-	private String time = EMPTY;
+    private static final String EMPTY = "";
+    private String accountNumber = EMPTY;
+    private double averageFilledPrice;
+    private int clientId;
+    private int cumulativeQuantity;
+    private String exchange = EMPTY;
+    private String executionId = EMPTY;
+    private int liquidation;
+    private int orderId;
+    private String orderRef = EMPTY;
+    private int permanentId;
+    private double filledPrice;
+    private int filledQuantity;
+    private Side side = Side.EMPTY;
+    private String time = EMPTY;
 
-	public final String getAccountNumber() {
-		return accountNumber;
-	}
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
-	public final void setAccountNumber(final String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
+    public void setAccountNumber(final String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
 
-	public final double getAverageFilledPrice() {
-		return averageFilledPrice;
-	}
+    public double getAverageFilledPrice() {
+        return averageFilledPrice;
+    }
 
-	public final void setAverageFilledPrice(final double averageFilledPrice) {
-		this.averageFilledPrice = averageFilledPrice;
-	}
+    public void setAverageFilledPrice(final double averageFilledPrice) {
+        this.averageFilledPrice = averageFilledPrice;
+    }
 
-	public final int getClientId() {
-		return clientId;
-	}
+    public int getClientId() {
+        return clientId;
+    }
 
-	public final void setClientId(final int clientId) {
-		this.clientId = clientId;
-	}
+    public void setClientId(final int clientId) {
+        this.clientId = clientId;
+    }
 
-	public final int getCumulativeQuantity() {
-		return cumulativeQuantity;
-	}
+    public int getCumulativeQuantity() {
+        return cumulativeQuantity;
+    }
 
-	public final void setCumulativeQuantity(final int cumulativeQuantity) {
-		this.cumulativeQuantity = cumulativeQuantity;
-	}
+    public void setCumulativeQuantity(final int cumulativeQuantity) {
+        this.cumulativeQuantity = cumulativeQuantity;
+    }
 
-	public final String getExchange() {
-		return exchange;
-	}
+    public String getExchange() {
+        return exchange;
+    }
 
-	public final void setExchange(final String exchange) {
-		this.exchange = exchange;
-	}
+    public void setExchange(final String exchange) {
+        this.exchange = exchange;
+    }
 
-	public final String getExecutionId() {
-		return executionId;
-	}
+    public String getExecutionId() {
+        return executionId;
+    }
 
-	public final void setExecutionId(final String executionId) {
-		this.executionId = executionId;
-	}
+    public void setExecutionId(final String executionId) {
+        this.executionId = executionId;
+    }
 
-	public final int getLiquidation() {
-		return liquidation;
-	}
+    public int getLiquidation() {
+        return liquidation;
+    }
 
-	public final void setLiquidation(final int liquidation) {
-		this.liquidation = liquidation;
-	}
+    public void setLiquidation(final int liquidation) {
+        this.liquidation = liquidation;
+    }
 
-	public final int getOrderId() {
-		return orderId;
-	}
+    public int getOrderId() {
+        return orderId;
+    }
 
-	public final void setOrderId(final int orderId) {
-		this.orderId = orderId;
-	}
+    public void setOrderId(final int orderId) {
+        this.orderId = orderId;
+    }
 
-	public final String getOrderRef() {
-		return orderRef;
-	}
+    public String getOrderRef() {
+        return orderRef;
+    }
 
-	public final void setOrderRef(final String orderRef) {
-		this.orderRef = orderRef;
-	}
+    public void setOrderRef(final String orderRef) {
+        this.orderRef = orderRef;
+    }
 
-	public final int getPermanentId() {
-		return permanentId;
-	}
+    public int getPermanentId() {
+        return permanentId;
+    }
 
-	public final void setPermanentId(final int permanentId) {
-		this.permanentId = permanentId;
-	}
+    public void setPermanentId(final int permanentId) {
+        this.permanentId = permanentId;
+    }
 
-	public final double getFilledPrice() {
-		return filledPrice;
-	}
+    public double getFilledPrice() {
+        return filledPrice;
+    }
 
-	public final void setFilledPrice(final double filledPrice) {
-		this.filledPrice = filledPrice;
-	}
+    public void setFilledPrice(final double filledPrice) {
+        this.filledPrice = filledPrice;
+    }
 
-	public final int getFilledQuantity() {
-		return filledQuantity;
-	}
+    public int getFilledQuantity() {
+        return filledQuantity;
+    }
 
-	public final void setFilledQuantity(final int filledQuantity) {
-		this.filledQuantity = filledQuantity;
-	}
+    public void setFilledQuantity(final int filledQuantity) {
+        this.filledQuantity = filledQuantity;
+    }
 
-	public final Side getSide() {
-		return side;
-	}
+    public Side getSide() {
+        return side;
+    }
 
-	public final void setSide(final Side side) {
-		this.side = side;
-	}
+    public void setSide(final Side side) {
+        this.side = side;
+    }
 
-	public final String getTime() {
-		return time;
-	}
+    public String getTime() {
+        return time;
+    }
 
-	public final void setTime(final String time) {
-		this.time = time;
-	}
+    public void setTime(final String time) {
+        this.time = time;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(accountNumber).append(averageFilledPrice).append(clientId)
-				.append(cumulativeQuantity).append(exchange).append(executionId).append(filledPrice)
-				.append(filledQuantity).append(liquidation).append(orderId).append(orderRef).append(permanentId)
-				.append(side).append(time).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(accountNumber).append(averageFilledPrice).append(clientId)
+                .append(cumulativeQuantity).append(exchange).append(executionId).append(filledPrice)
+                .append(filledQuantity).append(liquidation).append(orderId).append(orderRef).append(permanentId)
+                .append(side).append(time).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final ExecutionReport rhs = (ExecutionReport) obj;
-		return new EqualsBuilder().append(accountNumber, rhs.accountNumber)
-				.append(averageFilledPrice, rhs.averageFilledPrice).append(clientId, rhs.clientId)
-				.append(cumulativeQuantity, rhs.cumulativeQuantity).append(exchange, rhs.exchange)
-				.append(executionId, rhs.executionId).append(filledPrice, rhs.filledPrice)
-				.append(filledQuantity, rhs.filledQuantity).append(liquidation, rhs.liquidation)
-				.append(orderId, rhs.orderId).append(orderRef, rhs.orderRef).append(permanentId, rhs.permanentId)
-				.append(side, rhs.side).append(time, rhs.time).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final ExecutionReport rhs = (ExecutionReport) obj;
+        return new EqualsBuilder().append(accountNumber, rhs.accountNumber)
+                .append(averageFilledPrice, rhs.averageFilledPrice).append(clientId, rhs.clientId)
+                .append(cumulativeQuantity, rhs.cumulativeQuantity).append(exchange, rhs.exchange)
+                .append(executionId, rhs.executionId).append(filledPrice, rhs.filledPrice)
+                .append(filledQuantity, rhs.filledQuantity).append(liquidation, rhs.liquidation)
+                .append(orderId, rhs.orderId).append(orderRef, rhs.orderRef).append(permanentId, rhs.permanentId)
+                .append(side, rhs.side).append(time, rhs.time).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -26,117 +26,117 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public final class OrderExecution {
 
-	private static final String EMTPY = "";
-	private double commission;
-	private String commissionCurrencyCode = EMTPY;
-	private String equityWithLoan = EMTPY;
-	private String initialMargin = EMTPY;
-	private String maintenanceMargin = EMTPY;
-	private double maxCommission;
-	private double minCommission;
-	private OrderStatus orderStatus = OrderStatus.EMPTY;
-	private String warningText = EMTPY;
+    private static final String EMTPY = "";
+    private double commission;
+    private String commissionCurrencyCode = EMTPY;
+    private String equityWithLoan = EMTPY;
+    private String initialMargin = EMTPY;
+    private String maintenanceMargin = EMTPY;
+    private double maxCommission;
+    private double minCommission;
+    private OrderStatus orderStatus = OrderStatus.EMPTY;
+    private String warningText = EMTPY;
 
-	public final double getCommission() {
-		return commission;
-	}
+    public double getCommission() {
+        return commission;
+    }
 
-	public final void setCommission(final double commission) {
-		this.commission = commission;
-	}
+    public void setCommission(final double commission) {
+        this.commission = commission;
+    }
 
-	public final String getCommissionCurrencyCode() {
-		return commissionCurrencyCode;
-	}
+    public String getCommissionCurrencyCode() {
+        return commissionCurrencyCode;
+    }
 
-	public final void setCommissionCurrencyCode(final String commissionCurrencyCode) {
-		this.commissionCurrencyCode = commissionCurrencyCode;
-	}
+    public void setCommissionCurrencyCode(final String commissionCurrencyCode) {
+        this.commissionCurrencyCode = commissionCurrencyCode;
+    }
 
-	public final String getEquityWithLoan() {
-		return equityWithLoan;
-	}
+    public String getEquityWithLoan() {
+        return equityWithLoan;
+    }
 
-	public final void setEquityWithLoan(final String equityWithLoan) {
-		this.equityWithLoan = equityWithLoan;
-	}
+    public void setEquityWithLoan(final String equityWithLoan) {
+        this.equityWithLoan = equityWithLoan;
+    }
 
-	public final String getInitialMargin() {
-		return initialMargin;
-	}
+    public String getInitialMargin() {
+        return initialMargin;
+    }
 
-	public final void setInitialMargin(final String initialMargin) {
-		this.initialMargin = initialMargin;
-	}
+    public void setInitialMargin(final String initialMargin) {
+        this.initialMargin = initialMargin;
+    }
 
-	public final String getMaintenanceMargin() {
-		return maintenanceMargin;
-	}
+    public String getMaintenanceMargin() {
+        return maintenanceMargin;
+    }
 
-	public final void setMaintenanceMargin(final String maintenanceMargin) {
-		this.maintenanceMargin = maintenanceMargin;
-	}
+    public void setMaintenanceMargin(final String maintenanceMargin) {
+        this.maintenanceMargin = maintenanceMargin;
+    }
 
-	public final double getMaxCommission() {
-		return maxCommission;
-	}
+    public double getMaxCommission() {
+        return maxCommission;
+    }
 
-	public final void setMaxCommission(final double maxCommission) {
-		this.maxCommission = maxCommission;
-	}
+    public void setMaxCommission(final double maxCommission) {
+        this.maxCommission = maxCommission;
+    }
 
-	public final double getMinCommission() {
-		return minCommission;
-	}
+    public double getMinCommission() {
+        return minCommission;
+    }
 
-	public final void setMinCommission(final double minCommission) {
-		this.minCommission = minCommission;
-	}
+    public void setMinCommission(final double minCommission) {
+        this.minCommission = minCommission;
+    }
 
-	public final OrderStatus getOrderStatus() {
-		return orderStatus;
-	}
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
 
-	public final void setOrderStatus(final OrderStatus orderStatus) {
-		this.orderStatus = orderStatus;
-	}
+    public void setOrderStatus(final OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
-	public final String getWarningText() {
-		return warningText;
-	}
+    public String getWarningText() {
+        return warningText;
+    }
 
-	public final void setWarningText(final String warningText) {
-		this.warningText = warningText;
-	}
+    public void setWarningText(final String warningText) {
+        this.warningText = warningText;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(commission).append(commissionCurrencyCode).append(equityWithLoan)
-				.append(initialMargin).append(maintenanceMargin).append(maxCommission).append(minCommission)
-				.append(orderStatus).append(warningText).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(commission).append(commissionCurrencyCode).append(equityWithLoan)
+                .append(initialMargin).append(maintenanceMargin).append(maxCommission).append(minCommission)
+                .append(orderStatus).append(warningText).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final OrderExecution rhs = (OrderExecution) obj;
-		return new EqualsBuilder().append(commission, rhs.commission)
-				.append(commissionCurrencyCode, rhs.commissionCurrencyCode).append(equityWithLoan, rhs.equityWithLoan)
-				.append(initialMargin, rhs.initialMargin).append(maintenanceMargin, rhs.maintenanceMargin)
-				.append(maxCommission, rhs.maxCommission).append(minCommission, rhs.minCommission)
-				.append(orderStatus, rhs.orderStatus).append(warningText, rhs.warningText).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final OrderExecution rhs = (OrderExecution) obj;
+        return new EqualsBuilder().append(commission, rhs.commission)
+                .append(commissionCurrencyCode, rhs.commissionCurrencyCode).append(equityWithLoan, rhs.equityWithLoan)
+                .append(initialMargin, rhs.initialMargin).append(maintenanceMargin, rhs.maintenanceMargin)
+                .append(maxCommission, rhs.maxCommission).append(minCommission, rhs.minCommission)
+                .append(orderStatus, rhs.orderStatus).append(warningText, rhs.warningText).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

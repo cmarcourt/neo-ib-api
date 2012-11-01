@@ -26,30 +26,30 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class CompositeTickEvent extends AbstractEventSupport {
 
-	private final TickPriceEvent tickPriceEvent;
-	private final TickSizeEvent tickSizeEvent;
+    private final TickPriceEvent tickPriceEvent;
+    private final TickSizeEvent tickSizeEvent;
 
-	public CompositeTickEvent(final TickPriceEvent tickPriceEvent, final TickSizeEvent tickSizeEvent) {
-		super(tickPriceEvent.getId());
-		this.tickPriceEvent = tickPriceEvent;
-		this.tickSizeEvent = tickSizeEvent;
-	}
+    public CompositeTickEvent(final TickPriceEvent tickPriceEvent, final TickSizeEvent tickSizeEvent) {
+        super(tickPriceEvent.getId());
+        this.tickPriceEvent = tickPriceEvent;
+        this.tickSizeEvent = tickSizeEvent;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return CompositeTickEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return CompositeTickEventListener.class;
+    }
 
-	public final TickPriceEvent getTickPriceEvent() {
-		return tickPriceEvent;
-	}
+    public TickPriceEvent getTickPriceEvent() {
+        return tickPriceEvent;
+    }
 
-	public final TickSizeEvent getTickSizeEvent() {
-		return tickSizeEvent;
-	}
+    public TickSizeEvent getTickSizeEvent() {
+        return tickSizeEvent;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

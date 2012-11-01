@@ -26,21 +26,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class MarketDataTypeEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<MarketDataTypeEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<MarketDataTypeEvent> {
 
-	public MarketDataTypeEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public MarketDataTypeEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected MarketDataTypeEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final int marketDataType = readInt(inputStream);
-		return createEvent(requestId, marketDataType);
-	}
+    @Override
+    protected MarketDataTypeEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final int marketDataType = readInt(inputStream);
+        return createEvent(requestId, marketDataType);
+    }
 
-	private MarketDataTypeEvent createEvent(final int requestId, final int marketDataType) {
-		return new MarketDataTypeEvent(toRequestId(requestId), MarketDataType.fromValue(marketDataType));
-	}
+    private MarketDataTypeEvent createEvent(final int requestId, final int marketDataType) {
+        return new MarketDataTypeEvent(toRequestId(requestId), MarketDataType.fromValue(marketDataType));
+    }
 
 }

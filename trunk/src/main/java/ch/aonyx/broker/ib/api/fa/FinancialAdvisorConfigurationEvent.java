@@ -26,30 +26,30 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class FinancialAdvisorConfigurationEvent extends AbstractEventSupport {
 
-	private final FinancialAdvisorDataType dataTypeValue;
-	private final String xml;
+    private final FinancialAdvisorDataType dataTypeValue;
+    private final String xml;
 
-	public FinancialAdvisorConfigurationEvent(final FinancialAdvisorDataType dataTypeValue, final String xml) {
-		super();
-		this.dataTypeValue = dataTypeValue;
-		this.xml = xml;
-	}
+    public FinancialAdvisorConfigurationEvent(final FinancialAdvisorDataType dataTypeValue, final String xml) {
+        super();
+        this.dataTypeValue = dataTypeValue;
+        this.xml = xml;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return FinancialAdvisorConfigurationEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return FinancialAdvisorConfigurationEventListener.class;
+    }
 
-	public final FinancialAdvisorDataType getDataTypeValue() {
-		return dataTypeValue;
-	}
+    public FinancialAdvisorDataType getDataTypeValue() {
+        return dataTypeValue;
+    }
 
-	public final String getXml() {
-		return xml;
-	}
+    public String getXml() {
+        return xml;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

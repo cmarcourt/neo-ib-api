@@ -27,34 +27,34 @@ import com.google.common.collect.Maps;
  */
 public enum OrderAction {
 
-	BUY("BUY"), SELL("SELL"), SELL_SHORT("SSHORT"), UNKNOWN("UNKNOWN"), EMPTY("");
+    BUY("BUY"), SELL("SELL"), SELL_SHORT("SSHORT"), UNKNOWN("UNKNOWN"), EMPTY("");
 
-	private final String abbreviation;
-	private static final Map<String, OrderAction> MAP;
+    private final String abbreviation;
+    private static final Map<String, OrderAction> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final OrderAction action : values()) {
-			MAP.put(action.getAbbreviation(), action);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final OrderAction action : values()) {
+            MAP.put(action.getAbbreviation(), action);
+        }
+    }
 
-	private OrderAction(final String abbreviation) {
-		this.abbreviation = abbreviation;
-	}
+    private OrderAction(final String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
-	public final String getAbbreviation() {
-		return abbreviation;
-	}
+    public final String getAbbreviation() {
+        return abbreviation;
+    }
 
-	public static final OrderAction fromAbbreviation(final String abbreviation) {
-		if (StringUtils.isBlank(abbreviation)) {
-			return EMPTY;
-		}
-		final String abbreviationUpperCase = abbreviation.toUpperCase();
-		if (MAP.containsKey(abbreviationUpperCase)) {
-			return MAP.get(abbreviationUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final OrderAction fromAbbreviation(final String abbreviation) {
+        if (StringUtils.isBlank(abbreviation)) {
+            return EMPTY;
+        }
+        final String abbreviationUpperCase = abbreviation.toUpperCase();
+        if (MAP.containsKey(abbreviationUpperCase)) {
+            return MAP.get(abbreviationUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

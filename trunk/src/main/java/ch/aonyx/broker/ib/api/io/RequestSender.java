@@ -24,5 +24,5 @@ import ch.aonyx.broker.ib.api.RequestException;
  */
 public interface RequestSender {
 
-	void send(final Request request) throws RequestException;
+    void send(final Request request) throws RequestException;
 }

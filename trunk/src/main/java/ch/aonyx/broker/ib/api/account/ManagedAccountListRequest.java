@@ -33,46 +33,46 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class ManagedAccountListRequest extends AbstractRequestSupport implements SimpleRequest {
 
-	private static final int VERSION = 1;
+    private static final int VERSION = 1;
 
-	public ManagedAccountListRequest() {
-		super(StringIdUtils.uniqueRandomId());
-	}
+    public ManagedAccountListRequest() {
+        super(StringIdUtils.uniqueRandomId());
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.MANAGED_ACCOUNT_LIST_REQUEST.getId());
-		builder.append(VERSION);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.MANAGED_ACCOUNT_LIST_REQUEST.getId());
+        builder.append(VERSION);
+        return builder;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		return new EqualsBuilder().isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        return new EqualsBuilder().isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

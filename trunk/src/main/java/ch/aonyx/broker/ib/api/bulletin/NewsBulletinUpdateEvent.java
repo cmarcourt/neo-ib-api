@@ -26,44 +26,44 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class NewsBulletinUpdateEvent extends AbstractEventSupport {
 
-	private final int newsBulletinId;
-	private final NewsBulletinType newsBulletinType;
-	private final String message;
-	private final String exchange;
+    private final int newsBulletinId;
+    private final NewsBulletinType newsBulletinType;
+    private final String message;
+    private final String exchange;
 
-	public NewsBulletinUpdateEvent(final int newsBulletinId, final NewsBulletinType newsBulletinType,
-			final String message, final String exchange) {
-		super();
-		this.newsBulletinId = newsBulletinId;
-		this.newsBulletinType = newsBulletinType;
-		this.message = message;
-		this.exchange = exchange;
-	}
+    public NewsBulletinUpdateEvent(final int newsBulletinId, final NewsBulletinType newsBulletinType,
+            final String message, final String exchange) {
+        super();
+        this.newsBulletinId = newsBulletinId;
+        this.newsBulletinType = newsBulletinType;
+        this.message = message;
+        this.exchange = exchange;
+    }
 
-	public final int getNewsBulletinId() {
-		return newsBulletinId;
-	}
+    public int getNewsBulletinId() {
+        return newsBulletinId;
+    }
 
-	public final NewsBulletinType getNewsBulletinType() {
-		return newsBulletinType;
-	}
+    public NewsBulletinType getNewsBulletinType() {
+        return newsBulletinType;
+    }
 
-	public final String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public final String getExchange() {
-		return exchange;
-	}
+    public String getExchange() {
+        return exchange;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return NewsBulletinUpdateEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return NewsBulletinUpdateEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 
 }

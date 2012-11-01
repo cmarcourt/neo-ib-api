@@ -21,8 +21,8 @@ package ch.aonyx.broker.ib.api;
  */
 public class EmptyEventListener implements EventListener<EmptyEvent> {
 
-	@Override
-	public void notify(final EmptyEvent event) {
-	}
+    @Override
+    public void notify(final EmptyEvent event) {
+    }
 
 }

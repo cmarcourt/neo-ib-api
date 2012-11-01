@@ -21,23 +21,23 @@ package ch.aonyx.broker.ib.api;
  */
 public enum CodeRange {
 
-	ERROR(100), SYSTEM(1100), WARNING(2100);
+    ERROR(100), SYSTEM(1100), WARNING(2100);
 
-	private final int code;
+    private final int code;
 
-	private CodeRange(final int code) {
-		this.code = code;
-	}
+    private CodeRange(final int code) {
+        this.code = code;
+    }
 
-	public static final boolean isError(final int code) {
-		return (code >= ERROR.code) && (code < SYSTEM.code);
-	}
+    public static final boolean isError(final int code) {
+        return (code >= ERROR.code) && (code < SYSTEM.code);
+    }
 
-	public static final boolean isSystem(final int code) {
-		return (code >= SYSTEM.code) && (code < WARNING.code);
-	}
+    public static final boolean isSystem(final int code) {
+        return (code >= SYSTEM.code) && (code < WARNING.code);
+    }
 
-	public static final boolean isWarning(final int code) {
-		return code >= WARNING.code;
-	}
+    public static final boolean isWarning(final int code) {
+        return code >= WARNING.code;
+    }
 }

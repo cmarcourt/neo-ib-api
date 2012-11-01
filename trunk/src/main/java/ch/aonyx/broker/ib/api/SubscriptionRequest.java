@@ -21,9 +21,9 @@ package ch.aonyx.broker.ib.api;
  */
 public interface SubscriptionRequest extends Request {
 
-	/**
-	 * Returns a {@link RequestId}.
-	 */
-	@Override
-	RequestId getId();
+    /**
+     * Returns a {@link RequestId}.
+     */
+    @Override
+    RequestId getId();
 }

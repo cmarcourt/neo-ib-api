@@ -24,16 +24,16 @@ import org.slf4j.LoggerFactory;
  */
 final class SequentiallyEventNotifier extends AbstractEventNotifier {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(SequentiallyEventNotifier.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SequentiallyEventNotifier.class);
 
-	SequentiallyEventNotifier(final EventListenerService eventListenerService) {
-		super(eventListenerService);
-	}
+    SequentiallyEventNotifier(final EventListenerService eventListenerService) {
+        super(eventListenerService);
+    }
 
-	@Override
-	void notifyEvent(final EventListener<Event> eventListener, final Event event) {
-		LOGGER.debug("listener '{}' notifies event: {}", eventListener.getClass().getName(), event.toString());
-		eventListener.notify(event);
-	}
+    @Override
+    void notifyEvent(final EventListener<Event> eventListener, final Event event) {
+        LOGGER.debug("listener '{}' notifies event: {}", eventListener.getClass().getName(), event.toString());
+        eventListener.notify(event);
+    }
 
 }

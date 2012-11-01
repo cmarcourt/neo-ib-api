@@ -27,12 +27,12 @@ import ch.aonyx.broker.ib.api.order.NextValidOrderIdEventListener;
  */
 final class InitializeNextValidOrderIdEventListener implements NextValidOrderIdEventListener {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(InitializeNextValidOrderIdEventListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(InitializeNextValidOrderIdEventListener.class);
 
-	@Override
-	public void notify(final NextValidOrderIdEvent event) {
-		OrderIdInternalIdBinding.getInstance().initializeSequence(event.getNextValidOrderId());
-		LOGGER.info("initialized next valid order id: {}", event.getNextValidOrderId());
-	}
+    @Override
+    public void notify(final NextValidOrderIdEvent event) {
+        OrderIdInternalIdBinding.getInstance().initializeSequence(event.getNextValidOrderId());
+        LOGGER.info("initialized next valid order id: {}", event.getNextValidOrderId());
+    }
 
 }

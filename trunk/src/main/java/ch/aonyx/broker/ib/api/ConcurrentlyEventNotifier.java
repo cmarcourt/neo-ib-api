@@ -27,23 +27,23 @@ import org.slf4j.LoggerFactory;
  */
 final class ConcurrentlyEventNotifier extends AbstractEventNotifier {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConcurrentlyEventNotifier.class);
-	private final Executor executor;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConcurrentlyEventNotifier.class);
+    private final Executor executor;
 
-	ConcurrentlyEventNotifier(final EventListenerService eventListenerService) {
-		super(eventListenerService);
-		executor = Executors.newCachedThreadPool();
-	}
+    ConcurrentlyEventNotifier(final EventListenerService eventListenerService) {
+        super(eventListenerService);
+        executor = Executors.newCachedThreadPool();
+    }
 
-	@Override
-	void notifyEvent(final EventListener<Event> eventListener, final Event event) {
-		executor.execute(new Runnable() {
-			@Override
-			public void run() {
-				LOGGER.debug("listener '{}' notifies event: {}", eventListener.getClass().getName(), event.toString());
-				eventListener.notify(event);
-			}
-		});
-	}
+    @Override
+    void notifyEvent(final EventListener<Event> eventListener, final Event event) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                LOGGER.debug("listener '{}' notifies event: {}", eventListener.getClass().getName(), event.toString());
+                eventListener.notify(event);
+            }
+        });
+    }
 
 }

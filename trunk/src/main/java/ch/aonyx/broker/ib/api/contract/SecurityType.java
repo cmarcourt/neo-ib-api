@@ -27,35 +27,35 @@ import com.google.common.collect.Maps;
  */
 public enum SecurityType {
 
-	STOCK("STK"), OPTION("OPT"), FUTURE("FUT"), INDEX("IND"), FUTURE_ON_OPTION("FOP"), FOREX("CASH"), COMBO("BAG"), UNKNOWN(
-			"UNKNOWN"), EMPTY("");
+    STOCK("STK"), OPTION("OPT"), FUTURE("FUT"), INDEX("IND"), FUTURE_ON_OPTION("FOP"), FOREX("CASH"), COMBO("BAG"),
+    UNKNOWN("UNKNOWN"), EMPTY("");
 
-	private final String abbreviation;
-	private static final Map<String, SecurityType> MAP;
+    private final String abbreviation;
+    private static final Map<String, SecurityType> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final SecurityType securityType : values()) {
-			MAP.put(securityType.getAbbreviation(), securityType);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final SecurityType securityType : values()) {
+            MAP.put(securityType.getAbbreviation(), securityType);
+        }
+    }
 
-	private SecurityType(final String abbreviation) {
-		this.abbreviation = abbreviation;
-	}
+    private SecurityType(final String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
-	public final String getAbbreviation() {
-		return abbreviation;
-	}
+    public final String getAbbreviation() {
+        return abbreviation;
+    }
 
-	public static final SecurityType fromAbbreviation(final String abbreviation) {
-		if (StringUtils.isBlank(abbreviation)) {
-			return EMPTY;
-		}
-		final String abbreviationUpperCase = abbreviation.toUpperCase();
-		if (MAP.containsKey(abbreviationUpperCase)) {
-			return MAP.get(abbreviationUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final SecurityType fromAbbreviation(final String abbreviation) {
+        if (StringUtils.isBlank(abbreviation)) {
+            return EMPTY;
+        }
+        final String abbreviationUpperCase = abbreviation.toUpperCase();
+        if (MAP.containsKey(abbreviationUpperCase)) {
+            return MAP.get(abbreviationUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

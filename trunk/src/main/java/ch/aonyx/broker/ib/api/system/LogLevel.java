@@ -21,15 +21,15 @@ package ch.aonyx.broker.ib.api.system;
  */
 public enum LogLevel {
 
-	SYSTEM(1), ERROR(2), WARNING(3), INFO(4), DETAIL(5);
+    SYSTEM(1), ERROR(2), WARNING(3), INFO(4), DETAIL(5);
 
-	private final int value;
+    private final int value;
 
-	private LogLevel(final int value) {
-		this.value = value;
-	}
+    private LogLevel(final int value) {
+        this.value = value;
+    }
 
-	public final int getValue() {
-		return value;
-	};
+    public final int getValue() {
+        return value;
+    };
 }

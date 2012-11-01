@@ -32,79 +32,79 @@ import ch.aonyx.broker.ib.api.util.RequestBuilder;
  */
 public final class MarketScannerSubscriptionRequest extends AbstractRequestSupport implements SubscriptionRequest {
 
-	private static final int VERSION = 3;
-	private final MarketScannerFilter marketScannerFilter;
+    private static final int VERSION = 3;
+    private final MarketScannerFilter marketScannerFilter;
 
-	public MarketScannerSubscriptionRequest(final String id, final MarketScannerFilter filter) {
-		super(id);
-		marketScannerFilter = filter;
-	}
+    public MarketScannerSubscriptionRequest(final String id, final MarketScannerFilter filter) {
+        super(id);
+        marketScannerFilter = filter;
+    }
 
-	public MarketScannerFilter getMarketScannerFilter() {
-		return marketScannerFilter;
-	}
+    public MarketScannerFilter getMarketScannerFilter() {
+        return marketScannerFilter;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.MARKET_SCANNER_SUBSCRIPTION_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(toInternalId(getId()));
-		appendMarketScannerFilter(builder);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.MARKET_SCANNER_SUBSCRIPTION_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(toInternalId(getId()));
+        appendMarketScannerFilter(builder);
+        return builder;
+    }
 
-	private void appendMarketScannerFilter(final RequestBuilder builder) {
-		builder.append(marketScannerFilter.getNumberOfRows());
-		builder.append(marketScannerFilter.getInstrument());
-		builder.append(marketScannerFilter.getLocationCode());
-		builder.append(marketScannerFilter.getScannerCode());
-		builder.append(marketScannerFilter.getAbovePrice());
-		builder.append(marketScannerFilter.getBelowPrice());
-		builder.append(marketScannerFilter.getAboveVolume());
-		builder.append(marketScannerFilter.getAboveMarketCapitalization());
-		builder.append(marketScannerFilter.getBelowMarketCapitalization());
-		builder.append(marketScannerFilter.getAboveMoodyRating());
-		builder.append(marketScannerFilter.getBelowMoodyRating());
-		builder.append(marketScannerFilter.getAboveSpRating());
-		builder.append(marketScannerFilter.getBelowSpRating());
-		builder.append(marketScannerFilter.getAboveMaturityDate());
-		builder.append(marketScannerFilter.getBelowMaturityDate());
-		builder.append(marketScannerFilter.getAboveCouponRate());
-		builder.append(marketScannerFilter.getBelowCouponRate());
-		builder.append(marketScannerFilter.getExcludeConvertible());
-		builder.append(marketScannerFilter.getAboveAverageVolumeOption());
-		builder.append(marketScannerFilter.getScannerSettingPairs());
-		builder.append(marketScannerFilter.getStockType().getLabel());
-	}
+    private void appendMarketScannerFilter(final RequestBuilder builder) {
+        builder.append(marketScannerFilter.getNumberOfRows());
+        builder.append(marketScannerFilter.getInstrument());
+        builder.append(marketScannerFilter.getLocationCode());
+        builder.append(marketScannerFilter.getScannerCode());
+        builder.append(marketScannerFilter.getAbovePrice());
+        builder.append(marketScannerFilter.getBelowPrice());
+        builder.append(marketScannerFilter.getAboveVolume());
+        builder.append(marketScannerFilter.getAboveMarketCapitalization());
+        builder.append(marketScannerFilter.getBelowMarketCapitalization());
+        builder.append(marketScannerFilter.getAboveMoodyRating());
+        builder.append(marketScannerFilter.getBelowMoodyRating());
+        builder.append(marketScannerFilter.getAboveSpRating());
+        builder.append(marketScannerFilter.getBelowSpRating());
+        builder.append(marketScannerFilter.getAboveMaturityDate());
+        builder.append(marketScannerFilter.getBelowMaturityDate());
+        builder.append(marketScannerFilter.getAboveCouponRate());
+        builder.append(marketScannerFilter.getBelowCouponRate());
+        builder.append(marketScannerFilter.getExcludeConvertible());
+        builder.append(marketScannerFilter.getAboveAverageVolumeOption());
+        builder.append(marketScannerFilter.getScannerSettingPairs());
+        builder.append(marketScannerFilter.getStockType().getLabel());
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(marketScannerFilter).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(marketScannerFilter).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final MarketScannerSubscriptionRequest rhs = (MarketScannerSubscriptionRequest) obj;
-		return new EqualsBuilder().append(marketScannerFilter, rhs.marketScannerFilter).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final MarketScannerSubscriptionRequest rhs = (MarketScannerSubscriptionRequest) obj;
+        return new EqualsBuilder().append(marketScannerFilter, rhs.marketScannerFilter).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

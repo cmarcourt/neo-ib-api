@@ -27,17 +27,17 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class ExecutionReportEndEvent extends AbstractEventSupport {
 
-	public ExecutionReportEndEvent(final Id requestId) {
-		super(requestId);
-	}
+    public ExecutionReportEndEvent(final Id requestId) {
+        super(requestId);
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return ExecutionReportEndEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return ExecutionReportEndEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

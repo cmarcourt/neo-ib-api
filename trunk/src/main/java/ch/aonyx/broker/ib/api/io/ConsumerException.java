@@ -23,15 +23,15 @@ import ch.aonyx.broker.ib.api.ClientMessageCode;
  */
 public class ConsumerException extends IOStreamException {
 
-	private static final long serialVersionUID = -3614839301981201700L;
+    private static final long serialVersionUID = -3614839301981201700L;
 
-	public ConsumerException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Throwable cause) {
-		super(clientMessageCode, detailedMessage, cause);
-	}
+    public ConsumerException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Throwable cause) {
+        super(clientMessageCode, detailedMessage, cause);
+    }
 
-	public ConsumerException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
-		super(clientMessageCode, detailedMessage);
-	}
+    public ConsumerException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
+        super(clientMessageCode, detailedMessage);
+    }
 
 }

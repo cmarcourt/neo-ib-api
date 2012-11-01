@@ -23,14 +23,14 @@ import com.lmax.disruptor.EventHandler;
  */
 abstract class AbstractEventHandler implements EventHandler<EventWrapper> {
 
-	private final EventPublisher eventPublisher;
+    private final EventPublisher eventPublisher;
 
-	AbstractEventHandler(final EventPublisher eventPublisher) {
-		this.eventPublisher = eventPublisher;
-	}
+    AbstractEventHandler(final EventPublisher eventPublisher) {
+        this.eventPublisher = eventPublisher;
+    }
 
-	@Override
-	public void onEvent(final EventWrapper event, final long sequence, final boolean endOfBatch) throws Exception {
-		eventPublisher.publishEvent(event.getWrappedEvent());
-	}
+    @Override
+    public void onEvent(final EventWrapper event, final long sequence, final boolean endOfBatch) throws Exception {
+        eventPublisher.publishEvent(event.getWrappedEvent());
+    }
 }

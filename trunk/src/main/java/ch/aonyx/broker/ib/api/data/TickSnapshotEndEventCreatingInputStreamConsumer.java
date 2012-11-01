@@ -26,20 +26,20 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class TickSnapshotEndEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<TickSnapshotEndEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<TickSnapshotEndEvent> {
 
-	public TickSnapshotEndEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public TickSnapshotEndEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected TickSnapshotEndEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		return createEvent(requestId);
-	}
+    @Override
+    protected TickSnapshotEndEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        return createEvent(requestId);
+    }
 
-	private TickSnapshotEndEvent createEvent(final int requestId) {
-		return new TickSnapshotEndEvent(toRequestId(requestId));
-	}
+    private TickSnapshotEndEvent createEvent(final int requestId) {
+        return new TickSnapshotEndEvent(toRequestId(requestId));
+    }
 
 }

@@ -28,40 +28,40 @@ import com.google.common.collect.Multimap;
  */
 final class EventListenerMultimapService implements EventListenerService {
 
-	private final Multimap<Class<?>, EventListener<? extends Event>> eventListenerMap;
+    private final Multimap<Class<?>, EventListener<? extends Event>> eventListenerMap;
 
-	EventListenerMultimapService(final Multimap<Class<?>, EventListener<? extends Event>> eventListenerMap) {
-		this.eventListenerMap = eventListenerMap;
-	}
+    EventListenerMultimapService(final Multimap<Class<?>, EventListener<? extends Event>> eventListenerMap) {
+        this.eventListenerMap = eventListenerMap;
+    }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public <E extends Event> List<EventListener<E>> getEventListeners(final Class<?> eventListenerType) {
-		final List<EventListener<E>> eventListeners = Lists.newArrayList();
-		final Collection<EventListener<? extends Event>> eventListenerCollection = eventListenerMap
-				.get(eventListenerType);
-		for (final EventListener<? extends Event> eventListener : eventListenerCollection) {
-			eventListeners.add((EventListener<E>) eventListener);
-		}
-		return eventListeners;
-	}
+    @SuppressWarnings("unchecked")
+    @Override
+    public <E extends Event> List<EventListener<E>> getEventListeners(final Class<?> eventListenerType) {
+        final List<EventListener<E>> eventListeners = Lists.newArrayList();
+        final Collection<EventListener<? extends Event>> eventListenerCollection = eventListenerMap
+                .get(eventListenerType);
+        for (final EventListener<? extends Event> eventListener : eventListenerCollection) {
+            eventListeners.add((EventListener<E>) eventListener);
+        }
+        return eventListeners;
+    }
 
-	@Override
-	public <E extends Event> boolean containsListener(final EventListener<E> listener) {
-		for (final Class<?> key : getKeys()) {
-			final List<EventListener<E>> eventListeners = getEventListeners(key);
-			for (final EventListener<E> eventListener : eventListeners) {
-				if (eventListener.equals(listener)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+    @Override
+    public <E extends Event> boolean containsListener(final EventListener<E> listener) {
+        for (final Class<?> key : getKeys()) {
+            final List<EventListener<E>> eventListeners = getEventListeners(key);
+            for (final EventListener<E> eventListener : eventListeners) {
+                if (eventListener.equals(listener)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public Set<Class<?>> getKeys() {
-		return eventListenerMap.keySet();
-	}
+    @Override
+    public Set<Class<?>> getKeys() {
+        return eventListenerMap.keySet();
+    }
 
 }

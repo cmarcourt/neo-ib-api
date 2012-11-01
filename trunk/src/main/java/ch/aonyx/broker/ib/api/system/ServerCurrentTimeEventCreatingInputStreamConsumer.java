@@ -26,21 +26,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class ServerCurrentTimeEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<ServerCurrentTimeEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<ServerCurrentTimeEvent> {
 
-	public ServerCurrentTimeEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public ServerCurrentTimeEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected ServerCurrentTimeEvent consumeVersionLess(final InputStream inputStream) {
-		final long timestamp = readLong(inputStream);
-		return createEvent(timestamp);
-	}
+    @Override
+    protected ServerCurrentTimeEvent consumeVersionLess(final InputStream inputStream) {
+        final long timestamp = readLong(inputStream);
+        return createEvent(timestamp);
+    }
 
-	private ServerCurrentTimeEvent createEvent(final long timestamp) {
-		return new ServerCurrentTimeEvent(timestamp);
-	}
+    private ServerCurrentTimeEvent createEvent(final long timestamp) {
+        return new ServerCurrentTimeEvent(timestamp);
+    }
 
 }

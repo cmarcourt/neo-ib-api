@@ -25,57 +25,55 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public final class ConnectionParameters {
 
-	public final static String HOST_DEFAULT = "127.0.0.1";
-	public final static int PORT_DEFAULT = 7496;
-	public final static int CLIENT_ID_DEFAULT = 0;
-	private final String host;
-	private final int port;
-	private final int clientId;
+    public static final String HOST_DEFAULT = "127.0.0.1";
+    public static final int PORT_DEFAULT = 7496;
+    public static final int CLIENT_ID_DEFAULT = 0;
+    private final String host;
+    private final int port;
+    private final int clientId;
 
-	/**
-	 * Create a {@code ConnectionParameters} object with default values:
-	 * {@link ConnectionParameters#HOST_DEFAULT} ("127.0.0.1"),
-	 * {@link ConnectionParameters#PORT_DEFAULT} (7496),
-	 * {@link ConnectionParameters#CLIENT_ID_DEFAULT} (0).
-	 */
-	public ConnectionParameters() {
-		this(HOST_DEFAULT, PORT_DEFAULT, CLIENT_ID_DEFAULT);
-	}
+    /**
+     * Create a {@code ConnectionParameters} object with default values: {@link ConnectionParameters#HOST_DEFAULT}
+     * ("127.0.0.1"), {@link ConnectionParameters#PORT_DEFAULT} (7496), {@link ConnectionParameters#CLIENT_ID_DEFAULT}
+     * (0).
+     */
+    public ConnectionParameters() {
+        this(HOST_DEFAULT, PORT_DEFAULT, CLIENT_ID_DEFAULT);
+    }
 
-	/**
-	 * Create a {@code ConnectionParameters} object with default values:
-	 * {@link ConnectionParameters#HOST_DEFAULT} ("127.0.0.1"),
-	 * {@link ConnectionParameters#PORT_DEFAULT} (7496).
-	 */
-	public ConnectionParameters(final int clientId) {
-		this(HOST_DEFAULT, PORT_DEFAULT, clientId);
-	}
+    /**
+     * Create a {@code ConnectionParameters} object with default values: {@link ConnectionParameters#HOST_DEFAULT}
+     * ("127.0.0.1"), {@link ConnectionParameters#PORT_DEFAULT} (7496).
+     */
+    public ConnectionParameters(final int clientId) {
+        this(HOST_DEFAULT, PORT_DEFAULT, clientId);
+    }
 
-	public ConnectionParameters(final String host, final int port, final int clientId) {
-		this.host = host;
-		this.port = port;
-		this.clientId = clientId;
-	}
+    public ConnectionParameters(final String host, final int port, final int clientId) {
+        this.host = host;
+        this.port = port;
+        this.clientId = clientId;
+    }
 
-	public final String getHost() {
-		return host;
-	}
+    public String getHost() {
+        return host;
+    }
 
-	public final int getPort() {
-		return port;
-	}
+    public int getPort() {
+        return port;
+    }
 
-	public final int getClientId() {
-		return clientId;
-	}
+    public int getClientId() {
+        return clientId;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(host).append(port).append(clientId).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(host).append(port).append(clientId).toHashCode();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

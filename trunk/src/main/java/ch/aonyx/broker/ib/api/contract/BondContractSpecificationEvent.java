@@ -27,24 +27,24 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class BondContractSpecificationEvent extends AbstractEventSupport {
 
-	private final ContractSpecification contractSpecification;
+    private final ContractSpecification contractSpecification;
 
-	public BondContractSpecificationEvent(final Id requestId, final ContractSpecification contractSpecification) {
-		super(requestId);
-		this.contractSpecification = contractSpecification;
-	}
+    public BondContractSpecificationEvent(final Id requestId, final ContractSpecification contractSpecification) {
+        super(requestId);
+        this.contractSpecification = contractSpecification;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return BondContractSpecificationEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return BondContractSpecificationEventListener.class;
+    }
 
-	public final ContractSpecification getContractSpecification() {
-		return contractSpecification;
-	}
+    public ContractSpecification getContractSpecification() {
+        return contractSpecification;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

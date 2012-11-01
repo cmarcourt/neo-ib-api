@@ -27,55 +27,55 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class MarketDepthLevelTwoUpdateEvent extends AbstractEventSupport {
 
-	private final int rowId;
-	private final String marketMakerName;
-	private final Operation operation;
-	private final BookSide bookSide;
-	private final double price;
-	private final int size;
+    private final int rowId;
+    private final String marketMakerName;
+    private final Operation operation;
+    private final BookSide bookSide;
+    private final double price;
+    private final int size;
 
-	public MarketDepthLevelTwoUpdateEvent(final Id requestId, final int rowId, final String marketMakerName,
-			final Operation operation, final BookSide bookSide, final double price, final int size) {
-		super(requestId);
-		this.rowId = rowId;
-		this.marketMakerName = marketMakerName;
-		this.operation = operation;
-		this.bookSide = bookSide;
-		this.price = price;
-		this.size = size;
-	}
+    public MarketDepthLevelTwoUpdateEvent(final Id requestId, final int rowId, final String marketMakerName,
+            final Operation operation, final BookSide bookSide, final double price, final int size) {
+        super(requestId);
+        this.rowId = rowId;
+        this.marketMakerName = marketMakerName;
+        this.operation = operation;
+        this.bookSide = bookSide;
+        this.price = price;
+        this.size = size;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return MarketDepthLevelTwoUpdateEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return MarketDepthLevelTwoUpdateEventListener.class;
+    }
 
-	public final int getRowId() {
-		return rowId;
-	}
+    public int getRowId() {
+        return rowId;
+    }
 
-	public final String getMarketMakerName() {
-		return marketMakerName;
-	}
+    public String getMarketMakerName() {
+        return marketMakerName;
+    }
 
-	public final Operation getOperation() {
-		return operation;
-	}
+    public Operation getOperation() {
+        return operation;
+    }
 
-	public final BookSide getBookSide() {
-		return bookSide;
-	}
+    public BookSide getBookSide() {
+        return bookSide;
+    }
 
-	public final double getPrice() {
-		return price;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public final int getSize() {
-		return size;
-	}
+    public int getSize() {
+        return size;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

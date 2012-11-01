@@ -28,67 +28,67 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class ContractSpecificationEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<ContractSpecificationEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<ContractSpecificationEvent> {
 
-	public ContractSpecificationEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public ContractSpecificationEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected ContractSpecificationEvent consumeVersionLess(final InputStream inputStream) {
-		int requestId = -1;
-		if (getVersion() >= 3) {
-			requestId = readInt(inputStream);
-		}
-		final ContractSpecification contractSpecification = consumerContractSpecification(inputStream);
-		return createEvent(requestId, contractSpecification);
-	}
+    @Override
+    protected ContractSpecificationEvent consumeVersionLess(final InputStream inputStream) {
+        int requestId = -1;
+        if (getVersion() >= 3) {
+            requestId = readInt(inputStream);
+        }
+        final ContractSpecification contractSpecification = consumerContractSpecification(inputStream);
+        return createEvent(requestId, contractSpecification);
+    }
 
-	private ContractSpecification consumerContractSpecification(final InputStream inputStream) {
-		final ContractSpecification contractSpecification = new ContractSpecification();
-		final Contract contract = new Contract();
-		contractSpecification.setContract(contract);
-		contract.setSymbol(readString(inputStream));
-		contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
-		contract.setExpiry(readString(inputStream));
-		contract.setStrike(readDouble(inputStream));
-		contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
-		contract.setExchange(readString(inputStream));
-		contract.setCurrencyCode(readString(inputStream));
-		contract.setLocalSymbol(readString(inputStream));
-		contractSpecification.setMarketName(readString(inputStream));
-		contractSpecification.setTradingClass(readString(inputStream));
-		contract.setId(readInt(inputStream));
-		contractSpecification.setMinimumFluctuation(readDouble(inputStream));
-		contract.setMultiplier(readString(inputStream));
-		contractSpecification.setValidOrderTypes(readString(inputStream));
-		contractSpecification.setValidExchanges(readString(inputStream));
-		if (getVersion() >= 2) {
-			contractSpecification.setPriceMagnifier(readInt(inputStream));
-		}
-		if (getVersion() >= 4) {
-			contractSpecification.setUnderlyingContractId(readInt(inputStream));
-		}
-		if (getVersion() >= 5) {
-			contractSpecification.setLongName(readString(inputStream));
-			contract.setPrimaryExchange(readString(inputStream));
-		}
-		if (getVersion() >= 6) {
-			contractSpecification.setContractMonth(readString(inputStream));
-			contractSpecification.setIndustry(readString(inputStream));
-			contractSpecification.setCategory(readString(inputStream));
-			contractSpecification.setSubcategory(readString(inputStream));
-			contractSpecification.setTimeZoneId(readString(inputStream));
-			contractSpecification.setTradingHours(readString(inputStream));
-			contractSpecification.setLiquidHours(readString(inputStream));
-		}
-		return contractSpecification;
-	}
+    private ContractSpecification consumerContractSpecification(final InputStream inputStream) {
+        final ContractSpecification contractSpecification = new ContractSpecification();
+        final Contract contract = new Contract();
+        contractSpecification.setContract(contract);
+        contract.setSymbol(readString(inputStream));
+        contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
+        contract.setExpiry(readString(inputStream));
+        contract.setStrike(readDouble(inputStream));
+        contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
+        contract.setExchange(readString(inputStream));
+        contract.setCurrencyCode(readString(inputStream));
+        contract.setLocalSymbol(readString(inputStream));
+        contractSpecification.setMarketName(readString(inputStream));
+        contractSpecification.setTradingClass(readString(inputStream));
+        contract.setId(readInt(inputStream));
+        contractSpecification.setMinimumFluctuation(readDouble(inputStream));
+        contract.setMultiplier(readString(inputStream));
+        contractSpecification.setValidOrderTypes(readString(inputStream));
+        contractSpecification.setValidExchanges(readString(inputStream));
+        if (getVersion() >= 2) {
+            contractSpecification.setPriceMagnifier(readInt(inputStream));
+        }
+        if (getVersion() >= 4) {
+            contractSpecification.setUnderlyingContractId(readInt(inputStream));
+        }
+        if (getVersion() >= 5) {
+            contractSpecification.setLongName(readString(inputStream));
+            contract.setPrimaryExchange(readString(inputStream));
+        }
+        if (getVersion() >= 6) {
+            contractSpecification.setContractMonth(readString(inputStream));
+            contractSpecification.setIndustry(readString(inputStream));
+            contractSpecification.setCategory(readString(inputStream));
+            contractSpecification.setSubcategory(readString(inputStream));
+            contractSpecification.setTimeZoneId(readString(inputStream));
+            contractSpecification.setTradingHours(readString(inputStream));
+            contractSpecification.setLiquidHours(readString(inputStream));
+        }
+        return contractSpecification;
+    }
 
-	private ContractSpecificationEvent createEvent(final int requestId,
-			final ContractSpecification contractSpecification) {
-		return new ContractSpecificationEvent(toRequestId(requestId), contractSpecification);
-	}
+    private ContractSpecificationEvent createEvent(final int requestId,
+            final ContractSpecification contractSpecification) {
+        return new ContractSpecificationEvent(toRequestId(requestId), contractSpecification);
+    }
 
 }

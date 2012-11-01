@@ -27,29 +27,29 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class ServerMessageEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<ServerMessageEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<ServerMessageEvent> {
 
-	private static final int VERSION = 2;
+    private static final int VERSION = 2;
 
-	public ServerMessageEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public ServerMessageEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	private ServerMessageEvent createEvent(final int requestId, final int code, final String message) {
-		return new ServerMessageEvent(toRequestId(requestId), code, message);
-	}
+    private ServerMessageEvent createEvent(final int requestId, final int code, final String message) {
+        return new ServerMessageEvent(toRequestId(requestId), code, message);
+    }
 
-	@Override
-	protected ServerMessageEvent consumeVersionLess(final InputStream inputStream) {
-		if (getVersion() < VERSION) {
-			final String message = readString(inputStream);
-			return createEvent(-1, 0, message);
-		} else {
-			final int requestId = readInt(inputStream);
-			final int code = readInt(inputStream);
-			final String message = readString(inputStream);
-			return createEvent(requestId, code, message);
-		}
-	}
+    @Override
+    protected ServerMessageEvent consumeVersionLess(final InputStream inputStream) {
+        if (getVersion() < VERSION) {
+            final String message = readString(inputStream);
+            return createEvent(-1, 0, message);
+        } else {
+            final int requestId = readInt(inputStream);
+            final int code = readInt(inputStream);
+            final String message = readString(inputStream);
+            return createEvent(requestId, code, message);
+        }
+    }
 
 }

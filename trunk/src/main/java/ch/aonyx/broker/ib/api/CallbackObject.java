@@ -24,35 +24,35 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public class CallbackObject {
 
-	private final Request sentRequest;
-	private final long beginningTimeNanosecondsSendingRequest;
-	private final long endingTimeNanosecondsSendingRequest;
+    private final Request sentRequest;
+    private final long beginningTimeNanosecondsSendingRequest;
+    private final long endingTimeNanosecondsSendingRequest;
 
-	public CallbackObject(final Request request, final long beginningTimeNanosecondsSendingRequest,
-			final long endingTimeNanosecondsSendingRequest) {
-		sentRequest = request;
-		this.beginningTimeNanosecondsSendingRequest = beginningTimeNanosecondsSendingRequest;
-		this.endingTimeNanosecondsSendingRequest = endingTimeNanosecondsSendingRequest;
-	}
+    public CallbackObject(final Request request, final long beginningTimeNanosecondsSendingRequest,
+            final long endingTimeNanosecondsSendingRequest) {
+        sentRequest = request;
+        this.beginningTimeNanosecondsSendingRequest = beginningTimeNanosecondsSendingRequest;
+        this.endingTimeNanosecondsSendingRequest = endingTimeNanosecondsSendingRequest;
+    }
 
-	public final Request getSentRequest() {
-		return sentRequest;
-	}
+    public final Request getSentRequest() {
+        return sentRequest;
+    }
 
-	public final long getBeginningTimeNanosecondsSendingRequest() {
-		return beginningTimeNanosecondsSendingRequest;
-	}
+    public final long getBeginningTimeNanosecondsSendingRequest() {
+        return beginningTimeNanosecondsSendingRequest;
+    }
 
-	public final long getEndingTimeNanosecondsSendingRequest() {
-		return endingTimeNanosecondsSendingRequest;
-	}
+    public final long getEndingTimeNanosecondsSendingRequest() {
+        return endingTimeNanosecondsSendingRequest;
+    }
 
-	public final long getElapsedTimeNanosecondsSendingRequest() {
-		return endingTimeNanosecondsSendingRequest - beginningTimeNanosecondsSendingRequest;
-	}
+    public final long getElapsedTimeNanosecondsSendingRequest() {
+        return endingTimeNanosecondsSendingRequest - beginningTimeNanosecondsSendingRequest;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

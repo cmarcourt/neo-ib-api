@@ -23,9 +23,9 @@ import com.lmax.disruptor.EventFactory;
  */
 final class EventWrapperFactory implements EventFactory<EventWrapper> {
 
-	@Override
-	public EventWrapper newInstance() {
-		return new EventWrapper();
-	}
+    @Override
+    public EventWrapper newInstance() {
+        return new EventWrapper();
+    }
 
 }

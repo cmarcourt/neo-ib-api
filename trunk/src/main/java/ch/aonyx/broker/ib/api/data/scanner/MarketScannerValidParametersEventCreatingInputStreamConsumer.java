@@ -26,21 +26,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class MarketScannerValidParametersEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<MarketScannerValidParametersEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<MarketScannerValidParametersEvent> {
 
-	public MarketScannerValidParametersEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public MarketScannerValidParametersEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected MarketScannerValidParametersEvent consumeVersionLess(final InputStream inputStream) {
-		final String xml = readString(inputStream);
-		return createEvent(xml);
-	}
+    @Override
+    protected MarketScannerValidParametersEvent consumeVersionLess(final InputStream inputStream) {
+        final String xml = readString(inputStream);
+        return createEvent(xml);
+    }
 
-	private MarketScannerValidParametersEvent createEvent(final String xml) {
-		return new MarketScannerValidParametersEvent(xml);
-	}
+    private MarketScannerValidParametersEvent createEvent(final String xml) {
+        return new MarketScannerValidParametersEvent(xml);
+    }
 
 }

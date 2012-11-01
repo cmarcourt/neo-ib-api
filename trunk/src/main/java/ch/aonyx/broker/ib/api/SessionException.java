@@ -21,15 +21,15 @@ package ch.aonyx.broker.ib.api;
  */
 public class SessionException extends NeoIbApiClientException {
 
-	private static final long serialVersionUID = -3687684725997199633L;
+    private static final long serialVersionUID = -3687684725997199633L;
 
-	public SessionException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
-		super(clientMessageCode, detailedMessage);
-	}
+    public SessionException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
+        super(clientMessageCode, detailedMessage);
+    }
 
-	public SessionException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Throwable cause) {
-		super(clientMessageCode, detailedMessage, cause);
-	}
+    public SessionException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Throwable cause) {
+        super(clientMessageCode, detailedMessage, cause);
+    }
 
 }

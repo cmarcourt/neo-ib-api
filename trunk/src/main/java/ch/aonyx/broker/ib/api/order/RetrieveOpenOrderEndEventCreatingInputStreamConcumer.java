@@ -24,16 +24,16 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class RetrieveOpenOrderEndEventCreatingInputStreamConcumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<RetrieveOpenOrderEndEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<RetrieveOpenOrderEndEvent> {
 
-	public RetrieveOpenOrderEndEventCreatingInputStreamConcumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public RetrieveOpenOrderEndEventCreatingInputStreamConcumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected RetrieveOpenOrderEndEvent consumeVersionLess(final InputStream inputStream) {
-		return new RetrieveOpenOrderEndEvent();
-	}
+    @Override
+    protected RetrieveOpenOrderEndEvent consumeVersionLess(final InputStream inputStream) {
+        return new RetrieveOpenOrderEndEvent();
+    }
 
 }

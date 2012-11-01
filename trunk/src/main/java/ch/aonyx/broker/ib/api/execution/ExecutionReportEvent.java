@@ -28,30 +28,30 @@ import ch.aonyx.broker.ib.api.contract.Contract;
  */
 public final class ExecutionReportEvent extends AbstractEventSupport {
 
-	private final Contract contract;
-	private final ExecutionReport executionReport;
+    private final Contract contract;
+    private final ExecutionReport executionReport;
 
-	public ExecutionReportEvent(final Id requestId, final Contract contract, final ExecutionReport executionReport) {
-		super(requestId);
-		this.contract = contract;
-		this.executionReport = executionReport;
-	}
+    public ExecutionReportEvent(final Id requestId, final Contract contract, final ExecutionReport executionReport) {
+        super(requestId);
+        this.contract = contract;
+        this.executionReport = executionReport;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return ExecutionReportEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return ExecutionReportEventListener.class;
+    }
 
-	public final Contract getContract() {
-		return contract;
-	}
+    public Contract getContract() {
+        return contract;
+    }
 
-	public final ExecutionReport getExecutionReport() {
-		return executionReport;
-	}
+    public ExecutionReport getExecutionReport() {
+        return executionReport;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -26,24 +26,24 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class AccountUpdateValueEndEvent extends AbstractEventSupport {
 
-	private final String accountName;
+    private final String accountName;
 
-	public AccountUpdateValueEndEvent(final String accountName) {
-		super();
-		this.accountName = accountName;
-	}
+    public AccountUpdateValueEndEvent(final String accountName) {
+        super();
+        this.accountName = accountName;
+    }
 
-	public final String getAccountName() {
-		return accountName;
-	}
+    public String getAccountName() {
+        return accountName;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return AccountUpdateValueEndEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return AccountUpdateValueEndEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

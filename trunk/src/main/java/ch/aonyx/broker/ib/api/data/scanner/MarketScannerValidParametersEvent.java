@@ -26,24 +26,24 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class MarketScannerValidParametersEvent extends AbstractEventSupport {
 
-	private final String xml;
+    private final String xml;
 
-	public MarketScannerValidParametersEvent(final String xml) {
-		super();
-		this.xml = xml;
-	}
+    public MarketScannerValidParametersEvent(final String xml) {
+        super();
+        this.xml = xml;
+    }
 
-	public final String getXml() {
-		return xml;
-	}
+    public String getXml() {
+        return xml;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return MarketScannerValidParametersEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return MarketScannerValidParametersEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

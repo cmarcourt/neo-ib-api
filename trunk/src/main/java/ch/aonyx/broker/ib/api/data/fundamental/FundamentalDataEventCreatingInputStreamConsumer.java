@@ -27,21 +27,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class FundamentalDataEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<FundamentalDataEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<FundamentalDataEvent> {
 
-	public FundamentalDataEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public FundamentalDataEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected FundamentalDataEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final String xml = readString(inputStream);
-		return createEvent(requestId, xml);
-	}
+    @Override
+    protected FundamentalDataEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final String xml = readString(inputStream);
+        return createEvent(requestId, xml);
+    }
 
-	private FundamentalDataEvent createEvent(final int requestId, final String xml) {
-		return new FundamentalDataEvent(toRequestId(requestId), xml);
-	}
+    private FundamentalDataEvent createEvent(final int requestId, final String xml) {
+        return new FundamentalDataEvent(toRequestId(requestId), xml);
+    }
 
 }

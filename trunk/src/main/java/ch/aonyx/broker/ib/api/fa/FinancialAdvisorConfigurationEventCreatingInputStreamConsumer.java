@@ -27,22 +27,22 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class FinancialAdvisorConfigurationEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<FinancialAdvisorConfigurationEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<FinancialAdvisorConfigurationEvent> {
 
-	public FinancialAdvisorConfigurationEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public FinancialAdvisorConfigurationEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected FinancialAdvisorConfigurationEvent consumeVersionLess(final InputStream inputStream) {
-		final int dataType = readInt(inputStream);
-		final String xml = readString(inputStream);
-		return createEvent(dataType, xml);
-	}
+    @Override
+    protected FinancialAdvisorConfigurationEvent consumeVersionLess(final InputStream inputStream) {
+        final int dataType = readInt(inputStream);
+        final String xml = readString(inputStream);
+        return createEvent(dataType, xml);
+    }
 
-	private FinancialAdvisorConfigurationEvent createEvent(final int dataType, final String xml) {
-		return new FinancialAdvisorConfigurationEvent(FinancialAdvisorDataType.fromValue(dataType), xml);
-	}
+    private FinancialAdvisorConfigurationEvent createEvent(final int dataType, final String xml) {
+        return new FinancialAdvisorConfigurationEvent(FinancialAdvisorDataType.fromValue(dataType), xml);
+    }
 
 }

@@ -37,97 +37,97 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class OptionPriceSubscriptionRequest extends AbstractRequestSupport implements SubscriptionRequest {
 
-	private static final int VERSION = 1;
-	private final Contract contract;
-	private final double volatility;
-	private final double underlyingPrice;
+    private static final int VERSION = 1;
+    private final Contract contract;
+    private final double volatility;
+    private final double underlyingPrice;
 
-	public OptionPriceSubscriptionRequest(final Contract contract, final double volatility, final double underlyingPrice) {
-		this(StringIdUtils.uniqueIdFromContract(contract), contract, volatility, underlyingPrice);
-	}
+    public OptionPriceSubscriptionRequest(final Contract contract, final double volatility, final double underlyingPrice) {
+        this(StringIdUtils.uniqueIdFromContract(contract), contract, volatility, underlyingPrice);
+    }
 
-	public OptionPriceSubscriptionRequest(final String id, final Contract contract, final double volatility,
-			final double underlyingPrice) {
-		super(id);
-		this.contract = contract;
-		this.volatility = volatility;
-		this.underlyingPrice = underlyingPrice;
-	}
+    public OptionPriceSubscriptionRequest(final String id, final Contract contract, final double volatility,
+            final double underlyingPrice) {
+        super(id);
+        this.contract = contract;
+        this.volatility = volatility;
+        this.underlyingPrice = underlyingPrice;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		checkCalculateOptionPrice();
-		builder.append(OutgoingMessageId.OPTION_PRICE_SUBSCRIPTION_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(toInternalId(getId()));
-		appendContract(builder);
-		builder.append(volatility);
-		builder.append(underlyingPrice);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        checkCalculateOptionPrice();
+        builder.append(OutgoingMessageId.OPTION_PRICE_SUBSCRIPTION_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(toInternalId(getId()));
+        appendContract(builder);
+        builder.append(volatility);
+        builder.append(underlyingPrice);
+        return builder;
+    }
 
-	private void checkCalculateOptionPrice() {
-		if (!Feature.CALCULATE_OPTION_PRICE.isSupportedByVersion(getServerCurrentVersion())) {
-			throw new RequestException(ClientMessageCode.UPDATE_TWS,
-					"It does not support calculate option price requests.", this);
-		}
-	}
+    private void checkCalculateOptionPrice() {
+        if (!Feature.CALCULATE_OPTION_PRICE.isSupportedByVersion(getServerCurrentVersion())) {
+            throw new RequestException(ClientMessageCode.UPDATE_TWS,
+                    "It does not support calculate option price requests.", this);
+        }
+    }
 
-	private void appendContract(final RequestBuilder builder) {
-		builder.append(contract.getId());
-		builder.append(contract.getSymbol());
-		builder.append(contract.getSecurityType().getAbbreviation());
-		builder.append(contract.getExpiry());
-		builder.append(contract.getStrike());
-		builder.append(contract.getOptionRight().getName());
-		builder.append(contract.getMultiplier());
-		builder.append(contract.getExchange());
-		builder.append(contract.getPrimaryExchange());
-		builder.append(contract.getCurrencyCode());
-		builder.append(contract.getLocalSymbol());
-	}
+    private void appendContract(final RequestBuilder builder) {
+        builder.append(contract.getId());
+        builder.append(contract.getSymbol());
+        builder.append(contract.getSecurityType().getAbbreviation());
+        builder.append(contract.getExpiry());
+        builder.append(contract.getStrike());
+        builder.append(contract.getOptionRight().getName());
+        builder.append(contract.getMultiplier());
+        builder.append(contract.getExchange());
+        builder.append(contract.getPrimaryExchange());
+        builder.append(contract.getCurrencyCode());
+        builder.append(contract.getLocalSymbol());
+    }
 
-	public final Contract getContract() {
-		return contract;
-	}
+    public Contract getContract() {
+        return contract;
+    }
 
-	public final double getVolatility() {
-		return volatility;
-	}
+    public double getVolatility() {
+        return volatility;
+    }
 
-	public final double getUnderlyingPrice() {
-		return underlyingPrice;
-	}
+    public double getUnderlyingPrice() {
+        return underlyingPrice;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(contract).append(volatility).append(underlyingPrice).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(contract).append(volatility).append(underlyingPrice).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final OptionPriceSubscriptionRequest rhs = (OptionPriceSubscriptionRequest) obj;
-		return new EqualsBuilder().append(contract, rhs.contract).append(volatility, rhs.volatility)
-				.append(underlyingPrice, rhs.underlyingPrice).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final OptionPriceSubscriptionRequest rhs = (OptionPriceSubscriptionRequest) obj;
+        return new EqualsBuilder().append(contract, rhs.contract).append(volatility, rhs.volatility)
+                .append(underlyingPrice, rhs.underlyingPrice).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

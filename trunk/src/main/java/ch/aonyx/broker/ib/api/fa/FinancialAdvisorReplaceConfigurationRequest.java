@@ -33,62 +33,62 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class FinancialAdvisorReplaceConfigurationRequest extends AbstractRequestSupport implements SimpleRequest {
 
-	private static final int VERSION = 1;
-	private final FinancialAdvisorDataType dataType;
-	private final String xml;
+    private static final int VERSION = 1;
+    private final FinancialAdvisorDataType dataType;
+    private final String xml;
 
-	public FinancialAdvisorReplaceConfigurationRequest(final FinancialAdvisorDataType dataType, final String xml) {
-		super(StringIdUtils.uniqueRandomId());
-		this.dataType = dataType;
-		this.xml = xml;
-	}
+    public FinancialAdvisorReplaceConfigurationRequest(final FinancialAdvisorDataType dataType, final String xml) {
+        super(StringIdUtils.uniqueRandomId());
+        this.dataType = dataType;
+        this.xml = xml;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.FINANCIAL_ADVISOR_REPLACE_CONFIGURATION_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(dataType.getValue());
-		builder.append(xml);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.FINANCIAL_ADVISOR_REPLACE_CONFIGURATION_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(dataType.getValue());
+        builder.append(xml);
+        return builder;
+    }
 
-	public final String getXml() {
-		return xml;
-	}
+    public String getXml() {
+        return xml;
+    }
 
-	public final FinancialAdvisorDataType getDataType() {
-		return dataType;
-	}
+    public FinancialAdvisorDataType getDataType() {
+        return dataType;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(dataType).append(xml).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(dataType).append(xml).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final FinancialAdvisorReplaceConfigurationRequest rhs = (FinancialAdvisorReplaceConfigurationRequest) obj;
-		return new EqualsBuilder().append(dataType, rhs.dataType).append(xml, rhs.xml).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final FinancialAdvisorReplaceConfigurationRequest rhs = (FinancialAdvisorReplaceConfigurationRequest) obj;
+        return new EqualsBuilder().append(dataType, rhs.dataType).append(xml, rhs.xml).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 
 }

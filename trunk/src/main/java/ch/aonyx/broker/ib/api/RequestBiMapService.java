@@ -28,28 +28,28 @@ import com.google.common.collect.Maps;
  */
 final class RequestBiMapService implements RequestService {
 
-	private final Map<Id, Request> idRequestMap;
+    private final Map<Id, Request> idRequestMap;
 
-	RequestBiMapService() {
-		idRequestMap = Maps.newHashMap();
-	}
+    RequestBiMapService() {
+        idRequestMap = Maps.newHashMap();
+    }
 
-	@Override
-	public final List<Request> getRequests() {
-		return Collections.unmodifiableList(Lists.newArrayList(idRequestMap.values()));
-	}
+    @Override
+    public List<Request> getRequests() {
+        return Collections.unmodifiableList(Lists.newArrayList(idRequestMap.values()));
+    }
 
-	@Override
-	public final Request getRequest(final Id id) {
-		return idRequestMap.get(id);
-	}
+    @Override
+    public Request getRequest(final Id id) {
+        return idRequestMap.get(id);
+    }
 
-	@Override
-	public final boolean contains(final Id id) {
-		return idRequestMap.containsKey(id);
-	}
+    @Override
+    public boolean contains(final Id id) {
+        return idRequestMap.containsKey(id);
+    }
 
-	final void addRequest(final Request request) {
-		idRequestMap.put(request.getId(), request);
-	}
+    void addRequest(final Request request) {
+        idRequestMap.put(request.getId(), request);
+    }
 }

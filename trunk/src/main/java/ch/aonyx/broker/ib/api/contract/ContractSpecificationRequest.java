@@ -37,89 +37,89 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class ContractSpecificationRequest extends AbstractRequestSupport implements SimpleRequest {
 
-	private static final int VERSION = 6;
-	private final Contract contract;
+    private static final int VERSION = 6;
+    private final Contract contract;
 
-	public ContractSpecificationRequest(final Contract contract) {
-		this(StringIdUtils.uniqueIdFromContract(contract), contract);
-	}
+    public ContractSpecificationRequest(final Contract contract) {
+        this(StringIdUtils.uniqueIdFromContract(contract), contract);
+    }
 
-	public ContractSpecificationRequest(final String id, final Contract contract) {
-		super(id);
-		this.contract = contract;
-	}
+    public ContractSpecificationRequest(final String id, final Contract contract) {
+        super(id);
+        this.contract = contract;
+    }
 
-	public final Contract getContract() {
-		return contract;
-	}
+    public Contract getContract() {
+        return contract;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		checkSecurityIdType();
-		builder.append(OutgoingMessageId.CONTRACT_SPECIFICATION_REQUEST.getId());
-		builder.append(VERSION);
-		if (Feature.CONTRACT_SPECIFICATION_MARKER.isSupportedByVersion(getServerCurrentVersion())) {
-			builder.append(toInternalId(getId()));
-		}
-		appendContract(builder);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        checkSecurityIdType();
+        builder.append(OutgoingMessageId.CONTRACT_SPECIFICATION_REQUEST.getId());
+        builder.append(VERSION);
+        if (Feature.CONTRACT_SPECIFICATION_MARKER.isSupportedByVersion(getServerCurrentVersion())) {
+            builder.append(toInternalId(getId()));
+        }
+        appendContract(builder);
+        return builder;
+    }
 
-	private void checkSecurityIdType() {
-		if (StringUtils.isNotEmpty(contract.getSecurityId()) || (contract.getSecurityIdentifierCode() != null)) {
-			if (!Feature.SECURITY_ID_TYPE.isSupportedByVersion(getServerCurrentVersion())) {
-				throw new RequestException(ClientMessageCode.UPDATE_TWS,
-						"It does not support secIdType and secId parameters.", this);
-			}
-		}
-	}
+    private void checkSecurityIdType() {
+        if (StringUtils.isNotEmpty(contract.getSecurityId()) || (contract.getSecurityIdentifierCode() != null)) {
+            if (!Feature.SECURITY_ID_TYPE.isSupportedByVersion(getServerCurrentVersion())) {
+                throw new RequestException(ClientMessageCode.UPDATE_TWS,
+                        "It does not support secIdType and secId parameters.", this);
+            }
+        }
+    }
 
-	private void appendContract(final RequestBuilder builder) {
-		builder.append(contract.getId());
-		builder.append(contract.getSymbol());
-		builder.append(contract.getSecurityType().getAbbreviation());
-		builder.append(contract.getExpiry());
-		builder.append(contract.getStrike());
-		builder.append(contract.getOptionRight().getName());
-		builder.append(contract.getMultiplier());
-		builder.append(contract.getExchange());
-		builder.append(contract.getCurrencyCode());
-		builder.append(contract.getLocalSymbol());
-		builder.append(contract.isIncludeExpired());
-		if (Feature.SECURITY_ID_TYPE.isSupportedByVersion(getServerCurrentVersion())) {
-			builder.append(contract.getSecurityIdentifierCode().getAcronym());
-			builder.append(contract.getSecurityId());
-		}
-	}
+    private void appendContract(final RequestBuilder builder) {
+        builder.append(contract.getId());
+        builder.append(contract.getSymbol());
+        builder.append(contract.getSecurityType().getAbbreviation());
+        builder.append(contract.getExpiry());
+        builder.append(contract.getStrike());
+        builder.append(contract.getOptionRight().getName());
+        builder.append(contract.getMultiplier());
+        builder.append(contract.getExchange());
+        builder.append(contract.getCurrencyCode());
+        builder.append(contract.getLocalSymbol());
+        builder.append(contract.isIncludeExpired());
+        if (Feature.SECURITY_ID_TYPE.isSupportedByVersion(getServerCurrentVersion())) {
+            builder.append(contract.getSecurityIdentifierCode().getAcronym());
+            builder.append(contract.getSecurityId());
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(contract).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(contract).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final ContractSpecificationRequest rhs = (ContractSpecificationRequest) obj;
-		return new EqualsBuilder().append(contract, rhs.contract).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final ContractSpecificationRequest rhs = (ContractSpecificationRequest) obj;
+        return new EqualsBuilder().append(contract, rhs.contract).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -33,62 +33,62 @@ import com.google.common.collect.Lists;
  * @since 1.0.0
  */
 public final class HistoricalDataEventListEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<HistoricalDataEventListEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<HistoricalDataEventListEvent> {
 
-	private static final String FINISHED = "finished";
+    private static final String FINISHED = "finished";
 
-	public HistoricalDataEventListEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public HistoricalDataEventListEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected HistoricalDataEventListEvent consumeVersionLess(final InputStream inputStream) {
-		final List<HistoricalDataEvent> historicalDataEvents = Lists.newArrayList();
-		final int requestId = readInt(inputStream);
-		String startDate = null;
-		String endDate = null;
-		String finishedRetrievingHistoricalData = FINISHED;
-		if (getVersion() >= 2) {
-			startDate = readString(inputStream);
-			endDate = readString(inputStream);
-			finishedRetrievingHistoricalData = finishedRetrievingHistoricalData + "-" + startDate + "-" + endDate;
-		}
-		final int historicalDatas = readInt(inputStream);
-		for (int i = 0; i < historicalDatas; i++) {
-			historicalDataEvents.add(consumeHistoricalData(requestId, inputStream));
-		}
-		historicalDataEvents.add(createHistoricalDataEvent(requestId, finishedRetrievingHistoricalData, -1, -1, -1, -1,
-				-1, -1, -1, "false"));
-		return createHistoricalDataEventListEvent(requestId, historicalDataEvents);
-	}
+    @Override
+    protected HistoricalDataEventListEvent consumeVersionLess(final InputStream inputStream) {
+        final List<HistoricalDataEvent> historicalDataEvents = Lists.newArrayList();
+        final int requestId = readInt(inputStream);
+        String startDate = null;
+        String endDate = null;
+        String finishedRetrievingHistoricalData = FINISHED;
+        if (getVersion() >= 2) {
+            startDate = readString(inputStream);
+            endDate = readString(inputStream);
+            finishedRetrievingHistoricalData = finishedRetrievingHistoricalData + "-" + startDate + "-" + endDate;
+        }
+        final int historicalDatas = readInt(inputStream);
+        for (int i = 0; i < historicalDatas; i++) {
+            historicalDataEvents.add(consumeHistoricalData(requestId, inputStream));
+        }
+        historicalDataEvents.add(createHistoricalDataEvent(requestId, finishedRetrievingHistoricalData, -1, -1, -1, -1,
+                -1, -1, -1, "false"));
+        return createHistoricalDataEventListEvent(requestId, historicalDataEvents);
+    }
 
-	private HistoricalDataEvent consumeHistoricalData(final int requestId, final InputStream inputStream) {
-		final String dateTime = readString(inputStream);
-		final double open = readDouble(inputStream);
-		final double high = readDouble(inputStream);
-		final double low = readDouble(inputStream);
-		final double close = readDouble(inputStream);
-		final int volume = readInt(inputStream);
-		final double weightedAveragePrice = readDouble(inputStream);
-		final String hasGap = readString(inputStream);
-		int tradeNumber = -1;
-		if (getVersion() >= 3) {
-			tradeNumber = readInt(inputStream);
-		}
-		return createHistoricalDataEvent(requestId, dateTime, open, high, low, close, volume, weightedAveragePrice,
-				tradeNumber, hasGap);
-	}
+    private HistoricalDataEvent consumeHistoricalData(final int requestId, final InputStream inputStream) {
+        final String dateTime = readString(inputStream);
+        final double open = readDouble(inputStream);
+        final double high = readDouble(inputStream);
+        final double low = readDouble(inputStream);
+        final double close = readDouble(inputStream);
+        final int volume = readInt(inputStream);
+        final double weightedAveragePrice = readDouble(inputStream);
+        final String hasGap = readString(inputStream);
+        int tradeNumber = -1;
+        if (getVersion() >= 3) {
+            tradeNumber = readInt(inputStream);
+        }
+        return createHistoricalDataEvent(requestId, dateTime, open, high, low, close, volume, weightedAveragePrice,
+                tradeNumber, hasGap);
+    }
 
-	private HistoricalDataEvent createHistoricalDataEvent(final int requestId, final String dateTime,
-			final double open, final double high, final double low, final double close, final int volume,
-			final double weightedAveragePrice, final int tradeNumber, final String hasGap) {
-		return new HistoricalDataEvent(toRequestId(requestId), dateTime, open, high, low, close, volume, tradeNumber,
-				weightedAveragePrice, BooleanUtils.toBoolean(hasGap));
-	}
+    private HistoricalDataEvent createHistoricalDataEvent(final int requestId, final String dateTime,
+            final double open, final double high, final double low, final double close, final int volume,
+            final double weightedAveragePrice, final int tradeNumber, final String hasGap) {
+        return new HistoricalDataEvent(toRequestId(requestId), dateTime, open, high, low, close, volume, tradeNumber,
+                weightedAveragePrice, BooleanUtils.toBoolean(hasGap));
+    }
 
-	private HistoricalDataEventListEvent createHistoricalDataEventListEvent(final int requestId,
-			final List<HistoricalDataEvent> historicalDataEvents) {
-		return new HistoricalDataEventListEvent(toRequestId(requestId), historicalDataEvents);
-	}
+    private HistoricalDataEventListEvent createHistoricalDataEventListEvent(final int requestId,
+            final List<HistoricalDataEvent> historicalDataEvents) {
+        return new HistoricalDataEventListEvent(toRequestId(requestId), historicalDataEvents);
+    }
 }

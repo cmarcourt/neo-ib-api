@@ -28,29 +28,29 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class MarketDepthLevelTwoUpdateEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<MarketDepthLevelTwoUpdateEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<MarketDepthLevelTwoUpdateEvent> {
 
-	public MarketDepthLevelTwoUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public MarketDepthLevelTwoUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected MarketDepthLevelTwoUpdateEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final int rowId = readInt(inputStream);
-		final String marketMakerName = readString(inputStream);
-		final int operation = readInt(inputStream);
-		final int bookSide = readInt(inputStream);
-		final double price = readDouble(inputStream);
-		final int size = readInt(inputStream);
-		return createEvent(requestId, rowId, marketMakerName, operation, bookSide, price, size);
-	}
+    @Override
+    protected MarketDepthLevelTwoUpdateEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final int rowId = readInt(inputStream);
+        final String marketMakerName = readString(inputStream);
+        final int operation = readInt(inputStream);
+        final int bookSide = readInt(inputStream);
+        final double price = readDouble(inputStream);
+        final int size = readInt(inputStream);
+        return createEvent(requestId, rowId, marketMakerName, operation, bookSide, price, size);
+    }
 
-	private MarketDepthLevelTwoUpdateEvent createEvent(final int requestId, final int rowId,
-			final String marketMakerName, final int operation, final int bookSide, final double price, final int size) {
-		return new MarketDepthLevelTwoUpdateEvent(toRequestId(requestId), rowId, marketMakerName,
-				Operation.fromValue(operation), BookSide.fromValue(bookSide), price, size);
-	}
+    private MarketDepthLevelTwoUpdateEvent createEvent(final int requestId, final int rowId,
+            final String marketMakerName, final int operation, final int bookSide, final double price, final int size) {
+        return new MarketDepthLevelTwoUpdateEvent(toRequestId(requestId), rowId, marketMakerName,
+                Operation.fromValue(operation), BookSide.fromValue(bookSide), price, size);
+    }
 
 }

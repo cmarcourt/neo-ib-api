@@ -27,30 +27,30 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class DeltaNeutralValidationEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<DeltaNeutralValidationEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<DeltaNeutralValidationEvent> {
 
-	public DeltaNeutralValidationEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public DeltaNeutralValidationEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected DeltaNeutralValidationEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final UnderlyingCombo underlyingCombo = consumeUnderlyingCombo(inputStream);
-		return createEvent(requestId, underlyingCombo);
-	}
+    @Override
+    protected DeltaNeutralValidationEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final UnderlyingCombo underlyingCombo = consumeUnderlyingCombo(inputStream);
+        return createEvent(requestId, underlyingCombo);
+    }
 
-	private UnderlyingCombo consumeUnderlyingCombo(final InputStream inputStream) {
-		final UnderlyingCombo underlyingCombo = new UnderlyingCombo();
-		underlyingCombo.setContractId(readInt(inputStream));
-		underlyingCombo.setDelta(readDouble(inputStream));
-		underlyingCombo.setPrice(readDouble(inputStream));
-		return underlyingCombo;
-	}
+    private UnderlyingCombo consumeUnderlyingCombo(final InputStream inputStream) {
+        final UnderlyingCombo underlyingCombo = new UnderlyingCombo();
+        underlyingCombo.setContractId(readInt(inputStream));
+        underlyingCombo.setDelta(readDouble(inputStream));
+        underlyingCombo.setPrice(readDouble(inputStream));
+        return underlyingCombo;
+    }
 
-	private DeltaNeutralValidationEvent createEvent(final int requestId, final UnderlyingCombo underlyingCombo) {
-		return new DeltaNeutralValidationEvent(toRequestId(requestId), underlyingCombo);
-	}
+    private DeltaNeutralValidationEvent createEvent(final int requestId, final UnderlyingCombo underlyingCombo) {
+        return new DeltaNeutralValidationEvent(toRequestId(requestId), underlyingCombo);
+    }
 
 }

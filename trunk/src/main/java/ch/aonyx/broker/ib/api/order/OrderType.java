@@ -27,40 +27,41 @@ import com.google.common.collect.Maps;
  */
 public enum OrderType {
 
-	UNKNOWN("UNKNOWN"), MARKET_TO_LIMIT("MTL"), STOP("STP"), STOP_LIMIT("STPLMT"), TRAILING_STOP_LIMIT_IF_PRICE_TOUCHED(
-			"TRAILLIT"), TRAILING_STOP_MARKET_IF_PRICE_TOUCHED("TRAILMIT"), TRAILING_STOP("TRAIL"), TRAILING_STOP_LIMIT(
-			"TRAILLMT"), MARKET("MKT"), MARKET_IF_PRICE_TOUCHED("MIT"), MARKET_ON_CLOSE("MOC"), MARKET_ON_OPEN("MOO"), PEGGED_TO_MARKET(
-			"PEGMKT"), RELATIVE("REL"), BOX_TOP("BOXTOP"), LIMIT_ON_CLOSE("LOC"), LIMIT_ON_OPEN("LOO"), LIMIT_IF_PRICE_TOUCHED(
-			"LIT"), PEGGED_TO_MIDPOINT("PEGMID"), VOLUME_WEIGHTED_AVERAGE_PRICE_GUARANTEED("VWAP"), GOOD_AFTER_TIME(
-			"GAT"), GOOD_TILL_DATE("GTD"), GOOD_TILL_CANCELLED("GTC"), IMMEDIATE_OR_CANCEL("IOC"), ONE_CANCELS_ALL(
-			"OCA"), VOLATILITY("VOL"), LIMIT("LMT"), HIDDEN("HID"), ICEBERG("ICE"), SCALE("SCALE"), EMPTY("");
+    UNKNOWN("UNKNOWN"), MARKET_TO_LIMIT("MTL"), STOP("STP"), STOP_LIMIT("STPLMT"),
+    TRAILING_STOP_LIMIT_IF_PRICE_TOUCHED("TRAILLIT"), TRAILING_STOP_MARKET_IF_PRICE_TOUCHED("TRAILMIT"), TRAILING_STOP(
+            "TRAIL"), TRAILING_STOP_LIMIT("TRAILLMT"), MARKET("MKT"), MARKET_IF_PRICE_TOUCHED("MIT"), MARKET_ON_CLOSE(
+            "MOC"), MARKET_ON_OPEN("MOO"), PEGGED_TO_MARKET("PEGMKT"), RELATIVE("REL"), BOX_TOP("BOXTOP"),
+    LIMIT_ON_CLOSE("LOC"), LIMIT_ON_OPEN("LOO"), LIMIT_IF_PRICE_TOUCHED("LIT"), PEGGED_TO_MIDPOINT("PEGMID"),
+    VOLUME_WEIGHTED_AVERAGE_PRICE_GUARANTEED("VWAP"), GOOD_AFTER_TIME("GAT"), GOOD_TILL_DATE("GTD"),
+    GOOD_TILL_CANCELLED("GTC"), IMMEDIATE_OR_CANCEL("IOC"), ONE_CANCELS_ALL("OCA"), VOLATILITY("VOL"), LIMIT("LMT"),
+    HIDDEN("HID"), ICEBERG("ICE"), SCALE("SCALE"), EMPTY("");
 
-	private final String abbreviation;
-	private static final Map<String, OrderType> MAP;
+    private final String abbreviation;
+    private static final Map<String, OrderType> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final OrderType orderType : values()) {
-			MAP.put(orderType.getAbbreviation(), orderType);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final OrderType orderType : values()) {
+            MAP.put(orderType.getAbbreviation(), orderType);
+        }
+    }
 
-	private OrderType(final String abbreviation) {
-		this.abbreviation = abbreviation;
-	}
+    private OrderType(final String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
-	public final String getAbbreviation() {
-		return abbreviation;
-	}
+    public final String getAbbreviation() {
+        return abbreviation;
+    }
 
-	public static final OrderType fromAbbreviation(final String abbreviation) {
-		if (StringUtils.isBlank(abbreviation)) {
-			return EMPTY;
-		}
-		final String abbreviationUpperCase = abbreviation.toUpperCase();
-		if (MAP.containsKey(abbreviationUpperCase)) {
-			return MAP.get(abbreviationUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final OrderType fromAbbreviation(final String abbreviation) {
+        if (StringUtils.isBlank(abbreviation)) {
+            return EMPTY;
+        }
+        final String abbreviationUpperCase = abbreviation.toUpperCase();
+        if (MAP.containsKey(abbreviationUpperCase)) {
+            return MAP.get(abbreviationUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

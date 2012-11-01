@@ -23,9 +23,9 @@ import java.util.List;
  */
 public interface RequestService {
 
-	List<Request> getRequests();
+    List<Request> getRequests();
 
-	Request getRequest(Id id);
+    Request getRequest(Id id);
 
-	boolean contains(Id id);
+    boolean contains(Id id);
 }

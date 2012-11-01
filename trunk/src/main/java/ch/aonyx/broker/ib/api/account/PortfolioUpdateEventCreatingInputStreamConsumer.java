@@ -31,63 +31,63 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class PortfolioUpdateEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<PortfolioUpdateEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<PortfolioUpdateEvent> {
 
-	public PortfolioUpdateEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public PortfolioUpdateEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected PortfolioUpdateEvent consumeVersionLess(final InputStream inputStream) {
-		final Contract contract = consumeContract(inputStream);
-		final int position = readInt(inputStream);
-		final double marketPrice = readDouble(inputStream);
-		final double marketValue = readDouble(inputStream);
-		double averageCost = 0;
-		double unrealizedProfitAndLoss = 0;
-		double realizedProfitAndLoss = 0;
-		if (getVersion() >= 3) {
-			averageCost = readDouble(inputStream);
-			unrealizedProfitAndLoss = readDouble(inputStream);
-			realizedProfitAndLoss = readDouble(inputStream);
-		}
-		String accountName = null;
-		if (getVersion() >= 4) {
-			accountName = readString(inputStream);
-		}
-		if ((getVersion() == 6) && (getServerCurrentVersion() == 39)) {
-			contract.setPrimaryExchange(readString(inputStream));
-		}
-		return createEvent(contract, position, marketPrice, marketValue, averageCost, unrealizedProfitAndLoss,
-				realizedProfitAndLoss, accountName);
-	}
+    @Override
+    protected PortfolioUpdateEvent consumeVersionLess(final InputStream inputStream) {
+        final Contract contract = consumeContract(inputStream);
+        final int position = readInt(inputStream);
+        final double marketPrice = readDouble(inputStream);
+        final double marketValue = readDouble(inputStream);
+        double averageCost = 0;
+        double unrealizedProfitAndLoss = 0;
+        double realizedProfitAndLoss = 0;
+        if (getVersion() >= 3) {
+            averageCost = readDouble(inputStream);
+            unrealizedProfitAndLoss = readDouble(inputStream);
+            realizedProfitAndLoss = readDouble(inputStream);
+        }
+        String accountName = null;
+        if (getVersion() >= 4) {
+            accountName = readString(inputStream);
+        }
+        if ((getVersion() == 6) && (getServerCurrentVersion() == 39)) {
+            contract.setPrimaryExchange(readString(inputStream));
+        }
+        return createEvent(contract, position, marketPrice, marketValue, averageCost, unrealizedProfitAndLoss,
+                realizedProfitAndLoss, accountName);
+    }
 
-	private PortfolioUpdateEvent createEvent(final Contract contract, final int position, final double marketPrice,
-			final double marketValue, final double averageCost, final double unrealizedProfitAndLoss,
-			final double realizedProfitAndLoss, final String accountName) {
-		return new PortfolioUpdateEvent(contract, position, marketPrice, marketValue, averageCost,
-				unrealizedProfitAndLoss, realizedProfitAndLoss, accountName);
-	}
+    private PortfolioUpdateEvent createEvent(final Contract contract, final int position, final double marketPrice,
+            final double marketValue, final double averageCost, final double unrealizedProfitAndLoss,
+            final double realizedProfitAndLoss, final String accountName) {
+        return new PortfolioUpdateEvent(contract, position, marketPrice, marketValue, averageCost,
+                unrealizedProfitAndLoss, realizedProfitAndLoss, accountName);
+    }
 
-	private Contract consumeContract(final InputStream inputStream) {
-		final Contract contract = new Contract();
-		if (getVersion() >= 6) {
-			contract.setId(readInt(inputStream));
-		}
-		contract.setSymbol(readString(inputStream));
-		contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
-		contract.setExpiry(readString(inputStream));
-		contract.setStrike(readDouble(inputStream));
-		contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
-		if (getVersion() >= 7) {
-			contract.setMultiplier(readString(inputStream));
-			contract.setPrimaryExchange(readString(inputStream));
-		}
-		contract.setCurrencyCode(readString(inputStream));
-		if (getVersion() >= 2) {
-			contract.setLocalSymbol(readString(inputStream));
-		}
-		return contract;
-	}
+    private Contract consumeContract(final InputStream inputStream) {
+        final Contract contract = new Contract();
+        if (getVersion() >= 6) {
+            contract.setId(readInt(inputStream));
+        }
+        contract.setSymbol(readString(inputStream));
+        contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
+        contract.setExpiry(readString(inputStream));
+        contract.setStrike(readDouble(inputStream));
+        contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
+        if (getVersion() >= 7) {
+            contract.setMultiplier(readString(inputStream));
+            contract.setPrimaryExchange(readString(inputStream));
+        }
+        contract.setCurrencyCode(readString(inputStream));
+        if (getVersion() >= 2) {
+            contract.setLocalSymbol(readString(inputStream));
+        }
+        return contract;
+    }
 
 }

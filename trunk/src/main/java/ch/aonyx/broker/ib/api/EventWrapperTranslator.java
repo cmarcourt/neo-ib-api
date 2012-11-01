@@ -23,16 +23,16 @@ import com.lmax.disruptor.EventTranslator;
  */
 final class EventWrapperTranslator implements EventTranslator<EventWrapper> {
 
-	private final Event event;
+    private final Event event;
 
-	EventWrapperTranslator(final Event event) {
-		this.event = event;
-	}
+    EventWrapperTranslator(final Event event) {
+        this.event = event;
+    }
 
-	@Override
-	public EventWrapper translateTo(final EventWrapper eventWrapper, final long sequence) {
-		eventWrapper.setWrappedEvent(event);
-		return null;
-	}
+    @Override
+    public EventWrapper translateTo(final EventWrapper eventWrapper, final long sequence) {
+        eventWrapper.setWrappedEvent(event);
+        return null;
+    }
 
 }
