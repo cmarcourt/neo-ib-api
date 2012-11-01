@@ -61,178 +61,178 @@ import com.google.common.collect.Maps;
  */
 final class InputStreamConsumerService {
 
-	private final Map<IncomingMessageId, EventCreatingConsumer<? extends Event>> consumerCache = Maps.newHashMap();
-	private final InputStream inputStream;
-	private int serverCurrentVersion;
+    private final Map<IncomingMessageId, EventCreatingConsumer<? extends Event>> consumerCache = Maps.newHashMap();
+    private final InputStream inputStream;
+    private int serverCurrentVersion;
 
-	InputStreamConsumerService(final InputStream inputStream) {
-		this.inputStream = inputStream;
-	}
+    InputStreamConsumerService(final InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
 
-	final void setServerCurrentVersion(final int serverCurrentVersion) {
-		this.serverCurrentVersion = serverCurrentVersion;
-	}
+    void setServerCurrentVersion(final int serverCurrentVersion) {
+        this.serverCurrentVersion = serverCurrentVersion;
+    }
 
-	<E extends Event> EventCreatingConsumer<E> getEventCreatingConsumer(final IncomingMessageId messageId) {
-		return getEventCreatingConsumerFromCache(messageId);
-	}
+    <E extends Event> EventCreatingConsumer<E> getEventCreatingConsumer(final IncomingMessageId messageId) {
+        return getEventCreatingConsumerFromCache(messageId);
+    }
 
-	@SuppressWarnings("unchecked")
-	private <E extends Event> EventCreatingConsumer<E> getEventCreatingConsumerFromCache(
-			final IncomingMessageId messageId) {
-		if (consumerCache.containsKey(messageId)) {
-			return (EventCreatingConsumer<E>) consumerCache.get(messageId);
-		}
-		return newEventCreatingConsumer(messageId);
-	}
+    @SuppressWarnings("unchecked")
+    private <E extends Event> EventCreatingConsumer<E> getEventCreatingConsumerFromCache(
+            final IncomingMessageId messageId) {
+        if (consumerCache.containsKey(messageId)) {
+            return (EventCreatingConsumer<E>) consumerCache.get(messageId);
+        }
+        return newEventCreatingConsumer(messageId);
+    }
 
-	@SuppressWarnings("unchecked")
-	private <E extends Event> EventCreatingConsumer<E> newEventCreatingConsumer(final IncomingMessageId messageId) {
-		EventCreatingConsumer<? extends Event> consumer = null;
-		switch (messageId) {
-		case TICK_PRICE:
-			consumer = new CompositeTickEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+    @SuppressWarnings("unchecked")
+    private <E extends Event> EventCreatingConsumer<E> newEventCreatingConsumer(final IncomingMessageId messageId) {
+        EventCreatingConsumer<? extends Event> consumer = null;
+        switch (messageId) {
+        case TICK_PRICE:
+            consumer = new CompositeTickEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case TICK_SIZE:
-			consumer = new TickSizeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case TICK_SIZE:
+            consumer = new TickSizeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case ORDER_STATE_UPDATE:
-			consumer = new OrderStateUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case ORDER_STATE_UPDATE:
+            consumer = new OrderStateUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case SERVER_MESSAGE:
-			consumer = new ServerMessageEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case SERVER_MESSAGE:
+            consumer = new ServerMessageEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case RETRIEVE_OPEN_ORDER:
-			consumer = new RetrieveOpenOrderEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case RETRIEVE_OPEN_ORDER:
+            consumer = new RetrieveOpenOrderEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case ACCOUNT_UPDATE_VALUE:
-			consumer = new AccountUpdateValueEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case ACCOUNT_UPDATE_VALUE:
+            consumer = new AccountUpdateValueEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case PORTFOLIO_UPDATE:
-			consumer = new PortfolioUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case PORTFOLIO_UPDATE:
+            consumer = new PortfolioUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case ACCOUNT_UPDATE_TIME:
-			consumer = new AccountUpdateTimeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case ACCOUNT_UPDATE_TIME:
+            consumer = new AccountUpdateTimeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case NEXT_VALID_ORDER_ID:
-			consumer = new NextValidOrderIdEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case NEXT_VALID_ORDER_ID:
+            consumer = new NextValidOrderIdEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case CONTRACT_SPECIFICATION:
-			consumer = new ContractSpecificationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case CONTRACT_SPECIFICATION:
+            consumer = new ContractSpecificationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case EXECUTION_REPORT:
-			consumer = new ExecutionReportEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case EXECUTION_REPORT:
+            consumer = new ExecutionReportEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case MARKET_DEPTH_UPDATE:
-			consumer = new MarketDepthUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case MARKET_DEPTH_UPDATE:
+            consumer = new MarketDepthUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case MARKET_DEPTH_LEVEL_TWO_UPDATE:
-			consumer = new MarketDepthLevelTwoUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case MARKET_DEPTH_LEVEL_TWO_UPDATE:
+            consumer = new MarketDepthLevelTwoUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case NEWS_BULLETIN_UPDATE:
-			consumer = new NewsBulletinUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case NEWS_BULLETIN_UPDATE:
+            consumer = new NewsBulletinUpdateEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case MANAGED_ACCOUNT_LIST:
-			consumer = new ManagedAccountListEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case MANAGED_ACCOUNT_LIST:
+            consumer = new ManagedAccountListEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case FINANCIAL_ADVISOR_CONFIGURATION:
-			consumer = new FinancialAdvisorConfigurationEventCreatingInputStreamConsumer(inputStream,
-					serverCurrentVersion);
-			break;
+        case FINANCIAL_ADVISOR_CONFIGURATION:
+            consumer = new FinancialAdvisorConfigurationEventCreatingInputStreamConsumer(inputStream,
+                    serverCurrentVersion);
+            break;
 
-		case HISTORICAL_DATA:
-			consumer = new HistoricalDataEventListEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case HISTORICAL_DATA:
+            consumer = new HistoricalDataEventListEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case BOND_CONTRACT_SPECIFICATION:
-			consumer = new BondContractSpecificationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case BOND_CONTRACT_SPECIFICATION:
+            consumer = new BondContractSpecificationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case MARKET_SCANNER_VALID_PARAMETERS:
-			consumer = new MarketScannerValidParametersEventCreatingInputStreamConsumer(inputStream,
-					serverCurrentVersion);
-			break;
+        case MARKET_SCANNER_VALID_PARAMETERS:
+            consumer = new MarketScannerValidParametersEventCreatingInputStreamConsumer(inputStream,
+                    serverCurrentVersion);
+            break;
 
-		case MARKET_SCANNER_DATA:
-			consumer = new MarketScannerDataEventListEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case MARKET_SCANNER_DATA:
+            consumer = new MarketScannerDataEventListEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case TICK_OPTION_COMPUTATION:
-			consumer = new TickOptionComputationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case TICK_OPTION_COMPUTATION:
+            consumer = new TickOptionComputationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case TICK_GENERIC:
-			consumer = new TickGenericEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case TICK_GENERIC:
+            consumer = new TickGenericEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case TICK_STRING:
-			consumer = new TickStringEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case TICK_STRING:
+            consumer = new TickStringEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case TICK_EXCHANFE_FOR_PHYSICAL:
-			consumer = new TickEfpEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case TICK_EXCHANFE_FOR_PHYSICAL:
+            consumer = new TickEfpEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case SERVER_CURRENT_TIME:
-			consumer = new ServerCurrentTimeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case SERVER_CURRENT_TIME:
+            consumer = new ServerCurrentTimeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case REAL_TIME_BAR:
-			consumer = new RealTimeBarEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case REAL_TIME_BAR:
+            consumer = new RealTimeBarEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case FUNDAMENTAL_DATA:
-			consumer = new FundamentalDataEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case FUNDAMENTAL_DATA:
+            consumer = new FundamentalDataEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case CONTRACT_SPECIFICATION_END:
-			consumer = new ContractSpecificationEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case CONTRACT_SPECIFICATION_END:
+            consumer = new ContractSpecificationEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case RETRIEVE_OPEN_ORDER_END:
-			consumer = new RetrieveOpenOrderEndEventCreatingInputStreamConcumer(inputStream, serverCurrentVersion);
-			break;
+        case RETRIEVE_OPEN_ORDER_END:
+            consumer = new RetrieveOpenOrderEndEventCreatingInputStreamConcumer(inputStream, serverCurrentVersion);
+            break;
 
-		case ACCOUNT_UPDATE_VALUE_END:
-			consumer = new AccountUpdateValueEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case ACCOUNT_UPDATE_VALUE_END:
+            consumer = new AccountUpdateValueEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case EXECUTION_REPORT_END:
-			consumer = new ExecutionReportEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case EXECUTION_REPORT_END:
+            consumer = new ExecutionReportEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case DELTA_NEUTRAL_VALIDATION:
-			consumer = new DeltaNeutralValidationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case DELTA_NEUTRAL_VALIDATION:
+            consumer = new DeltaNeutralValidationEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case TICK_SNAPSHOT_END:
-			consumer = new TickSnapshotEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case TICK_SNAPSHOT_END:
+            consumer = new TickSnapshotEndEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		case MARKET_DATA_TYPE:
-			consumer = new MarketDataTypeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-			break;
+        case MARKET_DATA_TYPE:
+            consumer = new MarketDataTypeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
 
-		default:
-			consumer = new EmptyEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
-		}
-		consumerCache.put(messageId, consumer);
-		return (EventCreatingConsumer<E>) consumer;
-	}
+        default:
+            consumer = new EmptyEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+        }
+        consumerCache.put(messageId, consumer);
+        return (EventCreatingConsumer<E>) consumer;
+    }
 
 }

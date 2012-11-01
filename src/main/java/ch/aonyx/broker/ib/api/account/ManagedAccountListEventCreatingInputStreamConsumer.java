@@ -26,21 +26,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class ManagedAccountListEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<ManagedAccountListEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<ManagedAccountListEvent> {
 
-	public ManagedAccountListEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public ManagedAccountListEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	private ManagedAccountListEvent createEvent(final String commaSeparatedAccountList) {
-		return new ManagedAccountListEvent(commaSeparatedAccountList);
-	}
+    private ManagedAccountListEvent createEvent(final String commaSeparatedAccountList) {
+        return new ManagedAccountListEvent(commaSeparatedAccountList);
+    }
 
-	@Override
-	protected ManagedAccountListEvent consumeVersionLess(final InputStream inputStream) {
-		final String commaSeparatedAccountList = readString(inputStream);
-		return createEvent(commaSeparatedAccountList);
-	}
+    @Override
+    protected ManagedAccountListEvent consumeVersionLess(final InputStream inputStream) {
+        final String commaSeparatedAccountList = readString(inputStream);
+        return createEvent(commaSeparatedAccountList);
+    }
 
 }

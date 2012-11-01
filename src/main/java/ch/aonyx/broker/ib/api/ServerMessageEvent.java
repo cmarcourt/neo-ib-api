@@ -28,42 +28,42 @@ import com.google.common.collect.Lists;
  */
 public final class ServerMessageEvent extends AbstractEventSupport {
 
-	private final int code;
-	private final String message;
-	private List<Object> parameters = Lists.newArrayList();
+    private final int code;
+    private final String message;
+    private List<Object> parameters = Lists.newArrayList();
 
-	public ServerMessageEvent(final int code, final String message, final Object... parameters) {
-		this(null, code, message);
-		if ((parameters != null) && (parameters.length > 0)) {
-			this.parameters = Lists.newArrayList(parameters);
-		}
-	}
+    public ServerMessageEvent(final int code, final String message, final Object... parameters) {
+        this(null, code, message);
+        if ((parameters != null) && (parameters.length > 0)) {
+            this.parameters = Lists.newArrayList(parameters);
+        }
+    }
 
-	public ServerMessageEvent(final Id requestId, final int code, final String message) {
-		super(requestId);
-		this.code = code;
-		this.message = message;
-	}
+    public ServerMessageEvent(final Id requestId, final int code, final String message) {
+        super(requestId);
+        this.code = code;
+        this.message = message;
+    }
 
-	public final int getCode() {
-		return code;
-	}
+    public int getCode() {
+        return code;
+    }
 
-	public final String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public final List<Object> getParameters() {
-		return parameters;
-	}
+    public List<Object> getParameters() {
+        return parameters;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return ServerMessageEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return ServerMessageEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

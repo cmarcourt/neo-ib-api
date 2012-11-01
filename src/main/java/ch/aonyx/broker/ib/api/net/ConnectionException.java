@@ -24,15 +24,15 @@ import ch.aonyx.broker.ib.api.NeoIbApiClientException;
  */
 public class ConnectionException extends NeoIbApiClientException {
 
-	private static final long serialVersionUID = -6690414065094261327L;
+    private static final long serialVersionUID = -6690414065094261327L;
 
-	public ConnectionException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Throwable cause) {
-		super(clientMessageCode, detailedMessage, cause);
-	}
+    public ConnectionException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Throwable cause) {
+        super(clientMessageCode, detailedMessage, cause);
+    }
 
-	public ConnectionException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
-		super(clientMessageCode, detailedMessage);
-	}
+    public ConnectionException(final ClientMessageCode clientMessageCode, final String detailedMessage) {
+        super(clientMessageCode, detailedMessage);
+    }
 
 }

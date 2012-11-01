@@ -28,32 +28,32 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class TickEfpEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<TickEfpEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<TickEfpEvent> {
 
-	public TickEfpEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public TickEfpEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected TickEfpEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final int tickType = readInt(inputStream);
-		final double basisPoints = readDouble(inputStream);
-		final String formattedBasisPoints = readString(inputStream);
-		final double impliedFuturePrice = readDouble(inputStream);
-		final int holdDays = readInt(inputStream);
-		final String futureExpiry = readString(inputStream);
-		final double dividendImpact = readDouble(inputStream);
-		final double dividendToExpiry = readDouble(inputStream);
-		return createEvent(requestId, tickType, basisPoints, formattedBasisPoints, impliedFuturePrice, holdDays,
-				futureExpiry, dividendImpact, dividendToExpiry);
-	}
+    @Override
+    protected TickEfpEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final int tickType = readInt(inputStream);
+        final double basisPoints = readDouble(inputStream);
+        final String formattedBasisPoints = readString(inputStream);
+        final double impliedFuturePrice = readDouble(inputStream);
+        final int holdDays = readInt(inputStream);
+        final String futureExpiry = readString(inputStream);
+        final double dividendImpact = readDouble(inputStream);
+        final double dividendToExpiry = readDouble(inputStream);
+        return createEvent(requestId, tickType, basisPoints, formattedBasisPoints, impliedFuturePrice, holdDays,
+                futureExpiry, dividendImpact, dividendToExpiry);
+    }
 
-	private TickEfpEvent createEvent(final int requestId, final int tickType, final double basisPoints,
-			final String formattedBasisPoints, final double impliedFuturePrice, final int holdDays,
-			final String futureExpiry, final double dividendImpact, final double dividendToExpiry) {
-		return new TickEfpEvent(toRequestId(requestId), TickType.fromValue(tickType), basisPoints,
-				formattedBasisPoints, impliedFuturePrice, holdDays, futureExpiry, dividendImpact, dividendToExpiry);
-	}
+    private TickEfpEvent createEvent(final int requestId, final int tickType, final double basisPoints,
+            final String formattedBasisPoints, final double impliedFuturePrice, final int holdDays,
+            final String futureExpiry, final double dividendImpact, final double dividendToExpiry) {
+        return new TickEfpEvent(toRequestId(requestId), TickType.fromValue(tickType), basisPoints,
+                formattedBasisPoints, impliedFuturePrice, holdDays, futureExpiry, dividendImpact, dividendToExpiry);
+    }
 
 }

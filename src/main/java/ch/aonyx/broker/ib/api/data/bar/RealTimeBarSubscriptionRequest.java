@@ -34,97 +34,97 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class RealTimeBarSubscriptionRequest extends AbstractRequestSupport implements SubscriptionRequest {
 
-	private static final int VERSION = 1;
-	private final Contract contract;
-	private final int size;
-	private final RealTimeBarDataType realTimeBarDataType;
-	private final boolean useRegularTradingHours;
+    private static final int VERSION = 1;
+    private final Contract contract;
+    private final int size;
+    private final RealTimeBarDataType realTimeBarDataType;
+    private final boolean useRegularTradingHours;
 
-	public RealTimeBarSubscriptionRequest(final Contract contract, final int size,
-			final RealTimeBarDataType realTimeBarDataType, final boolean regularTradingHours) {
-		this(StringIdUtils.uniqueIdFromContract(contract), contract, size, realTimeBarDataType, regularTradingHours);
-	}
+    public RealTimeBarSubscriptionRequest(final Contract contract, final int size,
+            final RealTimeBarDataType realTimeBarDataType, final boolean regularTradingHours) {
+        this(StringIdUtils.uniqueIdFromContract(contract), contract, size, realTimeBarDataType, regularTradingHours);
+    }
 
-	public RealTimeBarSubscriptionRequest(final String id, final Contract contract, final int size,
-			final RealTimeBarDataType realTimeBarDataType, final boolean regularTradingHours) {
-		super(id);
-		this.contract = contract;
-		this.size = size;
-		this.realTimeBarDataType = realTimeBarDataType;
-		useRegularTradingHours = regularTradingHours;
-	}
+    public RealTimeBarSubscriptionRequest(final String id, final Contract contract, final int size,
+            final RealTimeBarDataType realTimeBarDataType, final boolean regularTradingHours) {
+        super(id);
+        this.contract = contract;
+        this.size = size;
+        this.realTimeBarDataType = realTimeBarDataType;
+        useRegularTradingHours = regularTradingHours;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.REAL_TIME_BAR_SUBSCRIPTION_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(toInternalId(getId()));
-		appendContract(builder);
-		builder.append(size);
-		builder.append(realTimeBarDataType.getLabel());
-		builder.append(useRegularTradingHours);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.REAL_TIME_BAR_SUBSCRIPTION_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(toInternalId(getId()));
+        appendContract(builder);
+        builder.append(size);
+        builder.append(realTimeBarDataType.getLabel());
+        builder.append(useRegularTradingHours);
+        return builder;
+    }
 
-	private void appendContract(final RequestBuilder builder) {
-		builder.append(contract.getSymbol());
-		builder.append(contract.getSecurityType().getAbbreviation());
-		builder.append(contract.getExpiry());
-		builder.append(contract.getStrike());
-		builder.append(contract.getOptionRight().getName());
-		builder.append(contract.getMultiplier());
-		builder.append(contract.getExchange());
-		builder.append(contract.getPrimaryExchange());
-		builder.append(contract.getCurrencyCode());
-		builder.append(contract.getLocalSymbol());
-	}
+    private void appendContract(final RequestBuilder builder) {
+        builder.append(contract.getSymbol());
+        builder.append(contract.getSecurityType().getAbbreviation());
+        builder.append(contract.getExpiry());
+        builder.append(contract.getStrike());
+        builder.append(contract.getOptionRight().getName());
+        builder.append(contract.getMultiplier());
+        builder.append(contract.getExchange());
+        builder.append(contract.getPrimaryExchange());
+        builder.append(contract.getCurrencyCode());
+        builder.append(contract.getLocalSymbol());
+    }
 
-	public final Contract getContract() {
-		return contract;
-	}
+    public Contract getContract() {
+        return contract;
+    }
 
-	public final int getSize() {
-		return size;
-	}
+    public int getSize() {
+        return size;
+    }
 
-	public final RealTimeBarDataType getRealTimeBarDataType() {
-		return realTimeBarDataType;
-	}
+    public RealTimeBarDataType getRealTimeBarDataType() {
+        return realTimeBarDataType;
+    }
 
-	public final boolean useRegularTradingHours() {
-		return useRegularTradingHours;
-	}
+    public boolean useRegularTradingHours() {
+        return useRegularTradingHours;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(contract).append(realTimeBarDataType).append(useRegularTradingHours)
-				.append(size).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(contract).append(realTimeBarDataType).append(useRegularTradingHours)
+                .append(size).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final RealTimeBarSubscriptionRequest rhs = (RealTimeBarSubscriptionRequest) obj;
-		return new EqualsBuilder().append(contract, rhs.contract).append(realTimeBarDataType, rhs.realTimeBarDataType)
-				.append(useRegularTradingHours, rhs.useRegularTradingHours).append(size, rhs.size).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final RealTimeBarSubscriptionRequest rhs = (RealTimeBarSubscriptionRequest) obj;
+        return new EqualsBuilder().append(contract, rhs.contract).append(realTimeBarDataType, rhs.realTimeBarDataType)
+                .append(useRegularTradingHours, rhs.useRegularTradingHours).append(size, rhs.size).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

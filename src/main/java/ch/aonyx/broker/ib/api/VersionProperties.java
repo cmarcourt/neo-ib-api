@@ -27,30 +27,30 @@ import org.slf4j.LoggerFactory;
  */
 final class VersionProperties {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(VersionProperties.class);
-	private static final String VERSIONS_FILE_NAME = "versions.properties";
-	private static final String VERSION_CLIENT_CURRENT = "version.client.current";
-	private static final String VERSION_SERVER_MINIMUM_REQUIRED = "version.server.minimum-required";
-	private final Properties properties;
+    private static final Logger LOGGER = LoggerFactory.getLogger(VersionProperties.class);
+    private static final String VERSIONS_FILE_NAME = "versions.properties";
+    private static final String VERSION_CLIENT_CURRENT = "version.client.current";
+    private static final String VERSION_SERVER_MINIMUM_REQUIRED = "version.server.minimum-required";
+    private final Properties properties;
 
-	VersionProperties() {
-		properties = new Properties();
-		readPropertiesFile();
-	}
+    VersionProperties() {
+        properties = new Properties();
+        readPropertiesFile();
+    }
 
-	private void readPropertiesFile() {
-		try {
-			properties.load(getClass().getResourceAsStream(VERSIONS_FILE_NAME));
-		} catch (final IOException e) {
-			LOGGER.error("", e);
-		}
-	}
+    private void readPropertiesFile() {
+        try {
+            properties.load(getClass().getResourceAsStream(VERSIONS_FILE_NAME));
+        } catch (final IOException e) {
+            LOGGER.error("", e);
+        }
+    }
 
-	int getClientCurrentVersion() {
-		return Integer.valueOf(properties.getProperty(VERSION_CLIENT_CURRENT));
-	}
+    int getClientCurrentVersion() {
+        return Integer.valueOf(properties.getProperty(VERSION_CLIENT_CURRENT));
+    }
 
-	int getServerMinimumRequiredVersion() {
-		return Integer.valueOf(properties.getProperty(VERSION_SERVER_MINIMUM_REQUIRED));
-	}
+    int getServerMinimumRequiredVersion() {
+        return Integer.valueOf(properties.getProperty(VERSION_SERVER_MINIMUM_REQUIRED));
+    }
 }

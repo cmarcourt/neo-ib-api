@@ -32,31 +32,31 @@ import ch.aonyx.broker.ib.api.util.InputStreamUtils;
  */
 final class ServerCurrentVersionSynchronousRequest {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ServerCurrentVersionSynchronousRequest.class);
-	private final int clientVersion;
-	private final InputStream inputStream;
-	private final OutputStream outputStream;
-	private ByteArrayRequestBuilder builder;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServerCurrentVersionSynchronousRequest.class);
+    private final int clientVersion;
+    private final InputStream inputStream;
+    private final OutputStream outputStream;
+    private ByteArrayRequestBuilder builder;
 
-	ServerCurrentVersionSynchronousRequest(final int clientVersion, final OutputStream outputStream,
-			final InputStream inputStream) {
-		this.clientVersion = clientVersion;
-		this.outputStream = outputStream;
-		this.inputStream = inputStream;
-		createByteArrayRequestBuilder();
-	}
+    ServerCurrentVersionSynchronousRequest(final int clientVersion, final OutputStream outputStream,
+            final InputStream inputStream) {
+        this.clientVersion = clientVersion;
+        this.outputStream = outputStream;
+        this.inputStream = inputStream;
+        createByteArrayRequestBuilder();
+    }
 
-	private void createByteArrayRequestBuilder() {
-		builder = new ByteArrayRequestBuilder();
-		builder.append(clientVersion);
-	}
+    private void createByteArrayRequestBuilder() {
+        builder = new ByteArrayRequestBuilder();
+        builder.append(clientVersion);
+    }
 
-	int getResponse() {
-		try {
-			IOUtils.write(builder.toBytes(), outputStream);
-		} catch (final IOException e) {
-			LOGGER.error("", e);
-		}
-		return InputStreamUtils.readInt(inputStream);
-	}
+    int getResponse() {
+        try {
+            IOUtils.write(builder.toBytes(), outputStream);
+        } catch (final IOException e) {
+            LOGGER.error("", e);
+        }
+        return InputStreamUtils.readInt(inputStream);
+    }
 }

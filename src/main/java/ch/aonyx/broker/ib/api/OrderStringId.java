@@ -21,8 +21,8 @@ package ch.aonyx.broker.ib.api;
  */
 final class OrderStringId extends StringId implements OrderId {
 
-	OrderStringId(final String id) {
-		super(id);
-	}
+    OrderStringId(final String id) {
+        super(id);
+    }
 
 }

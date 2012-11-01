@@ -27,35 +27,35 @@ import com.google.common.collect.Maps;
  */
 public enum BarSizeUnit {
 
-	UNKNOWN("unknown"), EMPTY(""), SECOND("sec"), SECONDS("secs"), MINUTE("min"), MINUTES("mins"), HOUR("hour"), DAY(
-			"day");
+    UNKNOWN("unknown"), EMPTY(""), SECOND("sec"), SECONDS("secs"), MINUTE("min"), MINUTES("mins"), HOUR("hour"), DAY(
+            "day");
 
-	private final String abbreviation;
-	private static final Map<String, BarSizeUnit> MAP;
+    private final String abbreviation;
+    private static final Map<String, BarSizeUnit> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final BarSizeUnit barSizeUnit : values()) {
-			MAP.put(barSizeUnit.getAbbreviation().toUpperCase(), barSizeUnit);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final BarSizeUnit barSizeUnit : values()) {
+            MAP.put(barSizeUnit.getAbbreviation().toUpperCase(), barSizeUnit);
+        }
+    }
 
-	private BarSizeUnit(final String abbreviation) {
-		this.abbreviation = abbreviation;
-	}
+    private BarSizeUnit(final String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
 
-	public final String getAbbreviation() {
-		return abbreviation;
-	}
+    public final String getAbbreviation() {
+        return abbreviation;
+    }
 
-	public static final BarSizeUnit fromAbbreviation(final String abbreviation) {
-		if (StringUtils.isBlank(abbreviation)) {
-			return EMPTY;
-		}
-		final String abbreviationUpperCase = abbreviation.toUpperCase();
-		if (MAP.containsKey(abbreviationUpperCase)) {
-			return MAP.get(abbreviationUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final BarSizeUnit fromAbbreviation(final String abbreviation) {
+        if (StringUtils.isBlank(abbreviation)) {
+            return EMPTY;
+        }
+        final String abbreviationUpperCase = abbreviation.toUpperCase();
+        if (MAP.containsKey(abbreviationUpperCase)) {
+            return MAP.get(abbreviationUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

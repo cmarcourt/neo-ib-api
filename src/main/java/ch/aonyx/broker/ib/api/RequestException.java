@@ -21,26 +21,26 @@ package ch.aonyx.broker.ib.api;
  */
 public class RequestException extends NeoIbApiClientException {
 
-	private static final long serialVersionUID = -1744532346747011511L;
-	private final Request request;
+    private static final long serialVersionUID = -1744532346747011511L;
+    private final Request request;
 
-	public RequestException(final RequestException exception) {
-		this(exception.getClientMessageCode(), exception.getDetailedMessage(), exception.getRequest(), exception
-				.getCause());
-	}
+    public RequestException(final RequestException exception) {
+        this(exception.getClientMessageCode(), exception.getDetailedMessage(), exception.getRequest(), exception
+                .getCause());
+    }
 
-	public RequestException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Request request, final Throwable cause) {
-		super(clientMessageCode, detailedMessage, cause);
-		this.request = request;
-	}
+    public RequestException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Request request, final Throwable cause) {
+        super(clientMessageCode, detailedMessage, cause);
+        this.request = request;
+    }
 
-	public RequestException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Request request) {
-		this(clientMessageCode, detailedMessage, request, null);
-	}
+    public RequestException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Request request) {
+        this(clientMessageCode, detailedMessage, request, null);
+    }
 
-	public final Request getRequest() {
-		return request;
-	}
+    public final Request getRequest() {
+        return request;
+    }
 }

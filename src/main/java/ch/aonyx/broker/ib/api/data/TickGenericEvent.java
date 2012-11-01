@@ -26,24 +26,24 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class TickGenericEvent extends AbstractTickEvent {
 
-	private final double value;
+    private final double value;
 
-	public TickGenericEvent(final Id requestId, final TickType type, final double value) {
-		super(requestId, type);
-		this.value = value;
-	}
+    public TickGenericEvent(final Id requestId, final TickType type, final double value) {
+        super(requestId, type);
+        this.value = value;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return TickGenericEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return TickGenericEventListener.class;
+    }
 
-	public final double getValue() {
-		return value;
-	}
+    public double getValue() {
+        return value;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

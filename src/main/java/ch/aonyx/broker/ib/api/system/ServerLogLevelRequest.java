@@ -33,61 +33,61 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class ServerLogLevelRequest extends AbstractRequestSupport implements SimpleRequest {
 
-	private static final int VERSION = 1;
-	private final LogLevel logLevel;
+    private static final int VERSION = 1;
+    private final LogLevel logLevel;
 
-	/**
-	 * Set {@link LogLevel#INFO} as the log level.
-	 */
-	public ServerLogLevelRequest() {
-		this(LogLevel.INFO);
-	}
+    /**
+     * Set {@link LogLevel#INFO} as the log level.
+     */
+    public ServerLogLevelRequest() {
+        this(LogLevel.INFO);
+    }
 
-	public ServerLogLevelRequest(final LogLevel logLevel) {
-		super(StringIdUtils.uniqueRandomId());
-		this.logLevel = logLevel;
-	}
+    public ServerLogLevelRequest(final LogLevel logLevel) {
+        super(StringIdUtils.uniqueRandomId());
+        this.logLevel = logLevel;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.SERVER_LOG_LEVEL_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(logLevel.getValue());
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.SERVER_LOG_LEVEL_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(logLevel.getValue());
+        return builder;
+    }
 
-	public final LogLevel getLogLevel() {
-		return logLevel;
-	}
+    public LogLevel getLogLevel() {
+        return logLevel;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(logLevel).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(logLevel).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final ServerLogLevelRequest rhs = (ServerLogLevelRequest) obj;
-		return new EqualsBuilder().append(logLevel, rhs.logLevel).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final ServerLogLevelRequest rhs = (ServerLogLevelRequest) obj;
+        return new EqualsBuilder().append(logLevel, rhs.logLevel).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

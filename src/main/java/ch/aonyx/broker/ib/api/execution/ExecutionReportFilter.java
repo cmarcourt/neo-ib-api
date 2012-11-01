@@ -33,104 +33,104 @@ import ch.aonyx.broker.ib.api.order.OrderAction;
  */
 public final class ExecutionReportFilter {
 
-	private static final String EMPTY = "";
-	private String accountNumber = EMPTY;
-	private int clientId;
-	private String exchange = EMPTY;
-	private SecurityType securityType = SecurityType.EMPTY;
-	private OrderAction orderAction = OrderAction.EMPTY;
-	private String symbol = EMPTY;
-	private String time = EMPTY;
+    private static final String EMPTY = "";
+    private String accountNumber = EMPTY;
+    private int clientId;
+    private String exchange = EMPTY;
+    private SecurityType securityType = SecurityType.EMPTY;
+    private OrderAction orderAction = OrderAction.EMPTY;
+    private String symbol = EMPTY;
+    private String time = EMPTY;
 
-	public final String getAccountNumber() {
-		return accountNumber;
-	}
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
-	public final void setAccountNumber(final String accountCode) {
-		accountNumber = accountCode;
-	}
+    public void setAccountNumber(final String accountCode) {
+        accountNumber = accountCode;
+    }
 
-	public final int getClientId() {
-		return clientId;
-	}
+    public int getClientId() {
+        return clientId;
+    }
 
-	public final void setClientId(final int clientId) {
-		this.clientId = clientId;
-	}
+    public void setClientId(final int clientId) {
+        this.clientId = clientId;
+    }
 
-	public final String getExchange() {
-		return exchange;
-	}
+    public String getExchange() {
+        return exchange;
+    }
 
-	public final void setExchange(final String exchange) {
-		this.exchange = exchange;
-	}
+    public void setExchange(final String exchange) {
+        this.exchange = exchange;
+    }
 
-	public final SecurityType getSecurityType() {
-		return securityType;
-	}
+    public SecurityType getSecurityType() {
+        return securityType;
+    }
 
-	public final void setSecurityType(final SecurityType securityType) {
-		this.securityType = securityType;
-	}
+    public void setSecurityType(final SecurityType securityType) {
+        this.securityType = securityType;
+    }
 
-	public final OrderAction getOrderAction() {
-		return orderAction;
-	}
+    public OrderAction getOrderAction() {
+        return orderAction;
+    }
 
-	public final void setOrderAction(final OrderAction orderAction) {
-		this.orderAction = orderAction;
-	}
+    public void setOrderAction(final OrderAction orderAction) {
+        this.orderAction = orderAction;
+    }
 
-	public final String getSymbol() {
-		return symbol;
-	}
+    public String getSymbol() {
+        return symbol;
+    }
 
-	public final void setSymbol(final String symbol) {
-		this.symbol = symbol;
-	}
+    public void setSymbol(final String symbol) {
+        this.symbol = symbol;
+    }
 
-	public final String getTime() {
-		return time;
-	}
+    public String getTime() {
+        return time;
+    }
 
-	public final DateTime getDateTime() {
-		try {
-			return new DateTime(DateUtils.parseDate(time, "yyyyMMdd-HH:mm:ss"));
-		} catch (final ParseException e) {
-		}
-		return null;
-	}
+    public DateTime getDateTime() {
+        try {
+            return new DateTime(DateUtils.parseDate(time, "yyyyMMdd-HH:mm:ss"));
+        } catch (final ParseException e) {
+        }
+        return null;
+    }
 
-	public final void setTime(final String time) {
-		this.time = time;
-	}
+    public void setTime(final String time) {
+        this.time = time;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(accountNumber).append(clientId).append(exchange).append(securityType)
-				.append(orderAction).append(symbol).append(time).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(accountNumber).append(clientId).append(exchange).append(securityType)
+                .append(orderAction).append(symbol).append(time).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final ExecutionReportFilter rhs = (ExecutionReportFilter) obj;
-		return new EqualsBuilder().append(accountNumber, rhs.accountNumber).append(clientId, rhs.clientId)
-				.append(exchange, rhs.exchange).append(securityType, rhs.securityType)
-				.append(orderAction, rhs.orderAction).append(symbol, rhs.symbol).append(time, rhs.time).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final ExecutionReportFilter rhs = (ExecutionReportFilter) obj;
+        return new EqualsBuilder().append(accountNumber, rhs.accountNumber).append(clientId, rhs.clientId)
+                .append(exchange, rhs.exchange).append(securityType, rhs.securityType)
+                .append(orderAction, rhs.orderAction).append(symbol, rhs.symbol).append(time, rhs.time).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

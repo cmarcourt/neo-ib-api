@@ -24,9 +24,9 @@ import java.util.Set;
  */
 public interface EventListenerService {
 
-	<E extends Event> List<EventListener<E>> getEventListeners(Class<?> eventListenerType);
+    <E extends Event> List<EventListener<E>> getEventListeners(Class<?> eventListenerType);
 
-	<E extends Event> boolean containsListener(EventListener<E> listener);
+    <E extends Event> boolean containsListener(EventListener<E> listener);
 
-	Set<Class<?>> getKeys();
+    Set<Class<?>> getKeys();
 }

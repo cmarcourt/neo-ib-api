@@ -28,56 +28,56 @@ import ch.aonyx.broker.ib.api.contract.ContractSpecification;
  */
 public final class MarketScannerDataEvent extends AbstractEventSupport {
 
-	private final int ranking;
-	private final ContractSpecification contractSpecification;
-	private final String distance;
-	private final String benchmark;
-	private final String projection;
-	private final String comboLegDescription;
+    private final int ranking;
+    private final ContractSpecification contractSpecification;
+    private final String distance;
+    private final String benchmark;
+    private final String projection;
+    private final String comboLegDescription;
 
-	public MarketScannerDataEvent(final Id requestId, final int ranking,
-			final ContractSpecification contractSpecification, final String distance, final String benchmark,
-			final String projection, final String comboLegDescription) {
-		super(requestId);
-		this.ranking = ranking;
-		this.contractSpecification = contractSpecification;
-		this.distance = distance;
-		this.benchmark = benchmark;
-		this.projection = projection;
-		this.comboLegDescription = comboLegDescription;
-	}
+    public MarketScannerDataEvent(final Id requestId, final int ranking,
+            final ContractSpecification contractSpecification, final String distance, final String benchmark,
+            final String projection, final String comboLegDescription) {
+        super(requestId);
+        this.ranking = ranking;
+        this.contractSpecification = contractSpecification;
+        this.distance = distance;
+        this.benchmark = benchmark;
+        this.projection = projection;
+        this.comboLegDescription = comboLegDescription;
+    }
 
-	public final int getRanking() {
-		return ranking;
-	}
+    public int getRanking() {
+        return ranking;
+    }
 
-	public final ContractSpecification getContractSpecification() {
-		return contractSpecification;
-	}
+    public ContractSpecification getContractSpecification() {
+        return contractSpecification;
+    }
 
-	public final String getDistance() {
-		return distance;
-	}
+    public String getDistance() {
+        return distance;
+    }
 
-	public final String getBenchmark() {
-		return benchmark;
-	}
+    public String getBenchmark() {
+        return benchmark;
+    }
 
-	public final String getProjection() {
-		return projection;
-	}
+    public String getProjection() {
+        return projection;
+    }
 
-	public final String getComboLegDescription() {
-		return comboLegDescription;
-	}
+    public String getComboLegDescription() {
+        return comboLegDescription;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return MarketScannerDataEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return MarketScannerDataEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

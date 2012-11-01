@@ -21,23 +21,23 @@ package ch.aonyx.broker.ib.api;
  */
 public abstract class AbstractRequestSupport extends AbstractRequest {
 
-	protected AbstractRequestSupport(final String id) {
-		this(new RequestStringId(id));
-	}
+    protected AbstractRequestSupport(final String id) {
+        this(new RequestStringId(id));
+    }
 
-	protected AbstractRequestSupport(final RequestId id) {
-		super(id);
-	}
+    protected AbstractRequestSupport(final RequestId id) {
+        super(id);
+    }
 
-	@Override
-	public final RequestId getId() {
-		return (RequestId) super.getId();
-	}
+    @Override
+    public final RequestId getId() {
+        return (RequestId) super.getId();
+    }
 
-	protected int toInternalId(final RequestId id) {
-		if (id != null) {
-			return RequestIdInternalIdBinding.getInstance().getInternalId(id);
-		}
-		return 0;
-	}
+    protected int toInternalId(final RequestId id) {
+        if (id != null) {
+            return RequestIdInternalIdBinding.getInstance().getInternalId(id);
+        }
+        return 0;
+    }
 }

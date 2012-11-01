@@ -21,5 +21,5 @@ package ch.aonyx.broker.ib.api;
  */
 interface EventNotifier {
 
-	void notify(Event event);
+    void notify(Event event);
 }

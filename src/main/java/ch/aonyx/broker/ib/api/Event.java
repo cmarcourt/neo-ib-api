@@ -21,26 +21,24 @@ package ch.aonyx.broker.ib.api;
  */
 public interface Event {
 
-	Class<?> getAssignableListenerType();
+    Class<?> getAssignableListenerType();
 
-	long getCreationTimestamp();
+    long getCreationTimestamp();
 
-	/**
-	 * This method is for internal use only. Any call during event creation
-	 * would have no effect.
-	 * 
-	 * @param sequence
-	 */
-	void setSequence(long sequence);
+    /**
+     * This method is for internal use only. Any call during event creation would have no effect.
+     * 
+     * @param sequence
+     */
+    void setSequence(long sequence);
 
-	/**
-	 * The ordered sequence which the event was created with.
-	 */
-	long getSequence();
+    /**
+     * The ordered sequence which the event was created with.
+     */
+    long getSequence();
 
-	/**
-	 * {@link Id} would be one of the following sub type : {@link RequestId} or
-	 * {@link OrderId}.
-	 */
-	Id getId();
+    /**
+     * {@link Id} would be one of the following sub type : {@link RequestId} or {@link OrderId}.
+     */
+    Id getId();
 }

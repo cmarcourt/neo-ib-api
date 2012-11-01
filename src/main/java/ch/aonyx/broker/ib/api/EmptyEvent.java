@@ -21,9 +21,9 @@ package ch.aonyx.broker.ib.api;
  */
 public final class EmptyEvent extends AbstractEventSupport {
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return EmptyEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return EmptyEventListener.class;
+    }
 
 }

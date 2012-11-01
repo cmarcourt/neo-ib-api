@@ -23,18 +23,18 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 abstract class AbstractEventPublisher implements EventPublisher {
 
-	private final EventNotifier eventNotifier;
-	private static final AtomicLong SEQUENCE = new AtomicLong(1);
+    private final EventNotifier eventNotifier;
+    private static final AtomicLong SEQUENCE = new AtomicLong(1);
 
-	protected AbstractEventPublisher(final EventNotifier eventNotifier) {
-		this.eventNotifier = eventNotifier;
-	}
+    protected AbstractEventPublisher(final EventNotifier eventNotifier) {
+        this.eventNotifier = eventNotifier;
+    }
 
-	final AtomicLong getSequence() {
-		return SEQUENCE;
-	}
+    final AtomicLong getSequence() {
+        return SEQUENCE;
+    }
 
-	final EventNotifier getEventNotifier() {
-		return eventNotifier;
-	}
+    final EventNotifier getEventNotifier() {
+        return eventNotifier;
+    }
 }

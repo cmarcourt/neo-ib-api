@@ -23,7 +23,7 @@ import ch.aonyx.broker.ib.api.SubscriptionRequest;
  */
 public final class AccountUpdateSubscriptionRequest extends AbstractAccountUpdateRequest implements SubscriptionRequest {
 
-	public AccountUpdateSubscriptionRequest(final String accountCode) {
-		super(accountCode, true);
-	}
+    public AccountUpdateSubscriptionRequest(final String accountCode) {
+        super(accountCode, true);
+    }
 }

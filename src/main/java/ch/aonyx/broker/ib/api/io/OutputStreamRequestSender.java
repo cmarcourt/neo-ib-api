@@ -30,18 +30,18 @@ import ch.aonyx.broker.ib.api.RequestException;
  */
 public final class OutputStreamRequestSender implements RequestSender {
 
-	private final OutputStream outputStream;
+    private final OutputStream outputStream;
 
-	public OutputStreamRequestSender(final OutputStream outputStream) {
-		this.outputStream = outputStream;
-	}
+    public OutputStreamRequestSender(final OutputStream outputStream) {
+        this.outputStream = outputStream;
+    }
 
-	@Override
-	public void send(final Request request) throws RequestException {
-		try {
-			IOUtils.write(request.getBytes(), outputStream);
-		} catch (final IOException e) {
-			throw new PublisherException(ClientMessageCode.CANT_PUBLISH_REQUEST, e.getMessage(), request, e);
-		}
-	}
+    @Override
+    public void send(final Request request) throws RequestException {
+        try {
+            IOUtils.write(request.getBytes(), outputStream);
+        } catch (final IOException e) {
+            throw new PublisherException(ClientMessageCode.CANT_PUBLISH_REQUEST, e.getMessage(), request, e);
+        }
+    }
 }

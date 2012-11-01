@@ -21,8 +21,8 @@ package ch.aonyx.broker.ib.api;
  */
 final class ConcurrentlyEventHandler extends AbstractEventHandler {
 
-	ConcurrentlyEventHandler(final EventNotifier eventNotifier) {
-		super(new ConcurrentlyEventPublisher(eventNotifier));
-	}
+    ConcurrentlyEventHandler(final EventNotifier eventNotifier) {
+        super(new ConcurrentlyEventPublisher(eventNotifier));
+    }
 
 }

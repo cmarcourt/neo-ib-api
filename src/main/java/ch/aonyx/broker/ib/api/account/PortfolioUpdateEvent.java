@@ -27,67 +27,67 @@ import ch.aonyx.broker.ib.api.contract.Contract;
  */
 public final class PortfolioUpdateEvent extends AbstractEventSupport {
 
-	private final Contract contract;
-	private final int marketPosition;
-	private final double marketPrice;
-	private final double marketValue;
-	private final double averageCost;
-	private final double unrealizedProfitAndLoss;
-	private final double realizedProfitAndLoss;
-	private final String accountName;
+    private final Contract contract;
+    private final int marketPosition;
+    private final double marketPrice;
+    private final double marketValue;
+    private final double averageCost;
+    private final double unrealizedProfitAndLoss;
+    private final double realizedProfitAndLoss;
+    private final String accountName;
 
-	public PortfolioUpdateEvent(final Contract contract, final int marketPosition, final double marketPrice,
-			final double marketValue, final double averageCost, final double unrealizedProfitAndLoss,
-			final double realizedProfitAndLoss, final String accountName) {
-		this.contract = contract;
-		this.marketPosition = marketPosition;
-		this.marketPrice = marketPrice;
-		this.marketValue = marketValue;
-		this.averageCost = averageCost;
-		this.unrealizedProfitAndLoss = unrealizedProfitAndLoss;
-		this.realizedProfitAndLoss = realizedProfitAndLoss;
-		this.accountName = accountName;
-	}
+    public PortfolioUpdateEvent(final Contract contract, final int marketPosition, final double marketPrice,
+            final double marketValue, final double averageCost, final double unrealizedProfitAndLoss,
+            final double realizedProfitAndLoss, final String accountName) {
+        this.contract = contract;
+        this.marketPosition = marketPosition;
+        this.marketPrice = marketPrice;
+        this.marketValue = marketValue;
+        this.averageCost = averageCost;
+        this.unrealizedProfitAndLoss = unrealizedProfitAndLoss;
+        this.realizedProfitAndLoss = realizedProfitAndLoss;
+        this.accountName = accountName;
+    }
 
-	public final Contract getContract() {
-		return contract;
-	}
+    public Contract getContract() {
+        return contract;
+    }
 
-	public final int getMarketPosition() {
-		return marketPosition;
-	}
+    public int getMarketPosition() {
+        return marketPosition;
+    }
 
-	public final double getMarketPrice() {
-		return marketPrice;
-	}
+    public double getMarketPrice() {
+        return marketPrice;
+    }
 
-	public final double getMarketValue() {
-		return marketValue;
-	}
+    public double getMarketValue() {
+        return marketValue;
+    }
 
-	public final double getAverageCost() {
-		return averageCost;
-	}
+    public double getAverageCost() {
+        return averageCost;
+    }
 
-	public final double getUnrealizedProfitAndLoss() {
-		return unrealizedProfitAndLoss;
-	}
+    public double getUnrealizedProfitAndLoss() {
+        return unrealizedProfitAndLoss;
+    }
 
-	public final double getRealizedProfitAndLoss() {
-		return realizedProfitAndLoss;
-	}
+    public double getRealizedProfitAndLoss() {
+        return realizedProfitAndLoss;
+    }
 
-	public final String getAccountName() {
-		return accountName;
-	}
+    public String getAccountName() {
+        return accountName;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return PortfolioUpdateEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return PortfolioUpdateEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

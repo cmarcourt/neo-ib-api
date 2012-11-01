@@ -24,19 +24,19 @@ import org.slf4j.LoggerFactory;
  */
 final class EventNotifierWrapperTask implements Runnable {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(EventNotifierWrapperTask.class);
-	private final Event event;
-	private final EventNotifier eventNotifier;
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventNotifierWrapperTask.class);
+    private final Event event;
+    private final EventNotifier eventNotifier;
 
-	EventNotifierWrapperTask(final Event event, final EventNotifier eventNotifier) {
-		this.event = event;
-		this.eventNotifier = eventNotifier;
-	}
+    EventNotifierWrapperTask(final Event event, final EventNotifier eventNotifier) {
+        this.event = event;
+        this.eventNotifier = eventNotifier;
+    }
 
-	@Override
-	public void run() {
-		LOGGER.debug("notify event: {}", event.toString());
-		eventNotifier.notify(event);
-	}
+    @Override
+    public void run() {
+        LOGGER.debug("notify event: {}", event.toString());
+        eventNotifier.notify(event);
+    }
 
 }

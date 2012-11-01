@@ -27,75 +27,75 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class OrderStateUpdateEvent extends AbstractEventSupport {
 
-	private final OrderStatus orderStatus;
-	private final int filledQuantity;
-	private final int remainingQuantity;
-	private final double averageFilledPrice;
-	private final int permanentId;
-	private final Id parentOrderId;
-	private final double lastFilledPrice;
-	private final int clientId;
-	private final String heldCause;
+    private final OrderStatus orderStatus;
+    private final int filledQuantity;
+    private final int remainingQuantity;
+    private final double averageFilledPrice;
+    private final int permanentId;
+    private final Id parentOrderId;
+    private final double lastFilledPrice;
+    private final int clientId;
+    private final String heldCause;
 
-	public OrderStateUpdateEvent(final Id orderId, final OrderStatus orderStatus, final int filledQuantity,
-			final int remainingQuantity, final double averageFilledPrice, final int permanentId,
-			final Id parentOrderId, final double lastFilledPrice, final int clientId, final String heldCause) {
-		super(orderId);
-		this.orderStatus = orderStatus;
-		this.filledQuantity = filledQuantity;
-		this.remainingQuantity = remainingQuantity;
-		this.averageFilledPrice = averageFilledPrice;
-		this.permanentId = permanentId;
-		this.parentOrderId = parentOrderId;
-		this.lastFilledPrice = lastFilledPrice;
-		this.clientId = clientId;
-		this.heldCause = heldCause;
-	}
+    public OrderStateUpdateEvent(final Id orderId, final OrderStatus orderStatus, final int filledQuantity,
+            final int remainingQuantity, final double averageFilledPrice, final int permanentId,
+            final Id parentOrderId, final double lastFilledPrice, final int clientId, final String heldCause) {
+        super(orderId);
+        this.orderStatus = orderStatus;
+        this.filledQuantity = filledQuantity;
+        this.remainingQuantity = remainingQuantity;
+        this.averageFilledPrice = averageFilledPrice;
+        this.permanentId = permanentId;
+        this.parentOrderId = parentOrderId;
+        this.lastFilledPrice = lastFilledPrice;
+        this.clientId = clientId;
+        this.heldCause = heldCause;
+    }
 
-	public final OrderStatus getOrderStatus() {
-		return orderStatus;
-	}
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
 
-	public final int getFilledQuantity() {
-		return filledQuantity;
-	}
+    public int getFilledQuantity() {
+        return filledQuantity;
+    }
 
-	public final int getRemainingQuantity() {
-		return remainingQuantity;
-	}
+    public int getRemainingQuantity() {
+        return remainingQuantity;
+    }
 
-	public final double getAverageFilledPrice() {
-		return averageFilledPrice;
-	}
+    public double getAverageFilledPrice() {
+        return averageFilledPrice;
+    }
 
-	public final int getPermanentId() {
-		return permanentId;
-	}
+    public int getPermanentId() {
+        return permanentId;
+    }
 
-	public final Id getParentOrderId() {
-		return parentOrderId;
-	}
+    public Id getParentOrderId() {
+        return parentOrderId;
+    }
 
-	public final double getLastFilledPrice() {
-		return lastFilledPrice;
-	}
+    public double getLastFilledPrice() {
+        return lastFilledPrice;
+    }
 
-	public final int getClientId() {
-		return clientId;
-	}
+    public int getClientId() {
+        return clientId;
+    }
 
-	public final String getHeldCause() {
-		return heldCause;
-	}
+    public String getHeldCause() {
+        return heldCause;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return OrderStateUpdateEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return OrderStateUpdateEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 
 }

@@ -29,24 +29,24 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class HistoricalDataEventListEvent extends AbstractEventSupport {
 
-	private final List<HistoricalDataEvent> historicalDataEvents;
+    private final List<HistoricalDataEvent> historicalDataEvents;
 
-	public HistoricalDataEventListEvent(final Id requestId, final List<HistoricalDataEvent> historicalDataEvents) {
-		super(requestId);
-		this.historicalDataEvents = historicalDataEvents;
-	}
+    public HistoricalDataEventListEvent(final Id requestId, final List<HistoricalDataEvent> historicalDataEvents) {
+        super(requestId);
+        this.historicalDataEvents = historicalDataEvents;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return HistoricalDataEventListEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return HistoricalDataEventListEventListener.class;
+    }
 
-	public final List<HistoricalDataEvent> getHistoricalDataEvents() {
-		return historicalDataEvents;
-	}
+    public List<HistoricalDataEvent> getHistoricalDataEvents() {
+        return historicalDataEvents;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

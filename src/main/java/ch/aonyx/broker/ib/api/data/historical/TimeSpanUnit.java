@@ -27,34 +27,34 @@ import com.google.common.collect.Maps;
  */
 public enum TimeSpanUnit {
 
-	UNKNOWN("U"), EMPTY(""), SECOND("S"), DAY("D"), WEEK("W"), MONTH("M"), YEAR("Y");
+    UNKNOWN("U"), EMPTY(""), SECOND("S"), DAY("D"), WEEK("W"), MONTH("M"), YEAR("Y");
 
-	private final String initial;
-	private static final Map<String, TimeSpanUnit> MAP;
+    private final String initial;
+    private static final Map<String, TimeSpanUnit> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final TimeSpanUnit unit : values()) {
-			MAP.put(unit.getInitial(), unit);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final TimeSpanUnit unit : values()) {
+            MAP.put(unit.getInitial(), unit);
+        }
+    }
 
-	private TimeSpanUnit(final String initial) {
-		this.initial = initial;
-	}
+    private TimeSpanUnit(final String initial) {
+        this.initial = initial;
+    }
 
-	public final String getInitial() {
-		return initial;
-	}
+    public final String getInitial() {
+        return initial;
+    }
 
-	public static final TimeSpanUnit fromInitial(final String initial) {
-		if (StringUtils.isBlank(initial)) {
-			return EMPTY;
-		}
-		final String initialUpperCase = initial.toUpperCase();
-		if (MAP.containsKey(initialUpperCase)) {
-			return MAP.get(initialUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final TimeSpanUnit fromInitial(final String initial) {
+        if (StringUtils.isBlank(initial)) {
+            return EMPTY;
+        }
+        final String initialUpperCase = initial.toUpperCase();
+        if (MAP.containsKey(initialUpperCase)) {
+            return MAP.get(initialUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

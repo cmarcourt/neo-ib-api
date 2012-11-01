@@ -26,48 +26,48 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public final class TimeSpan {
 
-	private final int duration;
-	private final TimeSpanUnit unit;
+    private final int duration;
+    private final TimeSpanUnit unit;
 
-	public TimeSpan(final int duration, final TimeSpanUnit unit) {
-		this.duration = duration;
-		this.unit = unit;
-	}
+    public TimeSpan(final int duration, final TimeSpanUnit unit) {
+        this.duration = duration;
+        this.unit = unit;
+    }
 
-	public final int getDuration() {
-		return duration;
-	}
+    public int getDuration() {
+        return duration;
+    }
 
-	public final TimeSpanUnit getUnit() {
-		return unit;
-	}
+    public TimeSpanUnit getUnit() {
+        return unit;
+    }
 
-	public final String getFormattedDuration() {
-		return duration + " " + unit.getInitial();
-	}
+    public String getFormattedDuration() {
+        return duration + " " + unit.getInitial();
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(duration).append(unit).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(duration).append(unit).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final TimeSpan rhs = (TimeSpan) obj;
-		return new EqualsBuilder().append(duration, rhs.duration).append(unit, rhs.unit).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final TimeSpan rhs = (TimeSpan) obj;
+        return new EqualsBuilder().append(duration, rhs.duration).append(unit, rhs.unit).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

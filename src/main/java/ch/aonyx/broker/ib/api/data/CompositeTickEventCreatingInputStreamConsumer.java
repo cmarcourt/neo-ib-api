@@ -34,65 +34,66 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class CompositeTickEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<CompositeTickEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<CompositeTickEvent> {
 
-	private static final int VERSION_2 = 2;
-	private static final int VERSION_3 = 3;
+    private static final int VERSION_2 = 2;
+    private static final int VERSION_3 = 3;
 
-	public CompositeTickEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public CompositeTickEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected CompositeTickEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final int tickType = readInt(inputStream);
-		final double price = readDouble(inputStream);
-		int size = 0;
-		if (getVersion() >= VERSION_2) {
-			size = readInt(inputStream);
-		}
-		int autoExecute = 0;
-		if (getVersion() >= VERSION_3) {
-			autoExecute = readInt(inputStream);
-		}
+    @Override
+    protected CompositeTickEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final int tickType = readInt(inputStream);
+        final double price = readDouble(inputStream);
+        int size = 0;
+        if (getVersion() >= VERSION_2) {
+            size = readInt(inputStream);
+        }
+        int autoExecute = 0;
+        if (getVersion() >= VERSION_3) {
+            autoExecute = readInt(inputStream);
+        }
 
-		final TickPriceEvent tickPriceEvent = createTickPriceEvent(requestId, tickType, price, autoExecute);
-		final TickSizeEvent tickSizeEvent = createTickSizeEvent(requestId, tickType, size);
-		return createCompositeTickEvent(tickPriceEvent, tickSizeEvent);
-	}
+        final TickPriceEvent tickPriceEvent = createTickPriceEvent(requestId, tickType, price, autoExecute);
+        final TickSizeEvent tickSizeEvent = createTickSizeEvent(requestId, tickType, size);
+        return createCompositeTickEvent(tickPriceEvent, tickSizeEvent);
+    }
 
-	private TickPriceEvent createTickPriceEvent(final int requestId, final int tickType, final double price,
-			final int autoExecute) {
-		return new TickPriceEvent(toRequestId(requestId), TickType.fromValue(tickType), price,
-				BooleanUtils.toBoolean(autoExecute));
-	}
+    private TickPriceEvent createTickPriceEvent(final int requestId, final int tickType, final double price,
+            final int autoExecute) {
+        return new TickPriceEvent(toRequestId(requestId), TickType.fromValue(tickType), price,
+                BooleanUtils.toBoolean(autoExecute));
+    }
 
-	private TickSizeEvent createTickSizeEvent(final int requestId, final int tickType, final int size) {
-		if (getVersion() >= VERSION_2) {
-			final TickType type = fromValue(tickType);
-			int sizeTickType = UNKNOWN.getValue();
-			switch (type) {
-			case BID_PRICE:
-				sizeTickType = BID_SIZE.getValue();
-				break;
-			case ASK_PRICE:
-				sizeTickType = ASK_SIZE.getValue();
-				break;
-			case LAST_PRICE:
-				sizeTickType = LAST_SIZE.getValue();
-				break;
-			}
-			if (sizeTickType != UNKNOWN.getValue()) {
-				return new TickSizeEvent(toRequestId(requestId), TickType.fromValue(sizeTickType), size);
-			}
-		}
-		return null;
-	}
+    @SuppressWarnings("incomplete-switch")
+    private TickSizeEvent createTickSizeEvent(final int requestId, final int tickType, final int size) {
+        if (getVersion() >= VERSION_2) {
+            final TickType type = fromValue(tickType);
+            int sizeTickType = UNKNOWN.getValue();
+            switch (type) {
+            case BID_PRICE:
+                sizeTickType = BID_SIZE.getValue();
+                break;
+            case ASK_PRICE:
+                sizeTickType = ASK_SIZE.getValue();
+                break;
+            case LAST_PRICE:
+                sizeTickType = LAST_SIZE.getValue();
+                break;
+            }
+            if (sizeTickType != UNKNOWN.getValue()) {
+                return new TickSizeEvent(toRequestId(requestId), TickType.fromValue(sizeTickType), size);
+            }
+        }
+        return null;
+    }
 
-	private CompositeTickEvent createCompositeTickEvent(final TickPriceEvent tickPriceEvent,
-			final TickSizeEvent tickSizeEvent) {
-		return new CompositeTickEvent(tickPriceEvent, tickSizeEvent);
-	}
+    private CompositeTickEvent createCompositeTickEvent(final TickPriceEvent tickPriceEvent,
+            final TickSizeEvent tickSizeEvent) {
+        return new CompositeTickEvent(tickPriceEvent, tickSizeEvent);
+    }
 
 }

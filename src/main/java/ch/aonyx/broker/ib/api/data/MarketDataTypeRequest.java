@@ -36,62 +36,62 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class MarketDataTypeRequest extends AbstractRequestSupport implements SimpleRequest {
 
-	private static final int VERSION = 1;
-	private final MarketDataType marketDataType;
+    private static final int VERSION = 1;
+    private final MarketDataType marketDataType;
 
-	public MarketDataTypeRequest(final MarketDataType marketDataType) {
-		super(StringIdUtils.uniqueRandomId());
-		this.marketDataType = marketDataType;
-	}
+    public MarketDataTypeRequest(final MarketDataType marketDataType) {
+        super(StringIdUtils.uniqueRandomId());
+        this.marketDataType = marketDataType;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		checkMarketDataTypeRequest();
-		builder.append(OutgoingMessageId.MARKET_DATA_TYPE_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(marketDataType.getValue());
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        checkMarketDataTypeRequest();
+        builder.append(OutgoingMessageId.MARKET_DATA_TYPE_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(marketDataType.getValue());
+        return builder;
+    }
 
-	private void checkMarketDataTypeRequest() {
-		if (!Feature.MARKET_DATA_TYPE.isSupportedByVersion(getServerCurrentVersion())) {
-			throw new RequestException(ClientMessageCode.UPDATE_TWS, "It does not support marketDataType requests.",
-					this);
-		}
-	}
+    private void checkMarketDataTypeRequest() {
+        if (!Feature.MARKET_DATA_TYPE.isSupportedByVersion(getServerCurrentVersion())) {
+            throw new RequestException(ClientMessageCode.UPDATE_TWS, "It does not support marketDataType requests.",
+                    this);
+        }
+    }
 
-	public final MarketDataType getMarketDataType() {
-		return marketDataType;
-	}
+    public MarketDataType getMarketDataType() {
+        return marketDataType;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(marketDataType).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(marketDataType).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final MarketDataTypeRequest rhs = (MarketDataTypeRequest) obj;
-		return new EqualsBuilder().append(marketDataType, rhs.marketDataType).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final MarketDataTypeRequest rhs = (MarketDataTypeRequest) obj;
+        return new EqualsBuilder().append(marketDataType, rhs.marketDataType).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -27,34 +27,34 @@ import com.google.common.collect.Maps;
  */
 public enum OpenCloseInstitutional {
 
-	UNKNOWN("U"), EMPTY(""), OPEN("O"), CLOSE("C");
+    UNKNOWN("U"), EMPTY(""), OPEN("O"), CLOSE("C");
 
-	private final String initial;
-	private static final Map<String, OpenCloseInstitutional> MAP;
+    private final String initial;
+    private static final Map<String, OpenCloseInstitutional> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final OpenCloseInstitutional openClose : values()) {
-			MAP.put(openClose.getInitial(), openClose);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final OpenCloseInstitutional openClose : values()) {
+            MAP.put(openClose.getInitial(), openClose);
+        }
+    }
 
-	private OpenCloseInstitutional(final String initial) {
-		this.initial = initial;
-	}
+    private OpenCloseInstitutional(final String initial) {
+        this.initial = initial;
+    }
 
-	public final String getInitial() {
-		return initial;
-	}
+    public final String getInitial() {
+        return initial;
+    }
 
-	public static final OpenCloseInstitutional fromInitial(final String initial) {
-		if (StringUtils.isBlank(initial)) {
-			return EMPTY;
-		}
-		final String initialUpperCase = initial.toUpperCase();
-		if (MAP.containsKey(initialUpperCase)) {
-			return MAP.get(initialUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final OpenCloseInstitutional fromInitial(final String initial) {
+        if (StringUtils.isBlank(initial)) {
+            return EMPTY;
+        }
+        final String initialUpperCase = initial.toUpperCase();
+        if (MAP.containsKey(initialUpperCase)) {
+            return MAP.get(initialUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

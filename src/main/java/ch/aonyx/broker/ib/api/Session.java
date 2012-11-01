@@ -21,26 +21,26 @@ package ch.aonyx.broker.ib.api;
  */
 public interface Session {
 
-	void request(SimpleRequest request);
+    void request(SimpleRequest request);
 
-	void orderRequest(OrderRequest request);
+    void orderRequest(OrderRequest request);
 
-	void subscribe(SubscriptionRequest request);
+    void subscribe(SubscriptionRequest request);
 
-	void unsubscribe(UnsubscriptionRequest request);
+    void unsubscribe(UnsubscriptionRequest request);
 
-	RequestService getRequestService();
+    RequestService getRequestService();
 
-	<E extends Event> void registerListener(EventListener<E> listener);
+    <E extends Event> void registerListener(EventListener<E> listener);
 
-	<E extends Event> void unregisterListener(EventListener<E> listener);
+    <E extends Event> void unregisterListener(EventListener<E> listener);
 
-	EventListenerService getEventListenerService();
+    EventListenerService getEventListenerService();
 
-	void start();
+    void start();
 
-	boolean isStarted();
+    boolean isStarted();
 
-	void stop();
+    void stop();
 
 }

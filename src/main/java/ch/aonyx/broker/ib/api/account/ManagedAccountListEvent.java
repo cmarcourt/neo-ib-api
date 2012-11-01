@@ -33,42 +33,42 @@ import com.google.common.collect.Lists;
  */
 public final class ManagedAccountListEvent extends AbstractEventSupport {
 
-	public final static char SEPARATOR = ',';
-	private final String commaSeparatedAccountList;
-	private char separator = SEPARATOR;
-	private final Function<String, String> toTrimmedStringFunction = new Function<String, String>() {
-		@Override
-		public String apply(final String input) {
-			return StringUtils.trim(input);
-		}
-	};
+    public static final char SEPARATOR = ',';
+    private final String commaSeparatedAccountList;
+    private char separator = SEPARATOR;
+    private final Function<String, String> toTrimmedStringFunction = new Function<String, String>() {
+        @Override
+        public String apply(final String input) {
+            return StringUtils.trim(input);
+        }
+    };
 
-	public ManagedAccountListEvent(final String commaSeparatedAccountList) {
-		super();
-		this.commaSeparatedAccountList = commaSeparatedAccountList;
-	}
+    public ManagedAccountListEvent(final String commaSeparatedAccountList) {
+        super();
+        this.commaSeparatedAccountList = commaSeparatedAccountList;
+    }
 
-	public final String getCommaSeparatedAccountList() {
-		return commaSeparatedAccountList;
-	}
+    public String getCommaSeparatedAccountList() {
+        return commaSeparatedAccountList;
+    }
 
-	public final List<String> getAccounts() {
-		return Collections.unmodifiableList(Lists.transform(
-				Lists.newArrayList(StringUtils.split(commaSeparatedAccountList, separator)), toTrimmedStringFunction));
-	}
+    public List<String> getAccounts() {
+        return Collections.unmodifiableList(Lists.transform(
+                Lists.newArrayList(StringUtils.split(commaSeparatedAccountList, separator)), toTrimmedStringFunction));
+    }
 
-	public final void setSeparator(final char separator) {
-		this.separator = separator;
-	}
+    public void setSeparator(final char separator) {
+        this.separator = separator;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return ManagedAccountListEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return ManagedAccountListEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 
 }

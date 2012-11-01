@@ -27,33 +27,33 @@ import com.google.common.collect.Maps;
  */
 public enum Side {
 
-	PURCHASE("BOT"), SALE("SLD"), UNKNOWN("UNKNOWN"), EMPTY("");
+    PURCHASE("BOT"), SALE("SLD"), UNKNOWN("UNKNOWN"), EMPTY("");
 
-	private final String acronym;
-	private static final Map<String, Side> MAP;
-	static {
-		MAP = Maps.newHashMap();
-		for (final Side side : values()) {
-			MAP.put(side.getAcronym(), side);
-		}
-	}
+    private final String acronym;
+    private static final Map<String, Side> MAP;
+    static {
+        MAP = Maps.newHashMap();
+        for (final Side side : values()) {
+            MAP.put(side.getAcronym(), side);
+        }
+    }
 
-	private Side(final String acronym) {
-		this.acronym = acronym;
-	}
+    private Side(final String acronym) {
+        this.acronym = acronym;
+    }
 
-	public final String getAcronym() {
-		return acronym;
-	}
+    public final String getAcronym() {
+        return acronym;
+    }
 
-	public static final Side fromAcronym(final String acronym) {
-		if (StringUtils.isBlank(acronym)) {
-			return EMPTY;
-		}
-		final String acronymUpperCase = acronym.toUpperCase();
-		if (MAP.containsKey(acronymUpperCase)) {
-			return MAP.get(acronymUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final Side fromAcronym(final String acronym) {
+        if (StringUtils.isBlank(acronym)) {
+            return EMPTY;
+        }
+        final String acronymUpperCase = acronym.toUpperCase();
+        if (MAP.containsKey(acronymUpperCase)) {
+            return MAP.get(acronymUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

@@ -27,34 +27,34 @@ import com.google.common.collect.Maps;
  */
 public enum StockType {
 
-	UNKNOWN("UNKNOWN"), ALL("ALL"), EXCLUDE_ETF("STOCK"), EXCLUDE_STOCK("ETF"), EMPTY("");
+    UNKNOWN("UNKNOWN"), ALL("ALL"), EXCLUDE_ETF("STOCK"), EXCLUDE_STOCK("ETF"), EMPTY("");
 
-	private final String label;
-	private static final Map<String, StockType> MAP;
+    private final String label;
+    private static final Map<String, StockType> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final StockType stockType : values()) {
-			MAP.put(stockType.getLabel(), stockType);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final StockType stockType : values()) {
+            MAP.put(stockType.getLabel(), stockType);
+        }
+    }
 
-	private StockType(final String label) {
-		this.label = label;
-	}
+    private StockType(final String label) {
+        this.label = label;
+    }
 
-	public final String getLabel() {
-		return label;
-	}
+    public final String getLabel() {
+        return label;
+    }
 
-	public static final StockType fromLabel(final String label) {
-		if (StringUtils.isBlank(label)) {
-			return EMPTY;
-		}
-		final String labelUpperCase = label.toUpperCase();
-		if (MAP.containsKey(labelUpperCase)) {
-			return MAP.get(labelUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final StockType fromLabel(final String label) {
+        if (StringUtils.isBlank(label)) {
+            return EMPTY;
+        }
+        final String labelUpperCase = label.toUpperCase();
+        if (MAP.containsKey(labelUpperCase)) {
+            return MAP.get(labelUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

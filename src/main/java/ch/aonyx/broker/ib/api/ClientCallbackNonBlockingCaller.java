@@ -24,28 +24,28 @@ import java.util.concurrent.Executors;
  */
 final class ClientCallbackNonBlockingCaller {
 
-	private final Executor executor;
+    private final Executor executor;
 
-	ClientCallbackNonBlockingCaller() {
-		executor = Executors.newCachedThreadPool();
-	}
+    ClientCallbackNonBlockingCaller() {
+        executor = Executors.newCachedThreadPool();
+    }
 
-	void onSuccess(final ClientCallback clientCallback, final CallbackObject object) {
-		executor.execute(new Runnable() {
-			@Override
-			public void run() {
-				clientCallback.onSuccess(object);
-			}
-		});
-	}
+    void onSuccess(final ClientCallback clientCallback, final CallbackObject object) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                clientCallback.onSuccess(object);
+            }
+        });
+    }
 
-	void onFailure(final ClientCallback clientCallback, final NeoIbApiClientException exception) {
-		executor.execute(new Runnable() {
-			@Override
-			public void run() {
-				clientCallback.onFailure(exception);
-			}
-		});
-	}
+    void onFailure(final ClientCallback clientCallback, final NeoIbApiClientException exception) {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                clientCallback.onFailure(exception);
+            }
+        });
+    }
 
 }

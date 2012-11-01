@@ -32,62 +32,62 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public abstract class AbstractAccountUpdateRequest extends AbstractRequestSupport {
 
-	private static final int VERSION = 2;
-	private final String accountName;
-	private final boolean subscribe;
+    private static final int VERSION = 2;
+    private final String accountName;
+    private final boolean subscribe;
 
-	protected AbstractAccountUpdateRequest(final String accountName, final boolean subscribe) {
-		super(StringIdUtils.uniqueRandomId());
-		this.accountName = accountName;
-		this.subscribe = subscribe;
-	}
+    protected AbstractAccountUpdateRequest(final String accountName, final boolean subscribe) {
+        super(StringIdUtils.uniqueRandomId());
+        this.accountName = accountName;
+        this.subscribe = subscribe;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.ACCOUNT_UPDATE_SUBSCRIPTION_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(subscribe);
-		builder.append(accountName);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.ACCOUNT_UPDATE_SUBSCRIPTION_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(subscribe);
+        builder.append(accountName);
+        return builder;
+    }
 
-	public final String getAccountName() {
-		return accountName;
-	}
+    public final String getAccountName() {
+        return accountName;
+    }
 
-	public final boolean isSubscribe() {
-		return subscribe;
-	}
+    public final boolean isSubscribe() {
+        return subscribe;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(accountName).append(subscribe).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(accountName).append(subscribe).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final AbstractAccountUpdateRequest rhs = (AbstractAccountUpdateRequest) obj;
-		return new EqualsBuilder().append(accountName, rhs.accountName).append(subscribe, rhs.subscribe).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final AbstractAccountUpdateRequest rhs = (AbstractAccountUpdateRequest) obj;
+        return new EqualsBuilder().append(accountName, rhs.accountName).append(subscribe, rhs.subscribe).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 
 }

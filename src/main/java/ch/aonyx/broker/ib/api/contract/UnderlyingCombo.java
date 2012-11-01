@@ -26,57 +26,57 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 public final class UnderlyingCombo {
 
-	private int contractId;
-	private double delta;
-	private double price;
+    private int contractId;
+    private double delta;
+    private double price;
 
-	public final int getContractId() {
-		return contractId;
-	}
+    public int getContractId() {
+        return contractId;
+    }
 
-	public final void setContractId(final int contractId) {
-		this.contractId = contractId;
-	}
+    public void setContractId(final int contractId) {
+        this.contractId = contractId;
+    }
 
-	public final double getDelta() {
-		return delta;
-	}
+    public double getDelta() {
+        return delta;
+    }
 
-	public final void setDelta(final double delta) {
-		this.delta = delta;
-	}
+    public void setDelta(final double delta) {
+        this.delta = delta;
+    }
 
-	public final double getPrice() {
-		return price;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public final void setPrice(final double price) {
-		this.price = price;
-	}
+    public void setPrice(final double price) {
+        this.price = price;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(contractId).append(delta).append(price).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(contractId).append(delta).append(price).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final UnderlyingCombo rhs = (UnderlyingCombo) obj;
-		return new EqualsBuilder().append(contractId, rhs.contractId).append(delta, rhs.delta).append(price, rhs.price)
-				.isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final UnderlyingCombo rhs = (UnderlyingCombo) obj;
+        return new EqualsBuilder().append(contractId, rhs.contractId).append(delta, rhs.delta).append(price, rhs.price)
+                .isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

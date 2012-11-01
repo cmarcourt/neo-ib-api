@@ -27,24 +27,24 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class DeltaNeutralValidationEvent extends AbstractEventSupport {
 
-	private final UnderlyingCombo underlyingCombo;
+    private final UnderlyingCombo underlyingCombo;
 
-	public DeltaNeutralValidationEvent(final Id requestId, final UnderlyingCombo underlyingCombo) {
-		super(requestId);
-		this.underlyingCombo = underlyingCombo;
-	}
+    public DeltaNeutralValidationEvent(final Id requestId, final UnderlyingCombo underlyingCombo) {
+        super(requestId);
+        this.underlyingCombo = underlyingCombo;
+    }
 
-	public final UnderlyingCombo getUnderlyingCombo() {
-		return underlyingCombo;
-	}
+    public UnderlyingCombo getUnderlyingCombo() {
+        return underlyingCombo;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return DeltaNeutralValidationEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return DeltaNeutralValidationEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

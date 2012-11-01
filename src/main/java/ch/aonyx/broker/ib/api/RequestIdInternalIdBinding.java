@@ -26,36 +26,36 @@ import com.google.common.collect.HashBiMap;
  */
 final class RequestIdInternalIdBinding {
 
-	private static final RequestIdInternalIdBinding INSTANCE = new RequestIdInternalIdBinding();
-	private final BiMap<Id, Integer> binding;
-	private final AtomicInteger sequence;
+    private static final RequestIdInternalIdBinding INSTANCE = new RequestIdInternalIdBinding();
+    private final BiMap<Id, Integer> binding;
+    private final AtomicInteger sequence;
 
-	static RequestIdInternalIdBinding getInstance() {
-		return INSTANCE;
-	}
+    static RequestIdInternalIdBinding getInstance() {
+        return INSTANCE;
+    }
 
-	private RequestIdInternalIdBinding() {
-		binding = HashBiMap.create();
-		sequence = new AtomicInteger(1);
-	}
+    private RequestIdInternalIdBinding() {
+        binding = HashBiMap.create();
+        sequence = new AtomicInteger(1);
+    }
 
-	void addAndBind(final Request request) {
-		binding.put(request.getId(), sequence.getAndIncrement());
-	}
+    void addAndBind(final Request request) {
+        binding.put(request.getId(), sequence.getAndIncrement());
+    }
 
-	boolean containsRequestId(final Id id) {
-		return binding.containsKey(id);
-	}
+    boolean containsRequestId(final Id id) {
+        return binding.containsKey(id);
+    }
 
-	Id getRequestId(final int internalId) {
-		return binding.inverse().get(internalId);
-	}
+    Id getRequestId(final int internalId) {
+        return binding.inverse().get(internalId);
+    }
 
-	boolean containsInternalId(final int internalId) {
-		return binding.containsValue(internalId);
-	}
+    boolean containsInternalId(final int internalId) {
+        return binding.containsValue(internalId);
+    }
 
-	int getInternalId(final Id id) {
-		return binding.get(id);
-	}
+    int getInternalId(final Id id) {
+        return binding.get(id);
+    }
 }

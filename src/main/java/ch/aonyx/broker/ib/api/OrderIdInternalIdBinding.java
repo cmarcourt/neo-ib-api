@@ -28,64 +28,63 @@ import com.google.common.collect.HashBiMap;
  */
 final class OrderIdInternalIdBinding {
 
-	private static final OrderIdInternalIdBinding INSTANCE = new OrderIdInternalIdBinding();
-	private final BiMap<Id, Integer> binding;
-	private AtomicInteger sequence;
-	private boolean initialized;
-	private final EventListenerList listenerList = new EventListenerList();
+    private static final OrderIdInternalIdBinding INSTANCE = new OrderIdInternalIdBinding();
+    private final BiMap<Id, Integer> binding;
+    private AtomicInteger sequence;
+    private boolean initialized;
+    private final EventListenerList listenerList = new EventListenerList();
 
-	static OrderIdInternalIdBinding getInstance() {
-		return INSTANCE;
-	}
+    static OrderIdInternalIdBinding getInstance() {
+        return INSTANCE;
+    }
 
-	void addListener(final OrderIdInternalIdListener listener) {
-		listenerList.add(OrderIdInternalIdListener.class, listener);
-	}
+    void addListener(final OrderIdInternalIdListener listener) {
+        listenerList.add(OrderIdInternalIdListener.class, listener);
+    }
 
-	/**
-	 * Initialization must be done once before using any other methods.
-	 * Initialization can only be done once.
-	 */
-	synchronized void initializeSequence(final int nextValidOrderId) {
-		if (!initialized) {
-			initialized = true;
-			sequence = new AtomicInteger(nextValidOrderId);
-			notifyListeners();
-		}
-	}
+    /**
+     * Initialization must be done once before using any other methods. Initialization can only be done once.
+     */
+    synchronized void initializeSequence(final int nextValidOrderId) {
+        if (!initialized) {
+            initialized = true;
+            sequence = new AtomicInteger(nextValidOrderId);
+            notifyListeners();
+        }
+    }
 
-	private void notifyListeners() {
-		final OrderIdInternalIdListener[] listeners = listenerList.getListeners(OrderIdInternalIdListener.class);
-		for (final OrderIdInternalIdListener listener : listeners) {
-			listener.sequenceInitialized();
-		}
-	}
+    private void notifyListeners() {
+        final OrderIdInternalIdListener[] listeners = listenerList.getListeners(OrderIdInternalIdListener.class);
+        for (final OrderIdInternalIdListener listener : listeners) {
+            listener.sequenceInitialized();
+        }
+    }
 
-	boolean isInitialized() {
-		return initialized;
-	}
+    boolean isInitialized() {
+        return initialized;
+    }
 
-	private OrderIdInternalIdBinding() {
-		binding = HashBiMap.create();
-	}
+    private OrderIdInternalIdBinding() {
+        binding = HashBiMap.create();
+    }
 
-	void addAndBind(final Request request) {
-		binding.put(request.getId(), sequence.getAndIncrement());
-	}
+    void addAndBind(final Request request) {
+        binding.put(request.getId(), sequence.getAndIncrement());
+    }
 
-	boolean containsOrderId(final Id orderId) {
-		return binding.containsKey(orderId);
-	}
+    boolean containsOrderId(final Id orderId) {
+        return binding.containsKey(orderId);
+    }
 
-	Id getOrderId(final int internalId) {
-		return binding.inverse().get(internalId);
-	}
+    Id getOrderId(final int internalId) {
+        return binding.inverse().get(internalId);
+    }
 
-	boolean containsInternalId(final int internalId) {
-		return binding.containsValue(internalId);
-	}
+    boolean containsInternalId(final int internalId) {
+        return binding.containsValue(internalId);
+    }
 
-	int getInternalId(final Id orderId) {
-		return binding.get(orderId);
-	}
+    int getInternalId(final Id orderId) {
+        return binding.get(orderId);
+    }
 }

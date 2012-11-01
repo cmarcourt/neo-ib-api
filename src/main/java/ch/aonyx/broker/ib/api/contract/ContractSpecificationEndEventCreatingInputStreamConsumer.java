@@ -26,21 +26,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class ContractSpecificationEndEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<ContractSpecificationEndEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<ContractSpecificationEndEvent> {
 
-	public ContractSpecificationEndEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public ContractSpecificationEndEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected ContractSpecificationEndEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		return createEvent(requestId);
-	}
+    @Override
+    protected ContractSpecificationEndEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        return createEvent(requestId);
+    }
 
-	private ContractSpecificationEndEvent createEvent(final int requestId) {
-		return new ContractSpecificationEndEvent(toRequestId(requestId));
-	}
+    private ContractSpecificationEndEvent createEvent(final int requestId) {
+        return new ContractSpecificationEndEvent(toRequestId(requestId));
+    }
 
 }

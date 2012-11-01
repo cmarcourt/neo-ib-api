@@ -34,52 +34,52 @@ import com.lmax.disruptor.dsl.Disruptor;
  */
 final class EventInputStreamConsumerThread implements Runnable {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(EventInputStreamConsumerThread.class);
-	private final String threadName = "consumer";
-	private final InputStream inputStream;
-	private final InputStreamConsumerService consumerService;
-	private final Disruptor<EventWrapper> disruptor;
-	private boolean running = true;
+    private static final Logger LOGGER = LoggerFactory.getLogger(EventInputStreamConsumerThread.class);
+    private final String threadName = "consumer";
+    private final InputStream inputStream;
+    private final InputStreamConsumerService consumerService;
+    private final Disruptor<EventWrapper> disruptor;
+    private boolean running = true;
 
-	EventInputStreamConsumerThread(final InputStream inputStream, final Disruptor<EventWrapper> disruptor) {
-		this.inputStream = inputStream;
-		this.disruptor = disruptor;
-		consumerService = new InputStreamConsumerService(this.inputStream);
-	}
+    EventInputStreamConsumerThread(final InputStream inputStream, final Disruptor<EventWrapper> disruptor) {
+        this.inputStream = inputStream;
+        this.disruptor = disruptor;
+        consumerService = new InputStreamConsumerService(this.inputStream);
+    }
 
-	InputStream getInputStream() {
-		return inputStream;
-	}
+    InputStream getInputStream() {
+        return inputStream;
+    }
 
-	final void setServerCurrentVersion(final int serverCurrentVersion) {
-		consumerService.setServerCurrentVersion(serverCurrentVersion);
-	}
+    void setServerCurrentVersion(final int serverCurrentVersion) {
+        consumerService.setServerCurrentVersion(serverCurrentVersion);
+    }
 
-	@Override
-	public void run() {
-		while (running) {
-			final Event event = consumeMessage();
-			publishEvent(event);
-		}
-		IOUtils.closeQuietly(inputStream);
-	}
+    @Override
+    public void run() {
+        while (running) {
+            final Event event = consumeMessage();
+            publishEvent(event);
+        }
+        IOUtils.closeQuietly(inputStream);
+    }
 
-	private <E extends Event> Event consumeMessage() {
-		final int messageId = readInt(inputStream);
-		final EventCreatingConsumer<E> consumer = consumerService.getEventCreatingConsumer(fromId(messageId));
-		return consumer.consume();
-	}
+    private <E extends Event> Event consumeMessage() {
+        final int messageId = readInt(inputStream);
+        final EventCreatingConsumer<E> consumer = consumerService.getEventCreatingConsumer(fromId(messageId));
+        return consumer.consume();
+    }
 
-	private void publishEvent(final Event event) {
-		LOGGER.debug("dispatch event: {} to disruptor", event.toString());
-		disruptor.publishEvent(new EventWrapperTranslator(event));
-	}
+    private void publishEvent(final Event event) {
+        LOGGER.debug("dispatch event: {} to disruptor", event.toString());
+        disruptor.publishEvent(new EventWrapperTranslator(event));
+    }
 
-	void stop() {
-		running = false;
-	}
+    void stop() {
+        running = false;
+    }
 
-	final String getThreadName() {
-		return threadName;
-	}
+    String getThreadName() {
+        return threadName;
+    }
 }

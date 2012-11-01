@@ -21,8 +21,8 @@ package ch.aonyx.broker.ib.api;
  */
 final class RequestStringId extends StringId implements RequestId {
 
-	RequestStringId(final String id) {
-		super(id);
-	}
+    RequestStringId(final String id) {
+        super(id);
+    }
 
 }

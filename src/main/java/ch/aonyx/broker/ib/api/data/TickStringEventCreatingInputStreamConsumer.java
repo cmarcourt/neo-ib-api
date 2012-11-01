@@ -27,22 +27,22 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class TickStringEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<TickStringEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<TickStringEvent> {
 
-	public TickStringEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public TickStringEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected TickStringEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final int tickType = readInt(inputStream);
-		final String value = readString(inputStream);
-		return createTickStringEvent(requestId, tickType, value);
-	}
+    @Override
+    protected TickStringEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final int tickType = readInt(inputStream);
+        final String value = readString(inputStream);
+        return createTickStringEvent(requestId, tickType, value);
+    }
 
-	private TickStringEvent createTickStringEvent(final int requestId, final int tickType, final String value) {
-		return new TickStringEvent(toRequestId(requestId), TickType.fromValue(tickType), value);
-	}
+    private TickStringEvent createTickStringEvent(final int requestId, final int tickType, final String value) {
+        return new TickStringEvent(toRequestId(requestId), TickType.fromValue(tickType), value);
+    }
 
 }

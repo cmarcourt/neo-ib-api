@@ -28,39 +28,39 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultServerMessageEventListener implements ServerMessageEventListener {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(DefaultServerMessageEventListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultServerMessageEventListener.class);
 
-	@Override
-	public void onInfo(final ServerMessageEvent event) {
-		LOGGER.info(event.toString());
-	}
+    @Override
+    public void onInfo(final ServerMessageEvent event) {
+        LOGGER.info(event.toString());
+    }
 
-	@Override
-	public void onWarn(final ServerMessageEvent event) {
-		LOGGER.warn(event.toString());
-	}
+    @Override
+    public void onWarn(final ServerMessageEvent event) {
+        LOGGER.warn(event.toString());
+    }
 
-	@Override
-	public void onError(final ServerMessageEvent event) {
-		LOGGER.error(event.toString());
-	}
+    @Override
+    public void onError(final ServerMessageEvent event) {
+        LOGGER.error(event.toString());
+    }
 
-	@Override
-	public void onUnknown(final ServerMessageEvent event) {
-		LOGGER.info(event.toString());
-	}
+    @Override
+    public void onUnknown(final ServerMessageEvent event) {
+        LOGGER.info(event.toString());
+    }
 
-	@Override
-	public void notify(final ServerMessageEvent event) {
-		final int code = event.getCode();
-		if (isError(code)) {
-			onError(event);
-		} else if (isSystem(code)) {
-			onInfo(event);
-		} else if (isWarning(code)) {
-			onWarn(event);
-		} else {
-			onUnknown(event);
-		}
-	}
+    @Override
+    public void notify(final ServerMessageEvent event) {
+        final int code = event.getCode();
+        if (isError(code)) {
+            onError(event);
+        } else if (isSystem(code)) {
+            onInfo(event);
+        } else if (isWarning(code)) {
+            onWarn(event);
+        } else {
+            onUnknown(event);
+        }
+    }
 }

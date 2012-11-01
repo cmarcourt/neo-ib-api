@@ -16,18 +16,13 @@
 package ch.aonyx.broker.ib.api;
 
 /**
- * This interface represents an id used to bind {@link Request} object to
- * {@link Event} object.
+ * This interface represents an id used to bind {@link Request} object to {@link Event} object.
  * 
- * No method is defined in this contract as the {@link Object#toString()} method
- * will return a human readable id.
+ * No method is defined in this contract as the {@link Object#toString()} method will return a human readable id.
  * 
- * @see ch.aonyx.broker.ib.api.Request#getId(),
- *      ch.aonyx.broker.ib.api.Event#getId(),
- *      ch.aonyx.broker.ib.api.OrderRequest#getId(),
- *      ch.aonyx.broker.ib.api.SimpleRequest#getId(),
- *      ch.aonyx.broker.ib.api.SubscriptionRequest#getId(),
- *      ch.aonyx.broker.ib.api.UnsubscriptionRequest#getId().
+ * @see ch.aonyx.broker.ib.api.Request#getId(), ch.aonyx.broker.ib.api.Event#getId(),
+ *      ch.aonyx.broker.ib.api.OrderRequest#getId(), ch.aonyx.broker.ib.api.SimpleRequest#getId(),
+ *      ch.aonyx.broker.ib.api.SubscriptionRequest#getId(), ch.aonyx.broker.ib.api.UnsubscriptionRequest#getId().
  * @author Christophe Marcourt
  * @since 1.0.0
  */

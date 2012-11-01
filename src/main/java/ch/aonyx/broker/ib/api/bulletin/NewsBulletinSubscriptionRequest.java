@@ -33,54 +33,54 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class NewsBulletinSubscriptionRequest extends AbstractRequestSupport implements SubscriptionRequest {
 
-	private static final int VERSION = 1;
-	private final boolean includeExistingDailyNews;
+    private static final int VERSION = 1;
+    private final boolean includeExistingDailyNews;
 
-	protected NewsBulletinSubscriptionRequest(final boolean includeExistingDailyNews) {
-		super(StringIdUtils.uniqueRandomId());
-		this.includeExistingDailyNews = includeExistingDailyNews;
-	}
+    protected NewsBulletinSubscriptionRequest(final boolean includeExistingDailyNews) {
+        super(StringIdUtils.uniqueRandomId());
+        this.includeExistingDailyNews = includeExistingDailyNews;
+    }
 
-	public final boolean isIncludeExistingDailyNews() {
-		return includeExistingDailyNews;
-	}
+    public boolean isIncludeExistingDailyNews() {
+        return includeExistingDailyNews;
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.NEWS_BULLETIN_SUBSCRIPTION_REQUEST.getId());
-		builder.append(VERSION);
-		builder.append(includeExistingDailyNews);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.NEWS_BULLETIN_SUBSCRIPTION_REQUEST.getId());
+        builder.append(VERSION);
+        builder.append(includeExistingDailyNews);
+        return builder;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(includeExistingDailyNews).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(includeExistingDailyNews).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final NewsBulletinSubscriptionRequest rhs = (NewsBulletinSubscriptionRequest) obj;
-		return new EqualsBuilder().append(includeExistingDailyNews, rhs.includeExistingDailyNews).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final NewsBulletinSubscriptionRequest rhs = (NewsBulletinSubscriptionRequest) obj;
+        return new EqualsBuilder().append(includeExistingDailyNews, rhs.includeExistingDailyNews).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -33,46 +33,46 @@ import ch.aonyx.broker.ib.api.util.StringIdUtils;
  */
 public final class NewsBulletinUnsubscriptionRequest extends AbstractRequestSupport implements UnsubscriptionRequest {
 
-	private static final int VERSION = 1;
+    private static final int VERSION = 1;
 
-	public NewsBulletinUnsubscriptionRequest() {
-		super(StringIdUtils.uniqueRandomId());
-	}
+    public NewsBulletinUnsubscriptionRequest() {
+        super(StringIdUtils.uniqueRandomId());
+    }
 
-	@Override
-	public byte[] getBytes() {
-		final RequestBuilder builder = createRequestBuilder();
-		return builder.toBytes();
-	}
+    @Override
+    public byte[] getBytes() {
+        final RequestBuilder builder = createRequestBuilder();
+        return builder.toBytes();
+    }
 
-	private RequestBuilder createRequestBuilder() {
-		final RequestBuilder builder = new ByteArrayRequestBuilder();
-		builder.append(OutgoingMessageId.NEWS_BULLETIN_UNSUBSCRIPTION_REQUEST.getId());
-		builder.append(VERSION);
-		return builder;
-	}
+    private RequestBuilder createRequestBuilder() {
+        final RequestBuilder builder = new ByteArrayRequestBuilder();
+        builder.append(OutgoingMessageId.NEWS_BULLETIN_UNSUBSCRIPTION_REQUEST.getId());
+        builder.append(VERSION);
+        return builder;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		return new EqualsBuilder().isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        return new EqualsBuilder().isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -25,30 +25,30 @@ import com.google.common.collect.Maps;
  */
 public enum OpenCloseComboLeg {
 
-	SAME(0), OPEN(1), CLOSE(2), UNKNOWN(3);
+    SAME(0), OPEN(1), CLOSE(2), UNKNOWN(3);
 
-	private final int value;
-	private static final Map<Integer, OpenCloseComboLeg> MAP;
+    private final int value;
+    private static final Map<Integer, OpenCloseComboLeg> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final OpenCloseComboLeg openCloseComboLeg : values()) {
-			MAP.put(openCloseComboLeg.getValue(), openCloseComboLeg);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final OpenCloseComboLeg openCloseComboLeg : values()) {
+            MAP.put(openCloseComboLeg.getValue(), openCloseComboLeg);
+        }
+    }
 
-	private OpenCloseComboLeg(final int value) {
-		this.value = value;
-	}
+    private OpenCloseComboLeg(final int value) {
+        this.value = value;
+    }
 
-	public final int getValue() {
-		return value;
-	}
+    public final int getValue() {
+        return value;
+    }
 
-	public static final OpenCloseComboLeg fromValue(final int value) {
-		if (MAP.containsKey(value)) {
-			return MAP.get(value);
-		}
-		return UNKNOWN;
-	}
+    public static final OpenCloseComboLeg fromValue(final int value) {
+        if (MAP.containsKey(value)) {
+            return MAP.get(value);
+        }
+        return UNKNOWN;
+    }
 }

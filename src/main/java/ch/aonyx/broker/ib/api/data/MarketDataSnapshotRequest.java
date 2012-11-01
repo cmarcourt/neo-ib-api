@@ -24,12 +24,12 @@ import ch.aonyx.broker.ib.api.contract.Contract;
  */
 public final class MarketDataSnapshotRequest extends AbstractMarketDataRequest implements SimpleRequest {
 
-	public MarketDataSnapshotRequest(final Contract contract) {
-		super(contract, true);
-	}
+    public MarketDataSnapshotRequest(final Contract contract) {
+        super(contract, true);
+    }
 
-	public MarketDataSnapshotRequest(final String id, final Contract contract) {
-		super(id, contract, true);
-	}
+    public MarketDataSnapshotRequest(final String id, final Contract contract) {
+        super(id, contract, true);
+    }
 
 }

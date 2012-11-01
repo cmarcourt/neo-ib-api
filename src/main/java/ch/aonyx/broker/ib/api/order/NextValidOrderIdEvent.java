@@ -26,24 +26,24 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class NextValidOrderIdEvent extends AbstractEventSupport {
 
-	private final int nextValidOrderId;
+    private final int nextValidOrderId;
 
-	public NextValidOrderIdEvent(final int nextValidOrderId) {
-		super();
-		this.nextValidOrderId = nextValidOrderId;
-	}
+    public NextValidOrderIdEvent(final int nextValidOrderId) {
+        super();
+        this.nextValidOrderId = nextValidOrderId;
+    }
 
-	public final int getNextValidOrderId() {
-		return nextValidOrderId;
-	}
+    public int getNextValidOrderId() {
+        return nextValidOrderId;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return NextValidOrderIdEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return NextValidOrderIdEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

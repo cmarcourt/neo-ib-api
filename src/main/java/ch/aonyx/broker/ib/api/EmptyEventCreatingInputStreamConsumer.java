@@ -24,23 +24,23 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class EmptyEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<EmptyEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<EmptyEvent> {
 
-	public EmptyEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public EmptyEventCreatingInputStreamConsumer(final InputStream inputStream, final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	public EmptyEvent consume() {
-		return new EmptyEvent();
-	}
+    @Override
+    public EmptyEvent consume() {
+        return new EmptyEvent();
+    }
 
-	/**
-	 * Never called
-	 */
-	@Override
-	protected EmptyEvent consumeVersionLess(final InputStream inputStream) {
-		return null;
-	}
+    /**
+     * Never called
+     */
+    @Override
+    protected EmptyEvent consumeVersionLess(final InputStream inputStream) {
+        return null;
+    }
 
 }

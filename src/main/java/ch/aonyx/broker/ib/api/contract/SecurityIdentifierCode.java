@@ -27,34 +27,34 @@ import com.google.common.collect.Maps;
  */
 public enum SecurityIdentifierCode {
 
-	SIN("SIN"), CUSIP("CUSIP"), SEDOL("SEDOL"), RIC("RIC"), UNKNOWN("UNKNOWN"), EMPTY("");
+    SIN("SIN"), CUSIP("CUSIP"), SEDOL("SEDOL"), RIC("RIC"), UNKNOWN("UNKNOWN"), EMPTY("");
 
-	private final String acronym;
-	private static final Map<String, SecurityIdentifierCode> MAP;
+    private final String acronym;
+    private static final Map<String, SecurityIdentifierCode> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final SecurityIdentifierCode code : values()) {
-			MAP.put(code.getAcronym(), code);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final SecurityIdentifierCode code : values()) {
+            MAP.put(code.getAcronym(), code);
+        }
+    }
 
-	private SecurityIdentifierCode(final String acronym) {
-		this.acronym = acronym;
-	}
+    private SecurityIdentifierCode(final String acronym) {
+        this.acronym = acronym;
+    }
 
-	public final String getAcronym() {
-		return acronym;
-	}
+    public final String getAcronym() {
+        return acronym;
+    }
 
-	public static final SecurityIdentifierCode fromAcronym(final String acronym) {
-		if (StringUtils.isBlank(acronym)) {
-			return EMPTY;
-		}
-		final String acronymUpperCase = acronym.toUpperCase();
-		if (MAP.containsKey(acronymUpperCase)) {
-			return MAP.get(acronymUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final SecurityIdentifierCode fromAcronym(final String acronym) {
+        if (StringUtils.isBlank(acronym)) {
+            return EMPTY;
+        }
+        final String acronymUpperCase = acronym.toUpperCase();
+        if (MAP.containsKey(acronymUpperCase)) {
+            return MAP.get(acronymUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

@@ -26,30 +26,30 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class TickPriceEvent extends AbstractTickEvent {
 
-	private final double price;
-	private final boolean autoExecute;
+    private final double price;
+    private final boolean autoExecute;
 
-	public TickPriceEvent(final Id requestId, final TickType type, final double price, final boolean autoExecute) {
-		super(requestId, type);
-		this.price = price;
-		this.autoExecute = autoExecute;
-	}
+    public TickPriceEvent(final Id requestId, final TickType type, final double price, final boolean autoExecute) {
+        super(requestId, type);
+        this.price = price;
+        this.autoExecute = autoExecute;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return TickPriceEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return TickPriceEventListener.class;
+    }
 
-	public final double getPrice() {
-		return price;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public final boolean isAutoExecute() {
-		return autoExecute;
-	}
+    public boolean isAutoExecute() {
+        return autoExecute;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

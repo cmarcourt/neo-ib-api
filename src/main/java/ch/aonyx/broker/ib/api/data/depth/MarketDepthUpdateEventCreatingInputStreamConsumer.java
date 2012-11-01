@@ -27,28 +27,28 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class MarketDepthUpdateEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<MarketDepthUpdateEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<MarketDepthUpdateEvent> {
 
-	public MarketDepthUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public MarketDepthUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected MarketDepthUpdateEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final int rowId = readInt(inputStream);
-		final int operation = readInt(inputStream);
-		final int bookSide = readInt(inputStream);
-		final double price = readDouble(inputStream);
-		final int size = readInt(inputStream);
-		return createEvent(requestId, rowId, operation, bookSide, price, size);
-	}
+    @Override
+    protected MarketDepthUpdateEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final int rowId = readInt(inputStream);
+        final int operation = readInt(inputStream);
+        final int bookSide = readInt(inputStream);
+        final double price = readDouble(inputStream);
+        final int size = readInt(inputStream);
+        return createEvent(requestId, rowId, operation, bookSide, price, size);
+    }
 
-	private MarketDepthUpdateEvent createEvent(final int requestId, final int rowId, final int operation,
-			final int bookSide, final double price, final int size) {
-		return new MarketDepthUpdateEvent(toRequestId(requestId), rowId, Operation.fromValue(operation),
-				BookSide.fromValue(bookSide), price, size);
-	}
+    private MarketDepthUpdateEvent createEvent(final int requestId, final int rowId, final int operation,
+            final int bookSide, final double price, final int size) {
+        return new MarketDepthUpdateEvent(toRequestId(requestId), rowId, Operation.fromValue(operation),
+                BookSide.fromValue(bookSide), price, size);
+    }
 
 }

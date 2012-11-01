@@ -23,6 +23,6 @@ import ch.aonyx.broker.ib.api.Event;
  */
 public interface EventCreatingConsumer<E extends Event> {
 
-	E consume();
+    E consume();
 
 }

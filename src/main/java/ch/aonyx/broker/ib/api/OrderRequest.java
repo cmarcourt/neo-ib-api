@@ -21,9 +21,9 @@ package ch.aonyx.broker.ib.api;
  */
 public interface OrderRequest extends Request {
 
-	/**
-	 * Returns an {@link OrderId}.
-	 */
-	@Override
-	OrderId getId();
+    /**
+     * Returns an {@link OrderId}.
+     */
+    @Override
+    OrderId getId();
 }

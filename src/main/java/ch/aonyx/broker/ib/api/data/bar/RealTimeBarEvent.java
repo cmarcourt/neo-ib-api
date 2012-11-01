@@ -27,68 +27,68 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class RealTimeBarEvent extends AbstractEventSupport {
 
-	private final long timestamp;
-	private final double open;
-	private final double high;
-	private final double low;
-	private final double close;
-	private final long volume;
-	private final double weightedAveragePrice;
-	private final int tradeNumber;
+    private final long timestamp;
+    private final double open;
+    private final double high;
+    private final double low;
+    private final double close;
+    private final long volume;
+    private final double weightedAveragePrice;
+    private final int tradeNumber;
 
-	public RealTimeBarEvent(final Id requestId, final long timestamp, final double open, final double high,
-			final double low, final double close, final long volume, final double weightedAveragePrice,
-			final int tradeNumber) {
-		super(requestId);
-		this.timestamp = timestamp;
-		this.open = open;
-		this.high = high;
-		this.low = low;
-		this.close = close;
-		this.volume = volume;
-		this.weightedAveragePrice = weightedAveragePrice;
-		this.tradeNumber = tradeNumber;
-	}
+    public RealTimeBarEvent(final Id requestId, final long timestamp, final double open, final double high,
+            final double low, final double close, final long volume, final double weightedAveragePrice,
+            final int tradeNumber) {
+        super(requestId);
+        this.timestamp = timestamp;
+        this.open = open;
+        this.high = high;
+        this.low = low;
+        this.close = close;
+        this.volume = volume;
+        this.weightedAveragePrice = weightedAveragePrice;
+        this.tradeNumber = tradeNumber;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return RealTimeBarEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return RealTimeBarEventListener.class;
+    }
 
-	public final long getTimestamp() {
-		return timestamp;
-	}
+    public long getTimestamp() {
+        return timestamp;
+    }
 
-	public final double getOpen() {
-		return open;
-	}
+    public double getOpen() {
+        return open;
+    }
 
-	public final double getHigh() {
-		return high;
-	}
+    public double getHigh() {
+        return high;
+    }
 
-	public final double getLow() {
-		return low;
-	}
+    public double getLow() {
+        return low;
+    }
 
-	public final double getClose() {
-		return close;
-	}
+    public double getClose() {
+        return close;
+    }
 
-	public final long getVolume() {
-		return volume;
-	}
+    public long getVolume() {
+        return volume;
+    }
 
-	public final double getWeightedAveragePrice() {
-		return weightedAveragePrice;
-	}
+    public double getWeightedAveragePrice() {
+        return weightedAveragePrice;
+    }
 
-	public final int getTradeNumber() {
-		return tradeNumber;
-	}
+    public int getTradeNumber() {
+        return tradeNumber;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

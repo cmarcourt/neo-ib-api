@@ -27,35 +27,36 @@ import com.google.common.collect.Maps;
  */
 public enum OrderStatus {
 
-	UNKNOWN("UNKNOWN"), PENDING_SUBMIT("PendingSubmit"), PENDING_CANCEL("PendingCancel"), PRE_SUBMITTED("PreSubmitted"), SUBMITTED(
-			"Submitted"), CANCELLED("Cancelled"), FILLED("Filled"), INACTIVE("Inactive"), EMPTY("");
+    UNKNOWN("UNKNOWN"), PENDING_SUBMIT("PendingSubmit"), PENDING_CANCEL("PendingCancel"),
+    PRE_SUBMITTED("PreSubmitted"), SUBMITTED("Submitted"), CANCELLED("Cancelled"), FILLED("Filled"), INACTIVE(
+            "Inactive"), EMPTY("");
 
-	private final String label;
-	private static final Map<String, OrderStatus> MAP;
+    private final String label;
+    private static final Map<String, OrderStatus> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final OrderStatus orderStatus : values()) {
-			MAP.put(orderStatus.getLabel().toUpperCase(), orderStatus);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final OrderStatus orderStatus : values()) {
+            MAP.put(orderStatus.getLabel().toUpperCase(), orderStatus);
+        }
+    }
 
-	private OrderStatus(final String label) {
-		this.label = label;
-	}
+    private OrderStatus(final String label) {
+        this.label = label;
+    }
 
-	public final String getLabel() {
-		return label;
-	}
+    public final String getLabel() {
+        return label;
+    }
 
-	public static final OrderStatus fromLabel(final String label) {
-		if (StringUtils.isBlank(label)) {
-			return EMPTY;
-		}
-		final String labelUpperCase = label.toUpperCase();
-		if (MAP.containsKey(labelUpperCase)) {
-			return MAP.get(labelUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final OrderStatus fromLabel(final String label) {
+        if (StringUtils.isBlank(label)) {
+            return EMPTY;
+        }
+        final String labelUpperCase = label.toUpperCase();
+        if (MAP.containsKey(labelUpperCase)) {
+            return MAP.get(labelUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

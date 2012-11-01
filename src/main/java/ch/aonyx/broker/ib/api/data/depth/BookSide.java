@@ -25,30 +25,30 @@ import com.google.common.collect.Maps;
  */
 public enum BookSide {
 
-	UNKNOWN(-1), ASK(0), BID(1);
+    UNKNOWN(-1), ASK(0), BID(1);
 
-	private final int value;
-	private static final Map<Integer, BookSide> MAP;
+    private final int value;
+    private static final Map<Integer, BookSide> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final BookSide bookSide : values()) {
-			MAP.put(bookSide.getValue(), bookSide);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final BookSide bookSide : values()) {
+            MAP.put(bookSide.getValue(), bookSide);
+        }
+    }
 
-	private BookSide(final int value) {
-		this.value = value;
-	}
+    private BookSide(final int value) {
+        this.value = value;
+    }
 
-	public final int getValue() {
-		return value;
-	}
+    public final int getValue() {
+        return value;
+    }
 
-	public static final BookSide fromValue(final int value) {
-		if (MAP.containsKey(value)) {
-			return MAP.get(value);
-		}
-		return UNKNOWN;
-	}
+    public static final BookSide fromValue(final int value) {
+        if (MAP.containsKey(value)) {
+            return MAP.get(value);
+        }
+        return UNKNOWN;
+    }
 }

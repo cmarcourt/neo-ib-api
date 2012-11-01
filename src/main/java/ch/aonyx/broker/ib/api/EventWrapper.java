@@ -24,18 +24,18 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  */
 final class EventWrapper {
 
-	private Event wrappedEvent;
+    private Event wrappedEvent;
 
-	final Event getWrappedEvent() {
-		return wrappedEvent;
-	}
+    Event getWrappedEvent() {
+        return wrappedEvent;
+    }
 
-	final void setWrappedEvent(final Event wrappedEvent) {
-		this.wrappedEvent = wrappedEvent;
-	}
+    void setWrappedEvent(final Event wrappedEvent) {
+        this.wrappedEvent = wrappedEvent;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

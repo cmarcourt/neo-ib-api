@@ -21,5 +21,5 @@ package ch.aonyx.broker.ib.api;
  */
 public interface EventListener<E extends Event> {
 
-	void notify(E event);
+    void notify(E event);
 }

@@ -28,27 +28,27 @@ import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.SECONDS;
  */
 public enum BarSize {
 
-	ONE_SECOND(1, SECOND), FIVE_SECONDS(5, SECONDS), FIFTEEN_SECONDS(15, SECONDS), THIRTY_SECONDS(30, SECONDS), ONE_MINUTE(
-			1, MINUTE), TWO_MINUTES(2, MINUTES), THREE_MINUTES(3, MINUTES), FIVE_MINUTES(5, MINUTES), FIFTEEN_MINUTES(
-			15, MINUTES), THIRTY_MINUTES(30, MINUTES), ONE_HOUR(1, HOUR), ONE_DAY(1, DAY);
+    ONE_SECOND(1, SECOND), FIVE_SECONDS(5, SECONDS), FIFTEEN_SECONDS(15, SECONDS), THIRTY_SECONDS(30, SECONDS),
+    ONE_MINUTE(1, MINUTE), TWO_MINUTES(2, MINUTES), THREE_MINUTES(3, MINUTES), FIVE_MINUTES(5, MINUTES),
+    FIFTEEN_MINUTES(15, MINUTES), THIRTY_MINUTES(30, MINUTES), ONE_HOUR(1, HOUR), ONE_DAY(1, DAY);
 
-	private final int duration;
-	private final BarSizeUnit barSizeUnit;
+    private final int duration;
+    private final BarSizeUnit barSizeUnit;
 
-	private BarSize(final int duration, final BarSizeUnit barSizeUnit) {
-		this.duration = duration;
-		this.barSizeUnit = barSizeUnit;
-	}
+    private BarSize(final int duration, final BarSizeUnit barSizeUnit) {
+        this.duration = duration;
+        this.barSizeUnit = barSizeUnit;
+    }
 
-	public final int getDuration() {
-		return duration;
-	}
+    public final int getDuration() {
+        return duration;
+    }
 
-	public final BarSizeUnit getBarSizeUnit() {
-		return barSizeUnit;
-	}
+    public final BarSizeUnit getBarSizeUnit() {
+        return barSizeUnit;
+    }
 
-	public final String getFormattedBarSize() {
-		return duration + " " + barSizeUnit.getAbbreviation();
-	}
+    public final String getFormattedBarSize() {
+        return duration + " " + barSizeUnit.getAbbreviation();
+    }
 }

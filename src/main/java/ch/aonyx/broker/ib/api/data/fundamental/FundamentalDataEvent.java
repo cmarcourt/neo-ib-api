@@ -27,24 +27,24 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class FundamentalDataEvent extends AbstractEventSupport {
 
-	private final String xml;
+    private final String xml;
 
-	public FundamentalDataEvent(final Id requestId, final String xml) {
-		super(requestId);
-		this.xml = xml;
-	}
+    public FundamentalDataEvent(final Id requestId, final String xml) {
+        super(requestId);
+        this.xml = xml;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return FundamentalDataEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return FundamentalDataEventListener.class;
+    }
 
-	public final String getXml() {
-		return xml;
-	}
+    public String getXml() {
+        return xml;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

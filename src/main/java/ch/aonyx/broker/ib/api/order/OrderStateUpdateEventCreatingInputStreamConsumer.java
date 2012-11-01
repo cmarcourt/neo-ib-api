@@ -28,50 +28,50 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class OrderStateUpdateEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<OrderStateUpdateEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<OrderStateUpdateEvent> {
 
-	public OrderStateUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public OrderStateUpdateEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected OrderStateUpdateEvent consumeVersionLess(final InputStream inputStream) {
-		final int orderId = readInt(inputStream);
-		final String orderStatus = readString(inputStream);
-		final int filledQuantity = readInt(inputStream);
-		final int remainingQuantity = readInt(inputStream);
-		final double averageFilledPrice = readDouble(inputStream);
-		int permanentId = 0;
-		if (getVersion() >= 2) {
-			permanentId = readInt(inputStream);
-		}
-		int parentOrderId = 0;
-		if (getVersion() >= 3) {
-			parentOrderId = readInt(inputStream);
-		}
-		double lastFilledPrice = 0;
-		if (getVersion() >= 4) {
-			lastFilledPrice = readDouble(inputStream);
-		}
-		int clientId = 0;
-		if (getVersion() >= 5) {
-			clientId = readInt(inputStream);
-		}
-		String heldCause = null;
-		if (getVersion() >= 6) {
-			heldCause = readString(inputStream);
-		}
-		return createEvent(orderId, orderStatus, filledQuantity, remainingQuantity, averageFilledPrice, permanentId,
-				parentOrderId, lastFilledPrice, clientId, heldCause);
-	}
+    @Override
+    protected OrderStateUpdateEvent consumeVersionLess(final InputStream inputStream) {
+        final int orderId = readInt(inputStream);
+        final String orderStatus = readString(inputStream);
+        final int filledQuantity = readInt(inputStream);
+        final int remainingQuantity = readInt(inputStream);
+        final double averageFilledPrice = readDouble(inputStream);
+        int permanentId = 0;
+        if (getVersion() >= 2) {
+            permanentId = readInt(inputStream);
+        }
+        int parentOrderId = 0;
+        if (getVersion() >= 3) {
+            parentOrderId = readInt(inputStream);
+        }
+        double lastFilledPrice = 0;
+        if (getVersion() >= 4) {
+            lastFilledPrice = readDouble(inputStream);
+        }
+        int clientId = 0;
+        if (getVersion() >= 5) {
+            clientId = readInt(inputStream);
+        }
+        String heldCause = null;
+        if (getVersion() >= 6) {
+            heldCause = readString(inputStream);
+        }
+        return createEvent(orderId, orderStatus, filledQuantity, remainingQuantity, averageFilledPrice, permanentId,
+                parentOrderId, lastFilledPrice, clientId, heldCause);
+    }
 
-	private OrderStateUpdateEvent createEvent(final int orderId, final String orderStatus, final int filledQuantity,
-			final int remainingQuantity, final double averageFilledPrice, final int permanentId,
-			final int parentOrderId, final double lastFilledPrice, final int clientId, final String heldCause) {
-		return new OrderStateUpdateEvent(toOrderId(orderId), OrderStatus.fromLabel(orderStatus), filledQuantity,
-				remainingQuantity, averageFilledPrice, permanentId, toOrderId(parentOrderId), lastFilledPrice,
-				clientId, heldCause);
-	}
+    private OrderStateUpdateEvent createEvent(final int orderId, final String orderStatus, final int filledQuantity,
+            final int remainingQuantity, final double averageFilledPrice, final int permanentId,
+            final int parentOrderId, final double lastFilledPrice, final int clientId, final String heldCause) {
+        return new OrderStateUpdateEvent(toOrderId(orderId), OrderStatus.fromLabel(orderStatus), filledQuantity,
+                remainingQuantity, averageFilledPrice, permanentId, toOrderId(parentOrderId), lastFilledPrice,
+                clientId, heldCause);
+    }
 
 }

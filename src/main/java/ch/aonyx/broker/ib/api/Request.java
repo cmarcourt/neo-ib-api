@@ -21,10 +21,10 @@ package ch.aonyx.broker.ib.api;
  */
 public interface Request {
 
-	Id getId();
+    Id getId();
 
-	void setServerCurrentVersion(int serverCurrentVersion);
+    void setServerCurrentVersion(int serverCurrentVersion);
 
-	byte[] getBytes();
+    byte[] getBytes();
 
 }

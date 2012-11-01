@@ -25,56 +25,56 @@ import com.google.common.primitives.Bytes;
  */
 public final class ByteArrayRequestBuilder implements RequestBuilder {
 
-	private static final byte[] EOL = { 0 };
-	private byte[] bytes = new byte[] {};
+    private static final byte[] EOL = { 0 };
+    private byte[] bytes = new byte[] {};
 
-	public ByteArrayRequestBuilder() {
-	}
+    public ByteArrayRequestBuilder() {
+    }
 
-	@Override
-	public final RequestBuilder append(final int i) {
-		if (i != Integer.MAX_VALUE) {
-			bytes = Bytes.concat(bytes, String.valueOf(i).getBytes());
-		}
-		appendEol();
-		return this;
-	}
+    @Override
+    public RequestBuilder append(final int i) {
+        if (i != Integer.MAX_VALUE) {
+            bytes = Bytes.concat(bytes, String.valueOf(i).getBytes());
+        }
+        appendEol();
+        return this;
+    }
 
-	private void appendEol() {
-		bytes = Bytes.concat(bytes, EOL);
-	}
+    private void appendEol() {
+        bytes = Bytes.concat(bytes, EOL);
+    }
 
-	@Override
-	public final RequestBuilder append(final boolean b) {
-		int i = 0;
-		if (b) {
-			i = 1;
-		}
-		bytes = Bytes.concat(bytes, String.valueOf(i).getBytes());
-		appendEol();
-		return this;
-	}
+    @Override
+    public RequestBuilder append(final boolean b) {
+        int i = 0;
+        if (b) {
+            i = 1;
+        }
+        bytes = Bytes.concat(bytes, String.valueOf(i).getBytes());
+        appendEol();
+        return this;
+    }
 
-	@Override
-	public final RequestBuilder append(final double d) {
-		if (d != Double.MAX_VALUE) {
-			bytes = Bytes.concat(bytes, String.valueOf(d).getBytes());
-		}
-		appendEol();
-		return this;
-	}
+    @Override
+    public RequestBuilder append(final double d) {
+        if (d != Double.MAX_VALUE) {
+            bytes = Bytes.concat(bytes, String.valueOf(d).getBytes());
+        }
+        appendEol();
+        return this;
+    }
 
-	@Override
-	public final RequestBuilder append(final String s) {
-		if (StringUtils.isNotEmpty(s)) {
-			bytes = Bytes.concat(bytes, s.getBytes());
-		}
-		appendEol();
-		return this;
-	}
+    @Override
+    public RequestBuilder append(final String s) {
+        if (StringUtils.isNotEmpty(s)) {
+            bytes = Bytes.concat(bytes, s.getBytes());
+        }
+        appendEol();
+        return this;
+    }
 
-	@Override
-	public final byte[] toBytes() {
-		return bytes;
-	}
+    @Override
+    public byte[] toBytes() {
+        return bytes;
+    }
 }

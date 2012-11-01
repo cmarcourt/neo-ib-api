@@ -25,30 +25,30 @@ import com.google.common.collect.Maps;
  */
 public enum OriginInstitutional {
 
-	UNKNOWN(-1), CUSTOMER(0), FIRM(1);
+    UNKNOWN(-1), CUSTOMER(0), FIRM(1);
 
-	private final int value;
-	private static final Map<Integer, OriginInstitutional> MAP;
+    private final int value;
+    private static final Map<Integer, OriginInstitutional> MAP;
 
-	static {
-		MAP = Maps.newHashMap();
-		for (final OriginInstitutional origin : values()) {
-			MAP.put(origin.getValue(), origin);
-		}
-	}
+    static {
+        MAP = Maps.newHashMap();
+        for (final OriginInstitutional origin : values()) {
+            MAP.put(origin.getValue(), origin);
+        }
+    }
 
-	private OriginInstitutional(final int value) {
-		this.value = value;
-	}
+    private OriginInstitutional(final int value) {
+        this.value = value;
+    }
 
-	public final int getValue() {
-		return value;
-	}
+    public final int getValue() {
+        return value;
+    }
 
-	public static final OriginInstitutional fromValue(final int value) {
-		if (MAP.containsKey(value)) {
-			return MAP.get(value);
-		}
-		return UNKNOWN;
-	}
+    public static final OriginInstitutional fromValue(final int value) {
+        if (MAP.containsKey(value)) {
+            return MAP.get(value);
+        }
+        return UNKNOWN;
+    }
 }

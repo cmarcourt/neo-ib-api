@@ -26,42 +26,42 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class AccountUpdateValueEvent extends AbstractEventSupport {
 
-	private final String key;
-	private final String value;
-	private final String currency;
-	private final String accountName;
+    private final String key;
+    private final String value;
+    private final String currency;
+    private final String accountName;
 
-	public AccountUpdateValueEvent(final String key, final String value, final String currency, final String accountName) {
-		super();
-		this.key = key;
-		this.value = value;
-		this.currency = currency;
-		this.accountName = accountName;
-	}
+    public AccountUpdateValueEvent(final String key, final String value, final String currency, final String accountName) {
+        super();
+        this.key = key;
+        this.value = value;
+        this.currency = currency;
+        this.accountName = accountName;
+    }
 
-	public final String getKey() {
-		return key;
-	}
+    public String getKey() {
+        return key;
+    }
 
-	public final String getValue() {
-		return value;
-	}
+    public String getValue() {
+        return value;
+    }
 
-	public final String getCurrency() {
-		return currency;
-	}
+    public String getCurrency() {
+        return currency;
+    }
 
-	public final String getAccountName() {
-		return accountName;
-	}
+    public String getAccountName() {
+        return accountName;
+    }
 
-	@Override
-	public final Class<?> getAssignableListenerType() {
-		return AccountUpdateValueEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return AccountUpdateValueEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -29,33 +29,33 @@ import ch.aonyx.broker.ib.api.Event;
  * @since 1.0.0
  */
 public abstract class AbstractEventCreatingInputStreamConsumerSupport<E extends Event> extends
-		AbstractEventCreatingConsumerSupport<E> {
+        AbstractEventCreatingConsumerSupport<E> {
 
-	private int version;
-	private final InputStream inputStream;
-	private final int serverCurrentVersion;
+    private int version;
+    private final InputStream inputStream;
+    private final int serverCurrentVersion;
 
-	protected AbstractEventCreatingInputStreamConsumerSupport(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		this.inputStream = inputStream;
-		this.serverCurrentVersion = serverCurrentVersion;
-	}
+    protected AbstractEventCreatingInputStreamConsumerSupport(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        this.inputStream = inputStream;
+        this.serverCurrentVersion = serverCurrentVersion;
+    }
 
-	@Override
-	public E consume() {
-		Validate.notNull(inputStream);
-		version = readInt(inputStream);
-		return consumeVersionLess(inputStream);
-	}
+    @Override
+    public E consume() {
+        Validate.notNull(inputStream);
+        version = readInt(inputStream);
+        return consumeVersionLess(inputStream);
+    }
 
-	protected abstract E consumeVersionLess(InputStream inputStream);
+    protected abstract E consumeVersionLess(InputStream inputStream);
 
-	protected final int getVersion() {
-		return version;
-	}
+    protected final int getVersion() {
+        return version;
+    }
 
-	protected final int getServerCurrentVersion() {
-		return serverCurrentVersion;
-	}
+    protected final int getServerCurrentVersion() {
+        return serverCurrentVersion;
+    }
 
 }

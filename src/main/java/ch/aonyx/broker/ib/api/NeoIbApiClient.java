@@ -34,37 +34,37 @@ import ch.aonyx.broker.ib.api.net.ConnectionParameters;
  */
 public final class NeoIbApiClient {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(NeoIbApiClient.class);
-	private final ClientCallback clientCallback;
-	private Socket socket;
+    private static final Logger LOGGER = LoggerFactory.getLogger(NeoIbApiClient.class);
+    private final ClientCallback clientCallback;
+    private Socket socket;
 
-	public NeoIbApiClient(final ClientCallback clientCallback) {
-		Validate.notNull(clientCallback);
-		this.clientCallback = clientCallback;
-	}
+    public NeoIbApiClient(final ClientCallback clientCallback) {
+        Validate.notNull(clientCallback);
+        this.clientCallback = clientCallback;
+    }
 
-	public void connect(final ConnectionParameters connectionParameters, final ConnectionCallback callback) {
-		Validate.notNull(connectionParameters);
-		Validate.notNull(callback);
-		try {
-			socket = new Socket(connectionParameters.getHost(), connectionParameters.getPort());
-			callback.onSuccess(new SocketSession(socket, connectionParameters.getClientId(), clientCallback));
-		} catch (final UnknownHostException e) {
-			LOGGER.error("", e);
-			callback.onFailure(new ConnectionException(ClientMessageCode.CONNECTION_ERROR, "Unknown host "
-					+ e.getMessage()));
-		} catch (final IOException e) {
-			LOGGER.error("", e);
-			callback.onFailure(new ConnectionException(ClientMessageCode.CONNECTION_FAILURE, e.getMessage()));
-		}
-	}
+    public void connect(final ConnectionParameters connectionParameters, final ConnectionCallback callback) {
+        Validate.notNull(connectionParameters);
+        Validate.notNull(callback);
+        try {
+            socket = new Socket(connectionParameters.getHost(), connectionParameters.getPort());
+            callback.onSuccess(new SocketSession(socket, connectionParameters.getClientId(), clientCallback));
+        } catch (final UnknownHostException e) {
+            LOGGER.error("", e);
+            callback.onFailure(new ConnectionException(ClientMessageCode.CONNECTION_ERROR, "Unknown host "
+                    + e.getMessage()));
+        } catch (final IOException e) {
+            LOGGER.error("", e);
+            callback.onFailure(new ConnectionException(ClientMessageCode.CONNECTION_FAILURE, e.getMessage()));
+        }
+    }
 
-	public void disconnect() {
-		IOUtils.closeQuietly(socket);
-	}
+    public void disconnect() {
+        IOUtils.closeQuietly(socket);
+    }
 
-	public boolean isConnected() {
-		return socket.isConnected();
-	}
+    public boolean isConnected() {
+        return socket.isConnected();
+    }
 
 }

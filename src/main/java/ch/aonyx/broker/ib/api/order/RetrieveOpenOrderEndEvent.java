@@ -23,9 +23,9 @@ import ch.aonyx.broker.ib.api.AbstractEventSupport;
  */
 public final class RetrieveOpenOrderEndEvent extends AbstractEventSupport {
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return RetrieveOpenOrderEndEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return RetrieveOpenOrderEndEventListener.class;
+    }
 
 }

@@ -27,46 +27,46 @@ import com.google.common.collect.Maps;
  */
 public enum OptionRight {
 
-	PUT("P", "PUT"), CALL("C", "CALL"), UNKNOWN("U", "UNKNOWN"), EMPTY("", "");
+    PUT("P", "PUT"), CALL("C", "CALL"), UNKNOWN("U", "UNKNOWN"), EMPTY("", "");
 
-	private final String initial;
-	private final String name;
-	private static final Map<String, OptionRight> INITIAL_MAP;
-	private static final Map<String, OptionRight> NAME_MAP;
+    private final String initial;
+    private final String name;
+    private static final Map<String, OptionRight> INITIAL_MAP;
+    private static final Map<String, OptionRight> NAME_MAP;
 
-	static {
-		INITIAL_MAP = Maps.newHashMap();
-		NAME_MAP = Maps.newHashMap();
-		for (final OptionRight optionRight : values()) {
-			INITIAL_MAP.put(optionRight.getInitial(), optionRight);
-			NAME_MAP.put(optionRight.getName(), optionRight);
-		}
-	}
+    static {
+        INITIAL_MAP = Maps.newHashMap();
+        NAME_MAP = Maps.newHashMap();
+        for (final OptionRight optionRight : values()) {
+            INITIAL_MAP.put(optionRight.getInitial(), optionRight);
+            NAME_MAP.put(optionRight.getName(), optionRight);
+        }
+    }
 
-	private OptionRight(final String initial, final String name) {
-		this.initial = initial;
-		this.name = name;
-	}
+    private OptionRight(final String initial, final String name) {
+        this.initial = initial;
+        this.name = name;
+    }
 
-	public final String getInitial() {
-		return initial;
-	}
+    public final String getInitial() {
+        return initial;
+    }
 
-	public final String getName() {
-		return name;
-	}
+    public final String getName() {
+        return name;
+    }
 
-	public static final OptionRight fromInitialOrName(final String value) {
-		if (StringUtils.isBlank(value)) {
-			return EMPTY;
-		}
-		final String valueUpperCase = value.toUpperCase();
-		if (INITIAL_MAP.containsKey(valueUpperCase)) {
-			return INITIAL_MAP.get(valueUpperCase);
-		}
-		if (NAME_MAP.containsKey(valueUpperCase)) {
-			return NAME_MAP.get(valueUpperCase);
-		}
-		return UNKNOWN;
-	}
+    public static final OptionRight fromInitialOrName(final String value) {
+        if (StringUtils.isBlank(value)) {
+            return EMPTY;
+        }
+        final String valueUpperCase = value.toUpperCase();
+        if (INITIAL_MAP.containsKey(valueUpperCase)) {
+            return INITIAL_MAP.get(valueUpperCase);
+        }
+        if (NAME_MAP.containsKey(valueUpperCase)) {
+            return NAME_MAP.get(valueUpperCase);
+        }
+        return UNKNOWN;
+    }
 }

@@ -35,69 +35,69 @@ import com.google.common.collect.Lists;
  * @since 1.0.0
  */
 public final class MarketScannerDataEventListEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<MarketScannerDataEventListEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<MarketScannerDataEventListEvent> {
 
-	public MarketScannerDataEventListEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public MarketScannerDataEventListEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected MarketScannerDataEventListEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		final List<MarketScannerDataEvent> marketScannerDataEvents = consumeMarketScannerDataEvents(requestId,
-				inputStream);
-		return createEvent(requestId, marketScannerDataEvents);
-	}
+    @Override
+    protected MarketScannerDataEventListEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        final List<MarketScannerDataEvent> marketScannerDataEvents = consumeMarketScannerDataEvents(requestId,
+                inputStream);
+        return createEvent(requestId, marketScannerDataEvents);
+    }
 
-	private List<MarketScannerDataEvent> consumeMarketScannerDataEvents(final int requestId,
-			final InputStream inputStream) {
-		final List<MarketScannerDataEvent> marketScannerDataEvents = Lists.newArrayList();
-		final int marketScannerDatas = readInt(inputStream);
-		for (int i = 0; i < marketScannerDatas; i++) {
-			marketScannerDataEvents.add(consumeMarketScannerDataEvent(requestId, inputStream));
-		}
-		return marketScannerDataEvents;
-	}
+    private List<MarketScannerDataEvent> consumeMarketScannerDataEvents(final int requestId,
+            final InputStream inputStream) {
+        final List<MarketScannerDataEvent> marketScannerDataEvents = Lists.newArrayList();
+        final int marketScannerDatas = readInt(inputStream);
+        for (int i = 0; i < marketScannerDatas; i++) {
+            marketScannerDataEvents.add(consumeMarketScannerDataEvent(requestId, inputStream));
+        }
+        return marketScannerDataEvents;
+    }
 
-	private MarketScannerDataEvent consumeMarketScannerDataEvent(final int requestId, final InputStream inputStream) {
-		final Contract contract = new Contract();
-		final ContractSpecification contractSpecification = new ContractSpecification();
-		contractSpecification.setContract(contract);
-		final int ranking = readInt(inputStream);
-		if (getVersion() >= 3) {
-			contract.setId(readInt(inputStream));
-		}
-		contract.setSymbol(readString(inputStream));
-		contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
-		contract.setExpiry(readString(inputStream));
-		contract.setStrike(readDouble(inputStream));
-		contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
-		contract.setExchange(readString(inputStream));
-		contract.setCurrencyCode(readString(inputStream));
-		contract.setLocalSymbol(readString(inputStream));
-		contractSpecification.setMarketName(readString(inputStream));
-		contractSpecification.setTradingClass(readString(inputStream));
-		final String distance = readString(inputStream);
-		final String benchmark = readString(inputStream);
-		final String projection = readString(inputStream);
-		String comboLegDescription = null;
-		if (getVersion() >= 2) {
-			comboLegDescription = readString(inputStream);
-		}
-		return createMarketScannerDataEvent(requestId, contractSpecification, ranking, distance, benchmark, projection,
-				comboLegDescription);
-	}
+    private MarketScannerDataEvent consumeMarketScannerDataEvent(final int requestId, final InputStream inputStream) {
+        final Contract contract = new Contract();
+        final ContractSpecification contractSpecification = new ContractSpecification();
+        contractSpecification.setContract(contract);
+        final int ranking = readInt(inputStream);
+        if (getVersion() >= 3) {
+            contract.setId(readInt(inputStream));
+        }
+        contract.setSymbol(readString(inputStream));
+        contract.setSecurityType(SecurityType.fromAbbreviation(readString(inputStream)));
+        contract.setExpiry(readString(inputStream));
+        contract.setStrike(readDouble(inputStream));
+        contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
+        contract.setExchange(readString(inputStream));
+        contract.setCurrencyCode(readString(inputStream));
+        contract.setLocalSymbol(readString(inputStream));
+        contractSpecification.setMarketName(readString(inputStream));
+        contractSpecification.setTradingClass(readString(inputStream));
+        final String distance = readString(inputStream);
+        final String benchmark = readString(inputStream);
+        final String projection = readString(inputStream);
+        String comboLegDescription = null;
+        if (getVersion() >= 2) {
+            comboLegDescription = readString(inputStream);
+        }
+        return createMarketScannerDataEvent(requestId, contractSpecification, ranking, distance, benchmark, projection,
+                comboLegDescription);
+    }
 
-	private MarketScannerDataEvent createMarketScannerDataEvent(final int requestId,
-			final ContractSpecification contractSpecification, final int ranking, final String distance,
-			final String benchmark, final String projection, final String comboLegDescription) {
-		return new MarketScannerDataEvent(toRequestId(requestId), ranking, contractSpecification, distance, benchmark,
-				projection, comboLegDescription);
-	}
+    private MarketScannerDataEvent createMarketScannerDataEvent(final int requestId,
+            final ContractSpecification contractSpecification, final int ranking, final String distance,
+            final String benchmark, final String projection, final String comboLegDescription) {
+        return new MarketScannerDataEvent(toRequestId(requestId), ranking, contractSpecification, distance, benchmark,
+                projection, comboLegDescription);
+    }
 
-	private MarketScannerDataEventListEvent createEvent(final int requestId,
-			final List<MarketScannerDataEvent> marketScannerDataEvents) {
-		return new MarketScannerDataEventListEvent(toRequestId(requestId), marketScannerDataEvents);
-	}
+    private MarketScannerDataEventListEvent createEvent(final int requestId,
+            final List<MarketScannerDataEvent> marketScannerDataEvents) {
+        return new MarketScannerDataEventListEvent(toRequestId(requestId), marketScannerDataEvents);
+    }
 }

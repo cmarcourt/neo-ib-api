@@ -29,25 +29,25 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class MarketScannerDataEventListEvent extends AbstractEventSupport {
 
-	private final List<MarketScannerDataEvent> marketScannerDataEvents;
+    private final List<MarketScannerDataEvent> marketScannerDataEvents;
 
-	public MarketScannerDataEventListEvent(final Id requestId,
-			final List<MarketScannerDataEvent> marketScannerDataEvents) {
-		super(requestId);
-		this.marketScannerDataEvents = marketScannerDataEvents;
-	}
+    public MarketScannerDataEventListEvent(final Id requestId,
+            final List<MarketScannerDataEvent> marketScannerDataEvents) {
+        super(requestId);
+        this.marketScannerDataEvents = marketScannerDataEvents;
+    }
 
-	public final List<MarketScannerDataEvent> getMarketScannerDataEvents() {
-		return marketScannerDataEvents;
-	}
+    public List<MarketScannerDataEvent> getMarketScannerDataEvents() {
+        return marketScannerDataEvents;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return MarketScannerDataEventListEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return MarketScannerDataEventListEventListener.class;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

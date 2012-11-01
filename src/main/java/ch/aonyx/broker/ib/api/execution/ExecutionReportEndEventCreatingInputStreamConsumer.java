@@ -26,21 +26,21 @@ import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport
  * @since 1.0.0
  */
 public final class ExecutionReportEndEventCreatingInputStreamConsumer extends
-		AbstractEventCreatingInputStreamConsumerSupport<ExecutionReportEndEvent> {
+        AbstractEventCreatingInputStreamConsumerSupport<ExecutionReportEndEvent> {
 
-	public ExecutionReportEndEventCreatingInputStreamConsumer(final InputStream inputStream,
-			final int serverCurrentVersion) {
-		super(inputStream, serverCurrentVersion);
-	}
+    public ExecutionReportEndEventCreatingInputStreamConsumer(final InputStream inputStream,
+            final int serverCurrentVersion) {
+        super(inputStream, serverCurrentVersion);
+    }
 
-	@Override
-	protected ExecutionReportEndEvent consumeVersionLess(final InputStream inputStream) {
-		final int requestId = readInt(inputStream);
-		return createEvent(requestId);
-	}
+    @Override
+    protected ExecutionReportEndEvent consumeVersionLess(final InputStream inputStream) {
+        final int requestId = readInt(inputStream);
+        return createEvent(requestId);
+    }
 
-	private ExecutionReportEndEvent createEvent(final int requestId) {
-		return new ExecutionReportEndEvent(toRequestId(requestId));
-	}
+    private ExecutionReportEndEvent createEvent(final int requestId) {
+        return new ExecutionReportEndEvent(toRequestId(requestId));
+    }
 
 }

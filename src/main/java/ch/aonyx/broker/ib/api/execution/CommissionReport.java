@@ -32,104 +32,104 @@ import org.joda.time.DateTime;
  */
 public final class CommissionReport {
 
-	private static final String DATE_PATTERN = "yyyyMMdd";
-	private double commission;
-	private String currencyCode;
-	private String executionId;
-	private double realizedProfitAndLoss;
-	private double yield;
-	private int yieldRedemptionDate;
+    private static final String DATE_PATTERN = "yyyyMMdd";
+    private double commission;
+    private String currencyCode;
+    private String executionId;
+    private double realizedProfitAndLoss;
+    private double yield;
+    private int yieldRedemptionDate;
 
-	public final double getCommission() {
-		return commission;
-	}
+    public double getCommission() {
+        return commission;
+    }
 
-	public final void setCommission(final double commission) {
-		this.commission = commission;
-	}
+    public void setCommission(final double commission) {
+        this.commission = commission;
+    }
 
-	public final String getCurrencyCode() {
-		return StringUtils.trimToNull(currencyCode);
-	}
+    public String getCurrencyCode() {
+        return StringUtils.trimToNull(currencyCode);
+    }
 
-	public final Currency getCurrency() {
-		return Currency.getInstance(currencyCode);
-	}
+    public Currency getCurrency() {
+        return Currency.getInstance(currencyCode);
+    }
 
-	public final void setCurrencyCode(final String currencyCode) {
-		this.currencyCode = currencyCode;
-	}
+    public void setCurrencyCode(final String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
 
-	public final void setCurrency(final Currency currency) {
-		currencyCode = currency.getCurrencyCode();
-	}
+    public void setCurrency(final Currency currency) {
+        currencyCode = currency.getCurrencyCode();
+    }
 
-	public final String getExecutionId() {
-		return StringUtils.trimToNull(executionId);
-	}
+    public String getExecutionId() {
+        return StringUtils.trimToNull(executionId);
+    }
 
-	public final void setExecutionId(final String executionId) {
-		this.executionId = executionId;
-	}
+    public void setExecutionId(final String executionId) {
+        this.executionId = executionId;
+    }
 
-	public final double getRealizedProfitAndLoss() {
-		return realizedProfitAndLoss;
-	}
+    public double getRealizedProfitAndLoss() {
+        return realizedProfitAndLoss;
+    }
 
-	public final void setRealizedProfitAndLoss(final double realizedProfitAndLoss) {
-		this.realizedProfitAndLoss = realizedProfitAndLoss;
-	}
+    public void setRealizedProfitAndLoss(final double realizedProfitAndLoss) {
+        this.realizedProfitAndLoss = realizedProfitAndLoss;
+    }
 
-	public final double getYield() {
-		return yield;
-	}
+    public double getYield() {
+        return yield;
+    }
 
-	public final void setYield(final double yield) {
-		this.yield = yield;
-	}
+    public void setYield(final double yield) {
+        this.yield = yield;
+    }
 
-	public final int getYieldRedemptionDate() {
-		return yieldRedemptionDate;
-	}
+    public int getYieldRedemptionDate() {
+        return yieldRedemptionDate;
+    }
 
-	public final DateTime getYieldRedemptionDateTime() {
-		try {
-			return new DateTime(DateUtils.parseDate(String.valueOf(yieldRedemptionDate), DATE_PATTERN).getTime());
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
+    public DateTime getYieldRedemptionDateTime() {
+        try {
+            return new DateTime(DateUtils.parseDate(String.valueOf(yieldRedemptionDate), DATE_PATTERN).getTime());
+        } catch (final ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
-	public final void setYieldRedemptionDate(final int yieldRedemptionDate) {
-		this.yieldRedemptionDate = yieldRedemptionDate;
-	}
+    public void setYieldRedemptionDate(final int yieldRedemptionDate) {
+        this.yieldRedemptionDate = yieldRedemptionDate;
+    }
 
-	@Override
-	public int hashCode() {
-		return new HashCodeBuilder().append(commission).append(currencyCode).append(executionId)
-				.append(realizedProfitAndLoss).append(yield).append(yieldRedemptionDate).toHashCode();
-	}
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder().append(commission).append(currencyCode).append(executionId)
+                .append(realizedProfitAndLoss).append(yield).append(yieldRedemptionDate).toHashCode();
+    }
 
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (obj == this) {
-			return true;
-		}
-		if (obj.getClass() != getClass()) {
-			return false;
-		}
-		final CommissionReport rhs = (CommissionReport) obj;
-		return new EqualsBuilder().append(commission, rhs.commission).append(currencyCode, rhs.currencyCode)
-				.append(executionId, rhs.executionId).append(realizedProfitAndLoss, rhs.realizedProfitAndLoss)
-				.append(yield, rhs.yield).append(yieldRedemptionDate, rhs.yieldRedemptionDate).isEquals();
-	}
+    @Override
+    public boolean equals(final Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass() != getClass()) {
+            return false;
+        }
+        final CommissionReport rhs = (CommissionReport) obj;
+        return new EqualsBuilder().append(commission, rhs.commission).append(currencyCode, rhs.currencyCode)
+                .append(executionId, rhs.executionId).append(realizedProfitAndLoss, rhs.realizedProfitAndLoss)
+                .append(yield, rhs.yield).append(yieldRedemptionDate, rhs.yieldRedemptionDate).isEquals();
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

@@ -23,5 +23,5 @@ import java.util.EventListener;
  */
 interface OrderIdInternalIdListener extends EventListener {
 
-	void sequenceInitialized();
+    void sequenceInitialized();
 }

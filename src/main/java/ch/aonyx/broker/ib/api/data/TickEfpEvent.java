@@ -26,62 +26,62 @@ import ch.aonyx.broker.ib.api.Id;
  */
 public final class TickEfpEvent extends AbstractTickEvent {
 
-	private final double basisPoints;
-	private final String formattedBasisPoints;
-	private final double impliedFuturePrice;
-	private final int holdDays;
-	private final String futureExpiry;
-	private final double dividendImpact;
-	private final double dividendToExpiry;
+    private final double basisPoints;
+    private final String formattedBasisPoints;
+    private final double impliedFuturePrice;
+    private final int holdDays;
+    private final String futureExpiry;
+    private final double dividendImpact;
+    private final double dividendToExpiry;
 
-	public TickEfpEvent(final Id requestId, final TickType type, final double basisPoints,
-			final String formattedBasisPoints, final double impliedFuturePrice, final int holdDays,
-			final String futureExpiry, final double dividendImpact, final double dividendToExpiry) {
-		super(requestId, type);
-		this.basisPoints = basisPoints;
-		this.formattedBasisPoints = formattedBasisPoints;
-		this.impliedFuturePrice = impliedFuturePrice;
-		this.holdDays = holdDays;
-		this.futureExpiry = futureExpiry;
-		this.dividendImpact = dividendImpact;
-		this.dividendToExpiry = dividendToExpiry;
-	}
+    public TickEfpEvent(final Id requestId, final TickType type, final double basisPoints,
+            final String formattedBasisPoints, final double impliedFuturePrice, final int holdDays,
+            final String futureExpiry, final double dividendImpact, final double dividendToExpiry) {
+        super(requestId, type);
+        this.basisPoints = basisPoints;
+        this.formattedBasisPoints = formattedBasisPoints;
+        this.impliedFuturePrice = impliedFuturePrice;
+        this.holdDays = holdDays;
+        this.futureExpiry = futureExpiry;
+        this.dividendImpact = dividendImpact;
+        this.dividendToExpiry = dividendToExpiry;
+    }
 
-	@Override
-	public Class<?> getAssignableListenerType() {
-		return TickEfpEventListener.class;
-	}
+    @Override
+    public Class<?> getAssignableListenerType() {
+        return TickEfpEventListener.class;
+    }
 
-	public final double getBasisPoints() {
-		return basisPoints;
-	}
+    public double getBasisPoints() {
+        return basisPoints;
+    }
 
-	public final String getFormattedBasisPoints() {
-		return formattedBasisPoints;
-	}
+    public String getFormattedBasisPoints() {
+        return formattedBasisPoints;
+    }
 
-	public final double getImpliedFuturePrice() {
-		return impliedFuturePrice;
-	}
+    public double getImpliedFuturePrice() {
+        return impliedFuturePrice;
+    }
 
-	public final int getHoldDays() {
-		return holdDays;
-	}
+    public int getHoldDays() {
+        return holdDays;
+    }
 
-	public final String getFutureExpiry() {
-		return futureExpiry;
-	}
+    public String getFutureExpiry() {
+        return futureExpiry;
+    }
 
-	public final double getDividendImpact() {
-		return dividendImpact;
-	}
+    public double getDividendImpact() {
+        return dividendImpact;
+    }
 
-	public final double getDividendToExpiry() {
-		return dividendToExpiry;
-	}
+    public double getDividendToExpiry() {
+        return dividendToExpiry;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);
+    }
 }

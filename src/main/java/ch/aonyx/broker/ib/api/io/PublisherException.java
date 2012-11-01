@@ -24,21 +24,21 @@ import ch.aonyx.broker.ib.api.Request;
  */
 public class PublisherException extends IOStreamException {
 
-	private static final long serialVersionUID = 7534293099917364456L;
-	private final Request request;
+    private static final long serialVersionUID = 7534293099917364456L;
+    private final Request request;
 
-	public PublisherException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Request request, final Throwable cause) {
-		super(clientMessageCode, detailedMessage, cause);
-		this.request = request;
-	}
+    public PublisherException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Request request, final Throwable cause) {
+        super(clientMessageCode, detailedMessage, cause);
+        this.request = request;
+    }
 
-	public PublisherException(final ClientMessageCode clientMessageCode, final String detailedMessage,
-			final Request request) {
-		this(clientMessageCode, detailedMessage, request, null);
-	}
+    public PublisherException(final ClientMessageCode clientMessageCode, final String detailedMessage,
+            final Request request) {
+        this(clientMessageCode, detailedMessage, request, null);
+    }
 
-	public final Request getRequest() {
-		return request;
-	}
+    public final Request getRequest() {
+        return request;
+    }
 }
