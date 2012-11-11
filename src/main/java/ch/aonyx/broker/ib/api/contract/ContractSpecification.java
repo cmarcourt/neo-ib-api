@@ -24,6 +24,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import ch.aonyx.broker.ib.api.order.OrderType;
+import ch.aonyx.broker.ib.api.order.PairTagValue;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -68,6 +69,9 @@ public final class ContractSpecification {
     private String tradingHours = EMPTY;
     private int underlyingContractId;
     private String validExchanges = EMPTY;
+    private String economicValueRule = EMPTY;
+    private double economicValueMultiplier;
+    private List<PairTagValue> securityIds = Lists.newArrayList();
     private static final Function<String, OrderType> FROM_STRING_TO_ORDER_TYPE_FUNCTION = new Function<String, OrderType>() {
         @Override
         public OrderType apply(final String input) {
@@ -352,16 +356,40 @@ public final class ContractSpecification {
         this.validExchanges = validExchanges;
     }
 
+    public String getEconomicValueRule() {
+        return economicValueRule;
+    }
+
+    public void setEconomicValueRule(final String economicValueRule) {
+        this.economicValueRule = economicValueRule;
+    }
+
+    public double getEconomicValueMultiplier() {
+        return economicValueMultiplier;
+    }
+
+    public void setEconomicValueMultiplier(final double economicValueMultiplier) {
+        this.economicValueMultiplier = economicValueMultiplier;
+    }
+
+    public List<PairTagValue> getSecurityIds() {
+        return securityIds;
+    }
+
+    public void setSecurityIds(final List<PairTagValue> securityIds) {
+        this.securityIds = securityIds;
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(bondType).append(callable).append(category).append(contract)
                 .append(contractMonth).append(convertible).append(coupon).append(couponType).append(cusip)
-                .append(description).append(industry).append(issueDate).append(liquidHours).append(longName)
-                .append(marketName).append(maturity).append(minimumFluctuation).append(nextOptionDate)
-                .append(nextOptionPartial).append(nextOptionType).append(notes).append(validOrderTypes)
-                .append(priceMagnifier).append(putable).append(ratings).append(subcategory).append(timeZoneId)
-                .append(tradingClass).append(tradingHours).append(underlyingContractId).append(validExchanges)
-                .toHashCode();
+                .append(description).append(economicValueMultiplier).append(economicValueRule).append(industry)
+                .append(issueDate).append(liquidHours).append(longName).append(marketName).append(maturity)
+                .append(minimumFluctuation).append(nextOptionDate).append(nextOptionPartial).append(nextOptionType)
+                .append(notes).append(validOrderTypes).append(priceMagnifier).append(putable).append(ratings)
+                .append(securityIds).append(subcategory).append(timeZoneId).append(tradingClass).append(tradingHours)
+                .append(underlyingContractId).append(validExchanges).toHashCode();
     }
 
     @Override
@@ -379,17 +407,19 @@ public final class ContractSpecification {
         return new EqualsBuilder().append(bondType, rhs.bondType).append(callable, rhs.callable)
                 .append(category, rhs.category).append(contract, rhs.contract).append(contractMonth, rhs.contractMonth)
                 .append(convertible, rhs.convertible).append(coupon, rhs.coupon).append(couponType, rhs.couponType)
-                .append(cusip, rhs.cusip).append(description, rhs.description).append(industry, rhs.industry)
+                .append(cusip, rhs.cusip).append(description, rhs.description)
+                .append(economicValueMultiplier, rhs.economicValueMultiplier)
+                .append(economicValueRule, rhs.economicValueRule).append(industry, rhs.industry)
                 .append(issueDate, rhs.issueDate).append(liquidHours, rhs.liquidHours).append(longName, rhs.longName)
                 .append(marketName, rhs.marketName).append(maturity, rhs.maturity)
                 .append(minimumFluctuation, rhs.minimumFluctuation).append(nextOptionDate, rhs.nextOptionDate)
                 .append(nextOptionPartial, rhs.nextOptionPartial).append(nextOptionType, rhs.nextOptionType)
                 .append(notes, rhs.notes).append(validOrderTypes, rhs.validOrderTypes)
                 .append(priceMagnifier, rhs.priceMagnifier).append(putable, rhs.putable).append(ratings, rhs.ratings)
-                .append(subcategory, rhs.subcategory).append(timeZoneId, rhs.timeZoneId)
-                .append(tradingClass, rhs.tradingClass).append(tradingHours, rhs.tradingHours)
-                .append(underlyingContractId, rhs.underlyingContractId).append(validExchanges, rhs.validExchanges)
-                .isEquals();
+                .append(securityIds, rhs.securityIds).append(subcategory, rhs.subcategory)
+                .append(timeZoneId, rhs.timeZoneId).append(tradingClass, rhs.tradingClass)
+                .append(tradingHours, rhs.tradingHours).append(underlyingContractId, rhs.underlyingContractId)
+                .append(validExchanges, rhs.validExchanges).isEquals();
     }
 
     @Override

@@ -13,25 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ch.aonyx.broker.ib.api;
+package ch.aonyx.broker.ib.api.execution;
 
-import com.lmax.disruptor.EventTranslator;
+import ch.aonyx.broker.ib.api.AssignableListenerType;
+import ch.aonyx.broker.ib.api.EventListener;
 
 /**
  * @author Christophe Marcourt
- * @since 1.0.0
+ * @version 1.1.0
  */
-final class EventWrapperTranslator implements EventTranslator<EventWrapper> {
-
-    private final Event event;
-
-    EventWrapperTranslator(final Event event) {
-        this.event = event;
-    }
-
-    @Override
-    public void translateTo(final EventWrapper eventWrapper, final long sequence) {
-        eventWrapper.setWrappedEvent(event);
-    }
+@AssignableListenerType
+public interface CommissionReportEventListener extends EventListener<CommissionReportEvent> {
 
 }

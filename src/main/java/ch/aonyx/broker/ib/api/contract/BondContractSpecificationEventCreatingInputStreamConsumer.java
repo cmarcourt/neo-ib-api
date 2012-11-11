@@ -23,6 +23,7 @@ import static ch.aonyx.broker.ib.api.util.InputStreamUtils.readString;
 import java.io.InputStream;
 
 import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport;
+import ch.aonyx.broker.ib.api.order.PairTagValue;
 
 /**
  * @author Christophe Marcourt
@@ -79,6 +80,19 @@ public final class BondContractSpecificationEventCreatingInputStreamConsumer ext
         }
         if (getVersion() >= 4) {
             contractSpecification.setLongName(readString(inputStream));
+        }
+        if (getVersion() >= 6) {
+            contractSpecification.setEconomicValueRule(readString(inputStream));
+            contractSpecification.setEconomicValueMultiplier(readDouble(inputStream));
+        }
+        if (getVersion() >= 5) {
+            final int securityIdsCount = readInt(inputStream);
+            for (int i = 0; i < securityIdsCount; i++) {
+                final PairTagValue pairTagValue = new PairTagValue();
+                contractSpecification.getSecurityIds().add(pairTagValue);
+                pairTagValue.setTagName(readString(inputStream));
+                pairTagValue.setValue(readString(inputStream));
+            }
         }
         return contractSpecification;
     }

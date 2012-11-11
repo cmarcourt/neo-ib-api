@@ -96,9 +96,8 @@ public final class CommissionReport {
         try {
             return new DateTime(DateUtils.parseDate(String.valueOf(yieldRedemptionDate), DATE_PATTERN).getTime());
         } catch (final ParseException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage(), e);
         }
-        return null;
     }
 
     public void setYieldRedemptionDate(final int yieldRedemptionDate) {

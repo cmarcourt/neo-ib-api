@@ -102,13 +102,24 @@ public final class Order {
     private TimeInForce timeInForce = TimeInForce.EMPTY;
     private int totalQuantity;
     private double trailingStopPrice;
+    private double trailingPercent;
     private boolean transmit;
     private StopTriggerMethod stopTriggerMethod = StopTriggerMethod.DEFAULT;
     private double volatility;
     private VolatilityType volatilityType = VolatilityType.INAPPLICABLE;
     private boolean requestPreTradeInformation;
+    private double scalePriceAdjustValue;
+    private int scalePriceAdjustInterval;
+    private double scaleProfitOffset;
+    private boolean scaleAutoReset;
+    private int scaleInitPosition;
+    private int scaleInitFillQuantity;
+    private boolean scaleRandomPercent;
+    private List<OrderComboLeg> orderComboLegs = Lists.newArrayList();
 
     public Order() {
+        limitPrice = Double.MAX_VALUE;
+        stopPrice = Double.MAX_VALUE;
         transmit = true;
         designatedLocation = EMPTY;
         exemptionCode = -1;
@@ -127,11 +138,17 @@ public final class Order {
         deltaNeutralClearingAccount = EMPTY;
         deltaNeutralClearingIntent = EMPTY;
         trailingStopPrice = Double.MAX_VALUE;
+        trailingPercent = Double.MAX_VALUE;
         basisPoint = Double.MAX_VALUE;
         basisPointType = Integer.MAX_VALUE;
         scaleInitialLevelSize = Integer.MAX_VALUE;
         scaleSubsequentLevelSize = Integer.MAX_VALUE;
         scalePriceIncrement = Double.MAX_VALUE;
+        scalePriceAdjustValue = Double.MAX_VALUE;
+        scalePriceAdjustInterval = Integer.MAX_VALUE;
+        scaleProfitOffset = Double.MAX_VALUE;
+        scaleInitPosition = Integer.MAX_VALUE;
+        scaleInitFillQuantity = Integer.MAX_VALUE;
     }
 
     public String getAccountName() {
@@ -686,6 +703,14 @@ public final class Order {
         this.trailingStopPrice = trailingStopPrice;
     }
 
+    public double getTrailingPercent() {
+        return trailingPercent;
+    }
+
+    public void setTrailingPercent(final double trailingPercent) {
+        this.trailingPercent = trailingPercent;
+    }
+
     public boolean isTransmit() {
         return transmit;
     }
@@ -726,6 +751,70 @@ public final class Order {
         this.requestPreTradeInformation = requestPreTradeInformation;
     }
 
+    public double getScalePriceAdjustValue() {
+        return scalePriceAdjustValue;
+    }
+
+    public void setScalePriceAdjustValue(final double scalePriceAdjustValue) {
+        this.scalePriceAdjustValue = scalePriceAdjustValue;
+    }
+
+    public int getScalePriceAdjustInterval() {
+        return scalePriceAdjustInterval;
+    }
+
+    public void setScalePriceAdjustInterval(final int scalePriceAdjustInterval) {
+        this.scalePriceAdjustInterval = scalePriceAdjustInterval;
+    }
+
+    public double getScaleProfitOffset() {
+        return scaleProfitOffset;
+    }
+
+    public void setScaleProfitOffset(final double scaleProfitOffset) {
+        this.scaleProfitOffset = scaleProfitOffset;
+    }
+
+    public boolean isScaleAutoReset() {
+        return scaleAutoReset;
+    }
+
+    public void setScaleAutoReset(final boolean scaleAutoReset) {
+        this.scaleAutoReset = scaleAutoReset;
+    }
+
+    public int getScaleInitPosition() {
+        return scaleInitPosition;
+    }
+
+    public void setScaleInitPosition(final int scaleInitPosition) {
+        this.scaleInitPosition = scaleInitPosition;
+    }
+
+    public int getScaleInitFillQuantity() {
+        return scaleInitFillQuantity;
+    }
+
+    public void setScaleInitFillQuantity(final int scaleInitFillQuantity) {
+        this.scaleInitFillQuantity = scaleInitFillQuantity;
+    }
+
+    public boolean isScaleRandomPercent() {
+        return scaleRandomPercent;
+    }
+
+    public void setScaleRandomPercent(final boolean scaleRandomPercent) {
+        this.scaleRandomPercent = scaleRandomPercent;
+    }
+
+    public List<OrderComboLeg> getOrderComboLegs() {
+        return orderComboLegs;
+    }
+
+    public void setOrderComboLegs(final List<OrderComboLeg> orderComboLegs) {
+        this.orderComboLegs = orderComboLegs;
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(accountName).append(action).append(algorithmParameters)
@@ -739,15 +828,18 @@ public final class Order {
                 .append(financialAdvisorProfile).append(firmQuoteOnly).append(goodAfterDateTime)
                 .append(goodTillDateTime).append(hedgeParameter).append(hedgeType).append(hidden).append(limitPrice)
                 .append(lowerStockPriceRange).append(minimumQuantity).append(nbboPriceCap).append(notHeld)
-                .append(ocaGroupName).append(ocaType).append(openClose).append(optOutSmartRouting).append(id)
-                .append(orderReference).append(orderType).append(origin).append(outsideRegularTradingHours)
-                .append(overridePercentageConstraints).append(parentId).append(percentageOffset).append(permanentId)
-                .append(referencePriceType).append(requestPreTradeInformation).append(rule80A)
-                .append(scaleInitialLevelSize).append(scalePriceIncrement).append(scaleSubsequentLevelSize)
+                .append(ocaGroupName).append(ocaType).append(openClose).append(optOutSmartRouting)
+                .append(orderComboLegs).append(id).append(orderReference).append(orderType).append(origin)
+                .append(outsideRegularTradingHours).append(overridePercentageConstraints).append(parentId)
+                .append(percentageOffset).append(permanentId).append(referencePriceType)
+                .append(requestPreTradeInformation).append(rule80A).append(scaleAutoReset)
+                .append(scaleInitFillQuantity).append(scaleInitialLevelSize).append(scaleInitPosition)
+                .append(scalePriceAdjustInterval).append(scalePriceAdjustValue).append(scalePriceIncrement)
+                .append(scaleProfitOffset).append(scaleRandomPercent).append(scaleSubsequentLevelSize)
                 .append(settlingFirm).append(shortSaleSlot).append(smartComboRoutingParameters).append(startingPrice)
                 .append(stockReferencePrice).append(stopPrice).append(stopTriggerMethod).append(sweepToFill)
-                .append(timeInForce).append(totalQuantity).append(trailingStopPrice).append(transmit)
-                .append(upperStockPriceRange).append(volatility).append(volatilityType).toHashCode();
+                .append(timeInForce).append(totalQuantity).append(trailingStopPrice).append(trailingPercent)
+                .append(transmit).append(upperStockPriceRange).append(volatility).append(volatilityType).toHashCode();
     }
 
     @Override
@@ -787,15 +879,21 @@ public final class Order {
                 .append(limitPrice, rhs.limitPrice).append(lowerStockPriceRange, rhs.lowerStockPriceRange)
                 .append(minimumQuantity, rhs.minimumQuantity).append(nbboPriceCap, rhs.nbboPriceCap)
                 .append(notHeld, rhs.notHeld).append(ocaGroupName, rhs.ocaGroupName).append(ocaType, rhs.ocaType)
-                .append(openClose, rhs.openClose).append(optOutSmartRouting, rhs.optOutSmartRouting).append(id, rhs.id)
+                .append(openClose, rhs.openClose).append(optOutSmartRouting, rhs.optOutSmartRouting)
+                .append(orderComboLegs, rhs.orderComboLegs).append(id, rhs.id)
                 .append(orderReference, rhs.orderReference).append(orderType, rhs.orderType).append(origin, rhs.origin)
                 .append(outsideRegularTradingHours, rhs.outsideRegularTradingHours)
                 .append(overridePercentageConstraints, rhs.overridePercentageConstraints)
                 .append(parentId, rhs.parentId).append(percentageOffset, rhs.percentageOffset)
                 .append(permanentId, rhs.permanentId).append(referencePriceType, rhs.referencePriceType)
                 .append(requestPreTradeInformation, rhs.requestPreTradeInformation).append(rule80A, rhs.rule80A)
+                .append(scaleAutoReset, rhs.scaleAutoReset).append(scaleInitFillQuantity, rhs.scaleInitFillQuantity)
                 .append(scaleInitialLevelSize, rhs.scaleInitialLevelSize)
-                .append(scalePriceIncrement, rhs.scalePriceIncrement)
+                .append(scaleInitPosition, rhs.scaleInitPosition)
+                .append(scalePriceAdjustInterval, rhs.scalePriceAdjustInterval)
+                .append(scalePriceAdjustValue, rhs.scalePriceAdjustValue)
+                .append(scalePriceIncrement, rhs.scalePriceIncrement).append(scaleProfitOffset, rhs.scaleProfitOffset)
+                .append(scaleRandomPercent, rhs.scaleRandomPercent)
                 .append(scaleSubsequentLevelSize, rhs.scaleSubsequentLevelSize).append(settlingFirm, rhs.settlingFirm)
                 .append(shortSaleSlot, rhs.shortSaleSlot)
                 .append(smartComboRoutingParameters, rhs.smartComboRoutingParameters)
@@ -803,8 +901,9 @@ public final class Order {
                 .append(stopPrice, rhs.stopPrice).append(stopTriggerMethod, rhs.stopTriggerMethod)
                 .append(sweepToFill, rhs.sweepToFill).append(timeInForce, rhs.timeInForce)
                 .append(totalQuantity, rhs.totalQuantity).append(trailingStopPrice, rhs.trailingStopPrice)
-                .append(transmit, rhs.transmit).append(upperStockPriceRange, rhs.upperStockPriceRange)
-                .append(volatility, rhs.volatility).append(volatilityType, rhs.volatilityType).isEquals();
+                .append(trailingPercent, rhs.trailingPercent).append(transmit, rhs.transmit)
+                .append(upperStockPriceRange, rhs.upperStockPriceRange).append(volatility, rhs.volatility)
+                .append(volatilityType, rhs.volatilityType).isEquals();
     }
 
     @Override

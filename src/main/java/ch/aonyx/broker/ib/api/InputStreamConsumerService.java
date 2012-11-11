@@ -43,6 +43,7 @@ import ch.aonyx.broker.ib.api.data.fundamental.FundamentalDataEventCreatingInput
 import ch.aonyx.broker.ib.api.data.historical.HistoricalDataEventListEventCreatingInputStreamConsumer;
 import ch.aonyx.broker.ib.api.data.scanner.MarketScannerDataEventListEventCreatingInputStreamConsumer;
 import ch.aonyx.broker.ib.api.data.scanner.MarketScannerValidParametersEventCreatingInputStreamConsumer;
+import ch.aonyx.broker.ib.api.execution.CommissionReportEventCreatingInputStreamConsumer;
 import ch.aonyx.broker.ib.api.execution.ExecutionReportEndEventCreatingInputStreamConsumer;
 import ch.aonyx.broker.ib.api.execution.ExecutionReportEventCreatingInputStreamConsumer;
 import ch.aonyx.broker.ib.api.fa.FinancialAdvisorConfigurationEventCreatingInputStreamConsumer;
@@ -226,6 +227,10 @@ final class InputStreamConsumerService {
 
         case MARKET_DATA_TYPE:
             consumer = new MarketDataTypeEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
+            break;
+
+        case COMMISSION_REPORT:
+            consumer = new CommissionReportEventCreatingInputStreamConsumer(inputStream, serverCurrentVersion);
             break;
 
         default:
