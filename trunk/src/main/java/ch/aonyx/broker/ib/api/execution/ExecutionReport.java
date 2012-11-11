@@ -41,6 +41,8 @@ public final class ExecutionReport {
     private int filledQuantity;
     private Side side = Side.EMPTY;
     private String time = EMPTY;
+    private String economicValueRule = EMPTY;
+    private double economicValueMultiplier;
 
     public String getAccountNumber() {
         return accountNumber;
@@ -154,12 +156,28 @@ public final class ExecutionReport {
         this.time = time;
     }
 
+    public String getEconomicValueRule() {
+        return economicValueRule;
+    }
+
+    public void setEconomicValueRule(final String economicValueRule) {
+        this.economicValueRule = economicValueRule;
+    }
+
+    public double getEconomicValueMultiplier() {
+        return economicValueMultiplier;
+    }
+
+    public void setEconomicValueMultiplier(final double economicValueMultiplier) {
+        this.economicValueMultiplier = economicValueMultiplier;
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(accountNumber).append(averageFilledPrice).append(clientId)
-                .append(cumulativeQuantity).append(exchange).append(executionId).append(filledPrice)
-                .append(filledQuantity).append(liquidation).append(orderId).append(orderRef).append(permanentId)
-                .append(side).append(time).toHashCode();
+                .append(cumulativeQuantity).append(economicValueMultiplier).append(economicValueRule).append(exchange)
+                .append(executionId).append(filledPrice).append(filledQuantity).append(liquidation).append(orderId)
+                .append(orderRef).append(permanentId).append(side).append(time).toHashCode();
     }
 
     @Override
@@ -176,7 +194,9 @@ public final class ExecutionReport {
         final ExecutionReport rhs = (ExecutionReport) obj;
         return new EqualsBuilder().append(accountNumber, rhs.accountNumber)
                 .append(averageFilledPrice, rhs.averageFilledPrice).append(clientId, rhs.clientId)
-                .append(cumulativeQuantity, rhs.cumulativeQuantity).append(exchange, rhs.exchange)
+                .append(cumulativeQuantity, rhs.cumulativeQuantity)
+                .append(economicValueMultiplier, rhs.economicValueMultiplier)
+                .append(economicValueRule, rhs.economicValueRule).append(exchange, rhs.exchange)
                 .append(executionId, rhs.executionId).append(filledPrice, rhs.filledPrice)
                 .append(filledQuantity, rhs.filledQuantity).append(liquidation, rhs.liquidation)
                 .append(orderId, rhs.orderId).append(orderRef, rhs.orderRef).append(permanentId, rhs.permanentId)

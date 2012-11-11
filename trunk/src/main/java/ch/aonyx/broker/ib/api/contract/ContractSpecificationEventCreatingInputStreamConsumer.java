@@ -22,6 +22,7 @@ import static ch.aonyx.broker.ib.api.util.InputStreamUtils.readString;
 import java.io.InputStream;
 
 import ch.aonyx.broker.ib.api.io.AbstractEventCreatingInputStreamConsumerSupport;
+import ch.aonyx.broker.ib.api.order.PairTagValue;
 
 /**
  * @author Christophe Marcourt
@@ -82,6 +83,19 @@ public final class ContractSpecificationEventCreatingInputStreamConsumer extends
             contractSpecification.setTimeZoneId(readString(inputStream));
             contractSpecification.setTradingHours(readString(inputStream));
             contractSpecification.setLiquidHours(readString(inputStream));
+        }
+        if (getVersion() >= 8) {
+            contractSpecification.setEconomicValueRule(readString(inputStream));
+            contractSpecification.setEconomicValueMultiplier(readDouble(inputStream));
+        }
+        if (getVersion() >= 7) {
+            final int securityIdsCount = readInt(inputStream);
+            for (int i = 0; i < securityIdsCount; i++) {
+                final PairTagValue pairTagValue = new PairTagValue();
+                contractSpecification.getSecurityIds().add(pairTagValue);
+                pairTagValue.setTagName(readString(inputStream));
+                pairTagValue.setValue(readString(inputStream));
+            }
         }
         return contractSpecification;
     }

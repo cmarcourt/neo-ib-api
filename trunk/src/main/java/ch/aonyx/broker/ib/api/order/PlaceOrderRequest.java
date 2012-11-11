@@ -15,6 +15,8 @@
  */
 package ch.aonyx.broker.ib.api.order;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -79,6 +81,9 @@ public final class PlaceOrderRequest extends AbstractOrderRequestSupport impleme
         checkHedgeOrderSupport();
         checkOptOutSmartRoutingSupport();
         checkDeltaNeutralOrderByContractIdSupport();
+        checkScaleOrdersSupport();
+        checkOrderComboLegsSupport();
+        checkTrailingPriceSupport();
         builder.append(OutgoingMessageId.PLACE_ORDER_REQUEST.getId());
         builder.append(getVersion());
         builder.append(toInternalId(getId()));
@@ -186,11 +191,53 @@ public final class PlaceOrderRequest extends AbstractOrderRequestSupport impleme
         }
     }
 
+    private void checkScaleOrdersSupport() {
+        final double scalePriceIncrement = order.getScalePriceIncrement();
+        if ((scalePriceIncrement > 0) && (scalePriceIncrement != Double.MAX_VALUE)) {
+            if ((order.getScalePriceAdjustValue() != Double.MAX_VALUE)
+                    || (order.getScalePriceAdjustInterval() != Integer.MAX_VALUE)
+                    || (order.getScaleProfitOffset() != Double.MAX_VALUE) || order.isScaleAutoReset()
+                    || (order.getScaleInitPosition() != Integer.MAX_VALUE)
+                    || (order.getScaleInitFillQuantity() != Integer.MAX_VALUE) || order.isScaleRandomPercent()) {
+                if (!Feature.SCALE_ORDERS.isSupportedByVersion(getServerCurrentVersion())) {
+                    throw new RequestException(ClientMessageCode.UPDATE_TWS,
+                            "It does not support Scale order parameters: PriceAdjustValue, PriceAdjustInterval, "
+                                    + "ProfitOffset, AutoReset, InitPosition, InitFillQty and RandomPercent.", this);
+                }
+            }
+        }
+    }
+
+    private void checkOrderComboLegsSupport() {
+        if (contract.getSecurityType().equals(SecurityType.COMBO)) {
+            final List<OrderComboLeg> orderComboLegs = order.getOrderComboLegs();
+            if (!orderComboLegs.isEmpty()) {
+                for (final OrderComboLeg orderComboLeg : orderComboLegs) {
+                    if (orderComboLeg.getPrice() != Double.MAX_VALUE) {
+                        if (!Feature.ORDER_COMBO_LEGS_PRICE.isSupportedByVersion(getServerCurrentVersion())) {
+                            throw new RequestException(ClientMessageCode.UPDATE_TWS,
+                                    "It does not support per-leg prices for order combo legs.", this);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void checkTrailingPriceSupport() {
+        if (order.getTrailingPercent() != Double.MAX_VALUE) {
+            if (!Feature.TRAILING_PERCENT.isSupportedByVersion(getServerCurrentVersion())) {
+                throw new RequestException(ClientMessageCode.UPDATE_TWS,
+                        "It does not support trailing percent parameter.", this);
+            }
+        }
+    }
+
     private int getVersion() {
         if (!Feature.NOT_HELD.isSupportedByVersion(getServerCurrentVersion())) {
             return 27;
         }
-        return 35;
+        return 38;
     }
 
     private void appendContract(final RequestBuilder builder) {
@@ -217,8 +264,18 @@ public final class PlaceOrderRequest extends AbstractOrderRequestSupport impleme
         builder.append(order.getAction().getAbbreviation());
         builder.append(order.getTotalQuantity());
         builder.append(order.getOrderType().getAbbreviation());
-        builder.append(order.getLimitPrice());
-        builder.append(order.getStopPrice());
+        final double limitPrice = order.getLimitPrice();
+        if (Feature.ORDER_COMBO_LEGS_PRICE.isSupportedByVersion(getServerCurrentVersion())) {
+            builder.append(limitPrice);
+        } else {
+            builder.append(limitPrice == Double.MAX_VALUE ? 0 : limitPrice);
+        }
+        final double stopPrice = order.getStopPrice();
+        if (Feature.TRAILING_PERCENT.isSupportedByVersion(getServerCurrentVersion())) {
+            builder.append(stopPrice);
+        } else {
+            builder.append(stopPrice == Double.MAX_VALUE ? 0 : stopPrice);
+        }
         builder.append(order.getTimeInForce().getAbbreviation());
         builder.append(order.getOcaGroupName());
         builder.append(order.getAccountName());
@@ -278,6 +335,9 @@ public final class PlaceOrderRequest extends AbstractOrderRequestSupport impleme
         builder.append(order.getContinuouslyUpdate());
         builder.append(order.getReferencePriceType().getValue());
         builder.append(order.getTrailingStopPrice());
+        if (Feature.TRAILING_PERCENT.isSupportedByVersion(getServerCurrentVersion())) {
+            builder.append(order.getTrailingPercent());
+        }
         if (Feature.SCALE_ORDER.isSupportedByVersion(getServerCurrentVersion())) {
             builder.append(order.getScaleInitialLevelSize());
             builder.append(order.getScaleSubsequentLevelSize());
@@ -286,6 +346,16 @@ public final class PlaceOrderRequest extends AbstractOrderRequestSupport impleme
             builder.append(order.getScaleInitialLevelSize());
         }
         builder.append(order.getScalePriceIncrement());
+        if (Feature.SCALE_ORDERS.isSupportedByVersion(getServerCurrentVersion())
+                && (order.getScalePriceIncrement() > 0) && (order.getScalePriceIncrement() != Double.MAX_VALUE)) {
+            builder.append(order.getScalePriceAdjustValue());
+            builder.append(order.getScalePriceAdjustInterval());
+            builder.append(order.getScaleProfitOffset());
+            builder.append(order.isScaleAutoReset());
+            builder.append(order.getScaleInitPosition());
+            builder.append(order.getScaleInitFillQuantity());
+            builder.append(order.isScaleRandomPercent());
+        }
         if (Feature.HEDGING_ORDER.isSupportedByVersion(getServerCurrentVersion())) {
             builder.append(order.getHedgeType().getInitial());
             if (StringUtils.isNotEmpty(order.getHedgeType().getInitial())) {
@@ -339,6 +409,13 @@ public final class PlaceOrderRequest extends AbstractOrderRequestSupport impleme
                 builder.append(comboLeg.getDesignatedLocation());
                 if (Feature.SHORT_SALE_EXEMPT_ORDER_OLD.isSupportedByVersion(getServerCurrentVersion())) {
                     builder.append(comboLeg.getExemptionCode());
+                }
+            }
+
+            if (Feature.ORDER_COMBO_LEGS_PRICE.isSupportedByVersion(getServerCurrentVersion())) {
+                builder.append(order.getOrderComboLegs().size());
+                for (final OrderComboLeg orderComboLeg : order.getOrderComboLegs()) {
+                    builder.append(orderComboLeg.getPrice());
                 }
             }
 

@@ -59,6 +59,9 @@ public final class ExecutionReportEventCreatingInputStreamConsumer extends
         contract.setExpiry(readString(inputStream));
         contract.setStrike(readDouble(inputStream));
         contract.setOptionRight(OptionRight.fromInitialOrName(readString(inputStream)));
+        if (getVersion() >= 9) {
+            contract.setMultiplier(readString(inputStream));
+        }
         contract.setExchange(readString(inputStream));
         contract.setCurrencyCode(readString(inputStream));
         contract.setLocalSymbol(readString(inputStream));
@@ -90,6 +93,10 @@ public final class ExecutionReportEventCreatingInputStreamConsumer extends
         }
         if (getVersion() >= 8) {
             executionReport.setOrderRef(readString(inputStream));
+        }
+        if (getVersion() >= 9) {
+            executionReport.setEconomicValueRule(readString(inputStream));
+            executionReport.setEconomicValueMultiplier(readDouble(inputStream));
         }
         return executionReport;
     }

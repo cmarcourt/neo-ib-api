@@ -77,8 +77,16 @@ public final class RetrieveOpenOrderEventCreatingInputStreamConsumer extends
         order.setAction(OrderAction.fromAbbreviation(readString(inputStream)));
         order.setTotalQuantity(readInt(inputStream));
         order.setOrderType(OrderType.fromAbbreviation(readString(inputStream)));
-        order.setLimitPrice(readDouble(inputStream));
-        order.setStopPrice(readDouble(inputStream));
+        if (getVersion() < 29) {
+            order.setLimitPrice(readDouble(inputStream));
+        } else {
+            order.setLimitPrice(readDoubleMax(inputStream));
+        }
+        if (getVersion() < 30) {
+            order.setStopPrice(readDouble(inputStream));
+        } else {
+            order.setStopPrice(readDoubleMax(inputStream));
+        }
         order.setTimeInForce(TimeInForce.fromAbbreviation(readString(inputStream)));
         order.setOcaGroupName(readString(inputStream));
         order.setAccountName(readString(inputStream));
@@ -115,7 +123,7 @@ public final class RetrieveOpenOrderEventCreatingInputStreamConsumer extends
         }
         if (getVersion() >= 9) {
             order.setRule80A(Rule80A.fromInitial(readString(inputStream)));
-            order.setPercentageOffset(readDouble(inputStream));
+            order.setPercentageOffset(readDoubleMax(inputStream));
             order.setSettlingFirm(readString(inputStream));
             order.setShortSaleSlot(ShortSaleSlotInstitutional.fromValue(readInt(inputStream)));
             order.setDesignatedLocation(readString(inputStream));
@@ -125,11 +133,11 @@ public final class RetrieveOpenOrderEventCreatingInputStreamConsumer extends
                 order.setExemptionCode(readInt(inputStream));
             }
             order.setAuctionStrategy(AuctionStrategy.fromValue(readInt(inputStream)));
-            order.setStartingPrice(readDouble(inputStream));
-            order.setStockReferencePrice(readDouble(inputStream));
-            order.setDelta(readDouble(inputStream));
-            order.setLowerStockPriceRange(readDouble(inputStream));
-            order.setUpperStockPriceRange(readDouble(inputStream));
+            order.setStartingPrice(readDoubleMax(inputStream));
+            order.setStockReferencePrice(readDoubleMax(inputStream));
+            order.setDelta(readDoubleMax(inputStream));
+            order.setLowerStockPriceRange(readDoubleMax(inputStream));
+            order.setUpperStockPriceRange(readDoubleMax(inputStream));
             order.setDisplaySize(readInt(inputStream));
             if (getVersion() < 18) {
                 readBoolean(inputStream);
@@ -137,24 +145,24 @@ public final class RetrieveOpenOrderEventCreatingInputStreamConsumer extends
             order.setBlockOrder(readBoolean(inputStream));
             order.setSweepToFill(readBoolean(inputStream));
             order.setAllOrNone(readBoolean(inputStream));
-            order.setMinimumQuantity(readInt(inputStream));
+            order.setMinimumQuantity(readIntMax(inputStream));
             order.setOcaType(OcaType.fromValue(readInt(inputStream)));
             order.setElectronicTradeOnly(readBoolean(inputStream));
             order.setFirmQuoteOnly(readBoolean(inputStream));
-            order.setNbboPriceCap(readDouble(inputStream));
+            order.setNbboPriceCap(readDoubleMax(inputStream));
         }
         if (getVersion() >= 10) {
             order.setParentId(toOrderId(readInt(inputStream)));
             order.setStopTriggerMethod(StopTriggerMethod.fromValue(readInt(inputStream)));
         }
         if (getVersion() >= 11) {
-            order.setVolatility(readDouble(inputStream));
+            order.setVolatility(readDoubleMax(inputStream));
             order.setVolatilityType(VolatilityType.fromValue(readInt(inputStream)));
             if (getVersion() == 11) {
                 order.setDeltaNeutralOrderType(readInt(inputStream) == 0 ? "NONE" : "MKT");
             } else {
                 order.setDeltaNeutralOrderType(readString(inputStream));
-                order.setDeltaNeutralAuxPrice(readDouble(inputStream));
+                order.setDeltaNeutralAuxPrice(readDoubleMax(inputStream));
                 if ((getVersion() >= 27) && StringUtils.isNotEmpty(order.getDeltaNeutralOrderType())) {
                     order.setDeltaNeutralContractId(readInt(inputStream));
                     order.setDeltaNeutralSettlingFirm(readString(inputStream));
@@ -170,12 +178,36 @@ public final class RetrieveOpenOrderEventCreatingInputStreamConsumer extends
             order.setReferencePriceType(ReferencePriceType.fromValue(readInt(inputStream)));
         }
         if (getVersion() >= 13) {
-            order.setTrailingStopPrice(readDouble(inputStream));
+            order.setTrailingStopPrice(readDoubleMax(inputStream));
+        }
+        if (getVersion() >= 30) {
+            order.setTrailingPercent(readDoubleMax(inputStream));
         }
         if (getVersion() >= 14) {
-            order.setBasisPoint(readDouble(inputStream));
-            order.setBasisPointType(readInt(inputStream));
+            order.setBasisPoint(readDoubleMax(inputStream));
+            order.setBasisPointType(readIntMax(inputStream));
             contract.setComboLegsDescription(readString(inputStream));
+        }
+        if (getVersion() >= 29) {
+            final int comboLegsCount = readInt(inputStream);
+            for (int i = 0; i < comboLegsCount; i++) {
+                final ComboLeg comboLeg = new ComboLeg();
+                contract.getComboLegs().add(comboLeg);
+                comboLeg.setContractId(readInt(inputStream));
+                comboLeg.setRatio(readInt(inputStream));
+                comboLeg.setOrderAction(OrderAction.fromAbbreviation(readString(inputStream)));
+                comboLeg.setExchange(readString(inputStream));
+                comboLeg.setOpenClose(OpenCloseComboLeg.fromValue(readInt(inputStream)));
+                comboLeg.setShortSaleSlotValue(ShortSaleSlotInstitutional.fromValue(readInt(inputStream)));
+                comboLeg.setDesignatedLocation(readString(inputStream));
+                comboLeg.setExemptionCode(readInt(inputStream));
+            }
+            final int orderComboLegsCount = readInt(inputStream);
+            for (int i = 0; i < orderComboLegsCount; i++) {
+                final OrderComboLeg orderComboLeg = new OrderComboLeg();
+                order.getOrderComboLegs().add(orderComboLeg);
+                orderComboLeg.setPrice(readDouble(inputStream));
+            }
         }
         if (getVersion() >= 26) {
             final int smartComboRoutingParametersCount = readInt(inputStream);
@@ -195,6 +227,16 @@ public final class RetrieveOpenOrderEventCreatingInputStreamConsumer extends
                 order.setScaleInitialLevelSize(readIntMax(inputStream));
             }
             order.setScalePriceIncrement(readDoubleMax(inputStream));
+        }
+        if ((getVersion() >= 28) && (order.getScalePriceIncrement() > 0)
+                && (order.getScalePriceIncrement() != Double.MAX_VALUE)) {
+            order.setScalePriceAdjustValue(readDoubleMax(inputStream));
+            order.setScalePriceAdjustInterval(readIntMax(inputStream));
+            order.setScaleProfitOffset(readDoubleMax(inputStream));
+            order.setScaleAutoReset(readBoolean(inputStream));
+            order.setScaleInitPosition(readIntMax(inputStream));
+            order.setScaleInitFillQuantity(readIntMax(inputStream));
+            order.setScaleRandomPercent(readBoolean(inputStream));
         }
         if (getVersion() >= 24) {
             order.setHedgeType(HedgeType.fromInitial(readString(inputStream)));
