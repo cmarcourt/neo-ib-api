@@ -19,6 +19,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.event.EventListenerList;
 
+import ch.aonyx.broker.ib.api.util.StringIdUtils;
+
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
@@ -69,7 +71,20 @@ final class OrderIdInternalIdBinding {
     }
 
     void addAndBind(final Request request) {
-        binding.put(request.getId(), sequence.getAndIncrement());
+        bind(request.getId(), getBindingId());
+    }
+
+    private int getBindingId() {
+        final int value = sequence.get();
+        if (value < 0) {
+            return sequence.getAndDecrement();
+        } else {
+            return sequence.getAndIncrement();
+        }
+    }
+
+    void bind(final Id id, final int bindingId) {
+        binding.put(id, bindingId);
     }
 
     boolean containsOrderId(final Id orderId) {
@@ -77,11 +92,20 @@ final class OrderIdInternalIdBinding {
     }
 
     Id getOrderId(final int internalId) {
-        return binding.inverse().get(internalId);
+        if (containsInternalId(internalId)) {
+            return binding.inverse().get(internalId);
+        }
+        return bindAndGetUnexistingId(internalId);
     }
 
     boolean containsInternalId(final int internalId) {
         return binding.containsValue(internalId);
+    }
+
+    private Id bindAndGetUnexistingId(final int internalId) {
+        final Id id = new OrderStringId(StringIdUtils.uniqueRandomId());
+        bind(id, internalId);
+        return id;
     }
 
     int getInternalId(final Id orderId) {
