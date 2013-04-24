@@ -15,23 +15,17 @@
  */
 package ch.aonyx.broker.ib.api;
 
-import com.lmax.disruptor.EventTranslator;
+import com.lmax.disruptor.EventTranslatorOneArg;
 
 /**
  * @author Christophe Marcourt
  * @since 1.0.0
  */
-final class EventWrapperTranslator implements EventTranslator<EventWrapper> {
-
-    private final Event event;
-
-    EventWrapperTranslator(final Event event) {
-        this.event = event;
-    }
+final class EventWrapperTranslator implements EventTranslatorOneArg<EventWrapper, Event> {
 
     @Override
-    public void translateTo(final EventWrapper eventWrapper, final long sequence) {
-        eventWrapper.setWrappedEvent(event);
+    public void translateTo(final EventWrapper event, final long sequence, final Event arg0) {
+        event.setWrappedEvent(arg0);
     }
 
 }

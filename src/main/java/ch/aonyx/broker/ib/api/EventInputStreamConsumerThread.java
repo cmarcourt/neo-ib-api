@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 import ch.aonyx.broker.ib.api.io.EventCreatingConsumer;
 
-import com.lmax.disruptor.dsl.Disruptor;
+import com.lmax.disruptor.RingBuffer;
 
 /**
  * @author Christophe Marcourt
@@ -38,12 +38,13 @@ final class EventInputStreamConsumerThread implements Runnable {
     private final String threadName = "consumer";
     private final InputStream inputStream;
     private final InputStreamConsumerService consumerService;
-    private final Disruptor<EventWrapper> disruptor;
+    private final RingBuffer<EventWrapper> ringBuffer;
+    private final EventWrapperTranslator eventWrapperTranslator = new EventWrapperTranslator();
     private boolean running = true;
 
-    EventInputStreamConsumerThread(final InputStream inputStream, final Disruptor<EventWrapper> disruptor) {
+    EventInputStreamConsumerThread(final InputStream inputStream, final RingBuffer<EventWrapper> ringBuffer) {
         this.inputStream = inputStream;
-        this.disruptor = disruptor;
+        this.ringBuffer = ringBuffer;
         consumerService = new InputStreamConsumerService(this.inputStream);
     }
 
@@ -72,7 +73,7 @@ final class EventInputStreamConsumerThread implements Runnable {
 
     private void publishEvent(final Event event) {
         LOGGER.debug("dispatch event: {} to disruptor", event.toString());
-        disruptor.publishEvent(new EventWrapperTranslator(event));
+        ringBuffer.publishEvent(eventWrapperTranslator, event);
     }
 
     void stop() {

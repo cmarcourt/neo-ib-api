@@ -8,7 +8,7 @@
     </parent>
     <groupId>ch.aonyx.broker.ib</groupId>
     <artifactId>neo-ib-api</artifactId>
-    <version>1.1.1-SNAPSHOT</version>
+    <version>1.1.2-SNAPSHOT</version>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -18,13 +18,13 @@
     </licenses>
 
     <properties>
-        <org.slf4j.slf4j-api.version>1.7.2</org.slf4j.slf4j-api.version>
-        <ch.qos.logback.logback-classic.version>1.0.7</ch.qos.logback.logback-classic.version>
+        <org.slf4j.slf4j-api.version>1.7.5</org.slf4j.slf4j-api.version>
+        <ch.qos.logback.logback-classic.version>1.0.11</ch.qos.logback.logback-classic.version>
         <commons-io.commons-io.version>2.4</commons-io.commons-io.version>
-        <joda-time.joda-time.version>2.1</joda-time.joda-time.version>
-        <com.googlecode.disruptor.disruptor.version>2.10.3</com.googlecode.disruptor.disruptor.version>
+        <joda-time.joda-time.version>2.2</joda-time.joda-time.version>
+        <com.lmax.disruptor.version>3.0.1</com.lmax.disruptor.version>
         <org.apache.commons.commons-lang3.version>3.1</org.apache.commons.commons-lang3.version>
-        <com.google.guava.guava.version>13.0.1</com.google.guava.guava.version>
+        <com.google.guava.guava.version>14.0.1</com.google.guava.guava.version>
     </properties>
 
     <dependencies>
@@ -49,9 +49,9 @@
             <version>${joda-time.joda-time.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.disruptor</groupId>
+            <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
-            <version>${com.googlecode.disruptor.disruptor.version}</version>
+            <version>${com.lmax.disruptor.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

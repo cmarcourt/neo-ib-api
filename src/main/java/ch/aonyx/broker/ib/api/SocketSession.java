@@ -48,8 +48,6 @@ import ch.aonyx.broker.ib.api.util.AnnotationUtils;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
-import com.lmax.disruptor.SingleThreadedClaimStrategy;
-import com.lmax.disruptor.SleepingWaitStrategy;
 import com.lmax.disruptor.dsl.Disruptor;
 
 /**
@@ -59,6 +57,7 @@ import com.lmax.disruptor.dsl.Disruptor;
 final class SocketSession implements Session, OrderIdInternalIdListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SocketSession.class);
+    private static final int RING_BUFFER_SIZE = 128;
     private VersionProperties versionProperties;
     private int clientCurrentVersion;
     private int serverMinimumRequiredVersion;
@@ -160,15 +159,15 @@ final class SocketSession implements Session, OrderIdInternalIdListener {
 
     @SuppressWarnings("unchecked")
     private void createDisruptor() {
-        disruptor = new Disruptor<EventWrapper>(new EventWrapperFactory(), Executors.newCachedThreadPool(),
-                new SingleThreadedClaimStrategy(128), new SleepingWaitStrategy());
+        disruptor = new Disruptor<EventWrapper>(new EventWrapperFactory(), RING_BUFFER_SIZE,
+                Executors.newCachedThreadPool());
         disruptor.handleEventsWith(new ConcurrentlyEventHandler(eventNotifier));
     }
 
     private void createEventInputStreamThread() {
         try {
             eventInputStreamConsumerThread = new EventInputStreamConsumerThread(new DataInputStream(
-                    socket.getInputStream()), disruptor);
+                    socket.getInputStream()), disruptor.getRingBuffer());
         } catch (final IOException e) {
             callbackNonBlockingCaller.onFailure(clientCallback,
                     new IOStreamException(ERROR_CREATING_INPUT_STREAM, e.getMessage(), e));
