@@ -35,9 +35,12 @@ public final class TickPriceEvent extends AbstractTickEvent {
         this.autoExecute = autoExecute;
     }
 
+    /**
+     * Will always return null as {@link TickPriceEvent} is only used in {@link CompositeTickEventListener}.
+     */
     @Override
     public Class<?> getAssignableListenerType() {
-        return TickPriceEventListener.class;
+        return null;
     }
 
     public double getPrice() {
