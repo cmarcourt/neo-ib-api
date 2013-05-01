@@ -71,7 +71,7 @@ final class SocketSession implements Session, OrderIdInternalIdListener {
     private boolean started = false;
     private boolean handShakeDone = false;
     private final HashMap<EventListener<? extends Event>, Class<?>> annotatedListenerCache = Maps.newHashMap();
-    private final ServerMessageEventListener defaultServerMessageEventListener = new DefaultServerMessageEventListener();
+    private final ServerMessageEventListener defaultServerMessageEventListener = new ServerMessageEventLoggingListener();
     private final InitializeNextValidOrderIdEventListener nextValidOrderIdEventListener = new InitializeNextValidOrderIdEventListener();
     private final ClientCallback clientCallback;
     private final ClientCallbackNonBlockingCaller callbackNonBlockingCaller = new ClientCallbackNonBlockingCaller();
