@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2012 Aonyx
+ * Copyright (C) 2012-2013 Aonyx
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,13 +24,11 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author Christophe Marcourt
- * @since 1.0.0
- * @deprecated use {@link ServerMessageEventLoggingListener}
+ * @since 1.1.4
  */
-@Deprecated
-public class DefaultServerMessageEventListener implements ServerMessageEventListener {
+public class ServerMessageEventLoggingListener implements ServerMessageEventListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultServerMessageEventListener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ServerMessageEventLoggingListener.class);
 
     @Override
     public void onInfo(final ServerMessageEvent event) {
@@ -65,4 +63,5 @@ public class DefaultServerMessageEventListener implements ServerMessageEventList
             onUnknown(event);
         }
     }
+
 }
