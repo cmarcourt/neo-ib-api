@@ -19,7 +19,6 @@ import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.DAY;
 import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.HOUR;
 import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.MINUTE;
 import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.MINUTES;
-import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.SECOND;
 import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.SECONDS;
 
 /**
@@ -28,9 +27,9 @@ import static ch.aonyx.broker.ib.api.data.historical.BarSizeUnit.SECONDS;
  */
 public enum BarSize {
 
-    ONE_SECOND(1, SECOND), FIVE_SECONDS(5, SECONDS), FIFTEEN_SECONDS(15, SECONDS), THIRTY_SECONDS(30, SECONDS),
-    ONE_MINUTE(1, MINUTE), TWO_MINUTES(2, MINUTES), THREE_MINUTES(3, MINUTES), FIVE_MINUTES(5, MINUTES),
-    FIFTEEN_MINUTES(15, MINUTES), THIRTY_MINUTES(30, MINUTES), ONE_HOUR(1, HOUR), ONE_DAY(1, DAY);
+    ONE_SECOND(1, SECONDS), FIVE_SECONDS(5, SECONDS), FIFTEEN_SECONDS(15, SECONDS), THIRTY_SECONDS(30, SECONDS), ONE_MINUTE(
+            1, MINUTE), TWO_MINUTES(2, MINUTES), THREE_MINUTES(3, MINUTES), FIVE_MINUTES(5, MINUTES), FIFTEEN_MINUTES(
+            15, MINUTES), THIRTY_MINUTES(30, MINUTES), ONE_HOUR(1, HOUR), ONE_DAY(1, DAY);
 
     private final int duration;
     private final BarSizeUnit barSizeUnit;

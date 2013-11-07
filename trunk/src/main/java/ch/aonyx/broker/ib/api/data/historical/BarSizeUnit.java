@@ -27,8 +27,7 @@ import com.google.common.collect.Maps;
  */
 public enum BarSizeUnit {
 
-    UNKNOWN("unknown"), EMPTY(""), SECOND("sec"), SECONDS("secs"), MINUTE("min"), MINUTES("mins"), HOUR("hour"), DAY(
-            "day");
+    UNKNOWN("unknown"), EMPTY(""), SECONDS("secs"), MINUTE("min"), MINUTES("mins"), HOUR("hour"), DAY("day");
 
     private final String abbreviation;
     private static final Map<String, BarSizeUnit> MAP;
