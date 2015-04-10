@@ -210,6 +210,12 @@ public final class Contract {
         return Collections.unmodifiableList(comboLegs);
     }
 
+    public void addComboLeg(final ComboLeg comboLeg) {
+        if ((comboLeg != null) && !comboLegs.contains(comboLeg)) {
+            comboLegs.add(comboLeg);
+        }
+    }
+
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(id).append(comboLegsDescription).append(currencyCode).append(exchange)

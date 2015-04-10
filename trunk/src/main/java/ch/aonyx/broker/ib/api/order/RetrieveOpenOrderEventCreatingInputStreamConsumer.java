@@ -192,7 +192,7 @@ public final class RetrieveOpenOrderEventCreatingInputStreamConsumer extends
             final int comboLegsCount = readInt(inputStream);
             for (int i = 0; i < comboLegsCount; i++) {
                 final ComboLeg comboLeg = new ComboLeg();
-                contract.getComboLegs().add(comboLeg);
+                contract.addComboLeg(comboLeg);
                 comboLeg.setContractId(readInt(inputStream));
                 comboLeg.setRatio(readInt(inputStream));
                 comboLeg.setOrderAction(OrderAction.fromAbbreviation(readString(inputStream)));
