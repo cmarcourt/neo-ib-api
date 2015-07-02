@@ -11,7 +11,8 @@ On 2012/11/11, Neo IB API implements specifications from IB's API version 9.67.
 
 =A simple sample=
 
-{{{
+{
+
 public class Main {
   public static void main(final String[] args) {
     new Main();
@@ -51,7 +52,8 @@ public class Main {
     });
   }
 }
-}}}
+
+}
 
 and listeners...
 
