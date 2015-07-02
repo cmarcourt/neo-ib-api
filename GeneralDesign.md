@@ -1,0 +1,1 @@
+Neo IB API is completely **event driven design**.
