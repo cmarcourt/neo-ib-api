@@ -1,7 +1,6 @@
+<h1>Neo IB API 1.1.5 (10 April 2015)</h1>
 This API could replace the API provided by IB.
 It is based on request (subscription, simple, ...) and event driven design.
-
-<h1>Neo IB API 1.1.5 (10 April 2015)</h1>
 
 <h2>Why ?</h2>
 I wanted to have an API more *elegant* and more *efficient*. I also wanted to have good naming for fields and methods.
