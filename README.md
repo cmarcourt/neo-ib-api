@@ -1,18 +1,17 @@
 This API could replace the API provided by IB.
 It is based on request (subscription, simple, ...) and event driven design.
 
-==Neo IB API 1.1.5 (10 April 2015)==
+<h1>Neo IB API 1.1.5 (10 April 2015)</h1>
 
-=Why ?=
+<h2>Why ?</h2>
 I wanted to have an API more *elegant* and more *efficient*. I also wanted to have good naming for fields and methods.
 
-=Specifications=
+<h2>Specifications</h2>
 On 2012/11/11, Neo IB API implements specifications from IB's API version 9.67.
 
-=A simple sample=
+<h2>A simple sample</h2>
 
-{
-
+<pre>
 public class Main {
   public static void main(final String[] args) {
     new Main();
@@ -52,48 +51,47 @@ public class Main {
     });
   }
 }
-
-}
+</pre>
 
 and listeners...
 
-{{{
+<pre>
 public class MyContractSpecificationEventListener implements ContractSpecificationEventListener {
    ...
 }
-}}}
+</pre>
 
-{{{
+<pre>
 public class MyTickSizeEventListener implements TickSizeEventListener {
    ...
 }
-}}}
+</pre>
 
-{{{
+<pre>
 public class MyTickGenericEventListener implements TickGenericEventListener {
    ...
 }
-}}}
+</pre>
 
-{{{
+<pre>
 public class MyCompositeTickEventListener implements CompositeTickEventListener {
    ...
 }
-}}}
+</pre>
 
-=Maven integration=
-{{{
-<dependency>
-  <groupId>ch.aonyx.broker.ib</groupId>
-  <artifactId>neo-ib-api</artifactId>
-  <version>1.1.5</version>
-</dependency>
+<h2>Maven integration</h2>
+<pre>
+&lt;dependency&gt;
+  &lt;groupId&gt;ch.aonyx.broker.ib&lt;/groupId&gt;
+  &lt;artifactId&gt;neo-ib-api&lt;/artifactId&gt;
+  &lt;version&gt;1.1.5&lt;/version&gt;
+&lt;/dependency&gt;
 
-<repositories>
-  <repository>
-     <id>central.maven</id>
-     <name>Central Maven Repository</name>
-     <url>http://central.maven.org/maven2</url>
-  </repository>
-</repositories>
-}}}
+&lt;repositories&gt;
+  &lt;repository&gt;
+     &lt;id&gt;central.maven&lt;/id&gt;
+     &lt;name&gt;Central Maven Repository&lt;/name&gt;
+     &lt;url&gt;http://central.maven.org/maven2&lt;/url&gt;
+  &lt;/repository&gt;
+&lt;/repositories&gt;
+</pre>
