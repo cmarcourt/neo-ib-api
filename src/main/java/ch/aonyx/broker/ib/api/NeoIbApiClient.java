@@ -64,7 +64,7 @@ public final class NeoIbApiClient {
     }
 
     public boolean isConnected() {
-        return socket.isConnected();
+        return null == socket ? false : socket.isConnected();
     }
 
 }
